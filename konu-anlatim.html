@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Eğitim Akademi - Kapsamlı Konu Anlatımları & AGS Notları</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Merkezi Yönetim Scripti -->
+    <script src="app-core.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+
+    <!-- Üst Menü -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Modern SVG Logo & Marka -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[2px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-sm tracking-tight text-white leading-none">ÖZEL EĞİTİM</span>
+                    <span class="font-bold text-[11px] tracking-widest text-indigo-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                        AKADEMİ <span class="bg-indigo-500/20 text-indigo-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-indigo-500/30">BETA</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigasyon Linkleri -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold">
+                <a href="index.html" class="text-slate-300 hover:text-indigo-400 transition">Ana Sayfa</a>
+                <a href="konu-anlatim.html" class="text-indigo-400 font-bold">Konu Anlatımları</a>
+                <a href="soru-bankasi.html" class="text-slate-300 hover:text-indigo-400 transition">Soru Bankası</a>
+                <a href="denemeler.html" class="text-slate-300 hover:text-indigo-400 transition">Deneme Sınavları</a>
+                <a href="analiz.html" class="text-slate-300 hover:text-indigo-400 transition">Performans Analizi</a>
+                <a href="ipuclari.html" class="text-slate-300 hover:text-indigo-400 transition">Püf Noktaları</a>
+            </nav>
+
+            <!-- Sağ Araçlar (XP, Streak ve Tema) -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="text-amber-400 font-bold flex items-center gap-1" title="Tecrübe Puanı">
+                        <i class="fa-solid fa-bolt text-xs"></i> <span id="headerXP">0 XP</span>
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-orange-400 font-bold flex items-center gap-1" title="Çalışma Serisi">
+                        <i class="fa-solid fa-fire text-xs"></i> <span id="headerStreak">1 Gün</span>
+                    </span>
+                </div>
+
+                <button onclick="toggleTheme()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl transition border border-slate-700 text-xs" title="Temayı Değiştir">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobil Uyumlu Alt Navigasyon -->
+        <div class="lg:hidden flex items-center justify-around bg-slate-950 border-t border-slate-800 px-2 py-2 text-[11px] overflow-x-auto">
+            <a href="index.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Ana Sayfa</a>
+            <a href="konu-anlatim.html" class="text-indigo-400 font-bold whitespace-nowrap px-2 py-1">Konu Anlatımı</a>
+            <a href="soru-bankasi.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Soru Bankası</a>
+            <a href="denemeler.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Denemeler</a>
+            <a href="analiz.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Analiz</a>
+            <a href="ipuclari.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Püf Noktaları</a>
+        </div>
+    </header>
+
+    <!-- Header Banner -->
+    <section class="bg-gradient-to-b from-indigo-950/50 via-slate-900/40 to-slate-950 py-10 border-b border-slate-800/80 text-center relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <span class="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+                <i class="fa-solid fa-book-open text-indigo-400"></i> Detaylı Özel Eğitim ÖABT & AGS Notları
+            </span>
+            <h1 class="text-2xl md:text-4xl font-black text-white mb-3 tracking-tight">
+                Kapsamlı Konu Anlatımları ve Sınav Özetleri
+            </h1>
+            <p class="text-slate-400 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed">
+                ÖSYM müfredatıyla tam uyumlu 9 özel eğitim alanı ve Akademi Giriş Sınavı (AGS) modüllerine ait detaylı konu özetleri, nokta atışı bilgiler ve ipuçları.
+            </p>
+
+            <!-- Hızlı Konu Atlama Menüsü (Pills) -->
+            <div class="mt-8 flex items-center justify-center gap-2 flex-wrap text-xs">
+                <a href="#ags" class="bg-slate-900/90 hover:bg-indigo-900/50 border border-indigo-500/40 text-indigo-300 font-semibold px-3 py-1.5 rounded-xl transition">📘 AGS Modülleri</a>
+                <a href="#zihinsel" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">1. Zihinsel Yet.</a>
+                <a href="#otizm" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">2. Otizm (OSB)</a>
+                <a href="#ooo" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">3. ÖÖG</a>
+                <a href="#ustun" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">4. Üstün Yet.</a>
+                <a href="#isitme" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">5. İşitme Yet.</a>
+                <a href="#gorme" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">6. Görme Yet.</a>
+                <a href="#fiziksel" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">7. Fiziksel Yet.</a>
+                <a href="#erken" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">8. Erken Çocukluk</a>
+                <a href="#mevzuat" class="bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl transition">9. Mevzuat</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ana İçerik Konu Kartları -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 md:p-8 space-y-8">
+
+        <!-- AGS Özel Modülü Notları -->
+        <div id="ags" class="bg-slate-900/90 border border-indigo-500/40 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -right-6 -top-6 w-32 h-32 bg-indigo-600/10 rounded-full blur-2xl"></div>
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-indigo-500/20">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-lg border border-indigo-500/30">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-400">Yeni Sınav Sistemi</span>
+                    <h2 class="text-lg md:text-xl font-extrabold text-white">AGS (Akademi Giriş Sınavı) Temel Modülleri</h2>
+                </div>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                MEB Akademi Giriş Sınavı (AGS); öğretmen adaylarının sözel akıl yürütme, sayısal akıl yürütme ve Türk Milli Eğitim Sistemi mevzuatı üzerindeki hakimiyetini ölçen çoklu değerlendirme modülüdür.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-xs">
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-indigo-300 mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-brain text-amber-400"></i> Sözel Akıl Yürütme
+                    </h4>
+                    <p class="text-slate-400 text-[11px]">Sözel mantık, cümle arası anlamsal bağıntılar, kavramsallaştırma ve paragraf çıkarımları.</p>
+                </div>
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-indigo-300 mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-emerald-400"></i> Sayısal Akıl Yürütme
+                    </h4>
+                    <p class="text-slate-400 text-[11px]">Problem çözme, tablo/grafik okuma, mantıksal sayı örüntüleri ve veri analizi.</p>
+                </div>
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-indigo-300 mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-landmark text-rose-400"></i> TMES & Mevzuat
+                    </h4>
+                    <p class="text-slate-400 text-[11px]">1739 Sayılı Temel Kanun, Öğretmenlik Meslek Kanunu (ÖMK) ve Türk Eğitim Sistemi teşkilatı.</p>
+                </div>
+            </div>
+
+            <a href="soru-bankasi.html?cat=ags_sozel" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-pen-to-square"></i> AGS Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 1. Zihinsel Yetersizlik -->
+        <div id="zihinsel" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg border border-indigo-500/20">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">1. Zihinsel Yetersizlik ve Uyumsal Davranışlar</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-indigo-400">Tanım ve Kriterler:</strong> AAIDD ve DSM-5 kriterlerine göre zihinsel yetersizlik; zihinsel işlevlerdeki anlamlı sınırlılıkların yanı sıra günlük yaşamı kapsayan uyumsal davranışlardaki (kavramsal, sosyal, pratik) eksikliklerle 18 yaşından önce ortaya çıkan gelişimsel bir durumdur.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">IQ Aralıkları:</strong> Hafif (50-70), Orta (35-50), Ağır (20-35), Çok Ağır (20 altı).</li>
+                    <li><strong class="text-white">Genelleme Güçlüğü:</strong> Öğrenilen bilgilerin farklı ortamlara ve durumlara aktarılmasında yaşanan en temel bilişsel problemdir.</li>
+                    <li><strong class="text-white">Öğretim Yöntemleri:</strong> Yanlışsız öğretim teknikleri (sabit ve eşzamanlı ipucu ile öğretim), beceri analizi ve geriye doğru zincirleme.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=1" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-indigo-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-indigo-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 2. Otizm Spektrum Bozukluğu -->
+        <div id="otizm" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg border border-purple-500/20">
+                    <i class="fa-solid fa-puzzle-piece"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">2. Otizm Spektrum Bozukluğu (OSB)</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-purple-400">Temel Özellikler:</strong> DSM-5'e göre iki ana tanı kriteri vardır: 1) Sosyal iletişim ve etkileşimde kalıcı eksiklikler, 2) Sınırlı, yinelenen davranış ve ilgi kalıpları.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Ortak Dikkat (Joint Attention):</strong> Başkasının baktığı yere bakmama veya parmakla işaret etmeme, otizmin en erken gelişimsel belirtisidir.</li>
+                    <li><strong class="text-white">Ekolali:</strong> Duyulan kelimelerin veya cümlelerin papağan gibi tekrarlanması (anında veya gecikmeli).</li>
+                    <li><strong class="text-white">Kanıta Dayalı Modeller:</strong> TEACCH (yapılandırılmış çevre), PECS (resim değiş-tokuş iletişimi), ABA (uygulamalı davranış analizi) ve ESDM.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=2" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-purple-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-purple-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 3. Özel Öğrenme Güçlüğü -->
+        <div id="ooo" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg border border-emerald-500/20">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">3. Özel Öğrenme Güçlüğü (ÖÖG)</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-emerald-400">Temel Kural:</strong> Bireyin zeka düzeyi normal veya normalin üstündedir. Sorun zeka yetersizliği değil; dinleme, konuşma, okuma, yazma veya matematik becerilerini edinmedeki özgül güçlüktür.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Disleksi:</strong> Okuma, kelime tanıma ve sesbilgisel (fonolojik) farkındalık güçlüğü.</li>
+                    <li><strong class="text-white">Diskalkuli:</strong> Matematiksel hesaplama, sembolleri kavrama ve sayısal ilişkilerde güçlük.</li>
+                    <li><strong class="text-white">Disgrafi:</strong> El yazısı bozukluğu, harf yönlerini karıştırma ve yazılı ifade zorluğu.</li>
+                    <li><strong class="text-white">Orton-Gillingham:</strong> Disleksi için geliştirilmiş çoklu duyusal (görsel, işitsel, taktil) öğretim yaklaşımı.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=3" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-emerald-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-emerald-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 4. Üstün Yetenekliler -->
+        <div id="ustun" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg border border-amber-500/20">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">4. Üstün Yetenekliler Eğitimi</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-amber-400">Tanım:</strong> Zeka, yaratıcılık, sanatsal liderlik veya spesifik akademik alanlarda akranlarına göre belirgin düzeyde yüksek performans gösteren bireylerdir.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Renzulli Üç Halka Kuramı:</strong> Ortalama üstü yetenek + Yaratıcılık + Göreve adanmışlık (motivasyon).</li>
+                    <li><strong class="text-white">BİLSEM:</strong> Bilim ve Sanat Merkezleri (örgün eğitimi destekleyici okul dışı kurum).</li>
+                    <li><strong class="text-white">Eğitim Modelleri:</strong> Zenginleştirme (derinleştirme) ve Hızlandırma (sınıf atlatma / erken okula başlama).</li>
+                    <li><strong class="text-white">Çift İstisnai (2E):</strong> Hem üstün yetenekli hem de eşlik eden bir yetersizliği/öğrenme güçlüğü olan bireyler.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=4" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-amber-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-amber-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 5. İşitme Yetersizliği -->
+        <div id="isitme" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg border border-cyan-500/20">
+                    <i class="fa-solid fa-ear-listen"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">5. İşitme Yetersizliği</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-cyan-400">Kayıp Türleri:</strong> İşitme kayıpları iletim tipi (dış/orta kulak sorunları, tedavi edilebilir) ve sensörinöral (iç kulak/sinir hasarı, kalıcı) olarak ikiye ayrılır.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Koklear İmplant:</strong> İç kulaktaki işlevsiz tüy hücrelerinin yerine geçip işitme sinirini doğrudan elektrikle uyaran biyonik kulak teknolojisi.</li>
+                    <li><strong class="text-white">FM Sistemleri:</strong> Sınıftaki arka plan gürültüsünü filtreleyip öğretmenin sesini doğrudan işitme cihazına aktaran teknoloji.</li>
+                    <li><strong class="text-white">Türk İşaret Dili (TİD):</strong> Kendine özgü gramer ve dilbilgisi yapısı olan bağımsız ulusal dil.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=5" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-cyan-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-cyan-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 6. Görme Yetersizliği -->
+        <div id="gorme" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-lg border border-rose-500/20">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">6. Görme Yetersizliği</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-rose-400">Eğitsel Sınıflandırma:</strong> Görme kalıntısını kullanabilenler "Az Gören", okuma-yazma için dokunma/işitme kanallarına bağımlı olanlar "Kör" olarak tanımlanır.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Braille Alfabesi:</strong> İki sütun halinde 6 kabartma noktadan oluşan dokunsal okuma sistemi.</li>
+                    <li><strong class="text-white">Beyaz Baston:</strong> Yönelim ve Bağımsız Hareket (O&M) çalışmalarının en temel güvenlik ve algı aracıdır.</li>
+                    <li><strong class="text-white">Göz Hastalıkları:</strong> Glokom (göz tansiyonu), Katarakt (mercek bulanıklaşması), ROP ve Retinitis Pigmentosa.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=6" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-rose-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-rose-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 7. Fiziksel Yetersizlik -->
+        <div id="fiziksel" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg border border-teal-500/20">
+                    <i class="fa-solid fa-wheelchair"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">7. Fiziksel Yetersizlik ve Süreğen Hastalıklar</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-teal-400">Temel Kapsam:</strong> Ortopedik kas-iskelet sistemi yetersizlikleri ile günlük yaşam fonksiyonlarını kısıtlayan kronik (süreğen) sağlık sorunlarını kapsar.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Serebral Palsi (CP):</strong> Gelişmekte olan beyin hasarına bağlı, ilerleyici olmayan hareket ve duruş bozukluğu (Spastik, Diskinetik, Ataksik).</li>
+                    <li><strong class="text-white">Spina Bifida:</strong> Omurganın kapanma kusurundan doğan nöral tüp defekti (en ağır formu Miyelomeningosel).</li>
+                    <li><strong class="text-white">Epilepsi:</strong> Beyin nöronlarındaki ani elektrik deşarjlarıyla oluşan nöbet tablosu. İlk yardımda ağza asla kaşık sokulmaz!</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=7" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-teal-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-teal-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 8. Erken Çocuklukta Özel Eğitim -->
+        <div id="erken" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-lg border border-pink-500/20">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">8. Erken Çocuklukta Özel Eğitim</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-pink-400">Kritik Dönem:</strong> Beyin plastisitesinin en yüksek seviyede olduğu 0-6 yaş aralığında gelişimsel gerilikleri önlemek veya etkiyi en aza indirmek için sunulan erken destek sistemidir.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">Denver II & AGTE:</strong> 0-6 yaş gelişimsel gecikmeleri tespit eden standart tarama envanterleri.</li>
+                    <li><strong class="text-white">Portage Modeli:</strong> Ev tabanlı erken çocukluk eğitimi ve aile rehberliği programı.</li>
+                    <li><strong class="text-white">BAHP (IFSP):</strong> 0-3 yaş dönemi için aile ihtiyaçlarını ve çocuk hedeflerini belirleyen Bireyselleştirilmiş Aile Hizmet Planı.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=8" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-pink-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-pink-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+        <!-- 9. Mevzuat ve Uluslararası Politikalar -->
+        <div id="mevzuat" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl backdrop-blur-xl">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg border border-blue-500/20">
+                    <i class="fa-solid fa-gavel"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-extrabold text-white">9. Mevzuat, Yasal Düzenlemeler ve Politikalar</h2>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
+                <strong class="text-blue-400">Yasal Çerçeve:</strong> Türkiye'de özel eğitimin ana omurgasını 573 Sayılı KHK, Özel Eğitim Hizmetleri Yönetmeliği ve Anayasa'nın 42. maddesi oluşturmaktadır.
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-4 mb-6">
+                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star"></i> ÖSYM Banko Noktalar
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                    <li><strong class="text-white">RAM:</strong> Rehberlik ve Araştırma Merkezi (Eğitsel değerlendirme ve resmi tanılamayı yapan kurul).</li>
+                    <li><strong class="text-white">BEP Birimi:</strong> Okul idaresi başkanlığında öğretmenler, uzmanlar ve ailenin katılımıyla BEP hazırlayan ekip.</li>
+                    <li><strong class="text-white">Uluslararası Sözleşmeler:</strong> Salamanca Bildirgesi (bütünleştirme meşalesi), BM Engelli Hakları Sözleşmesi (CRPD) ve Jomtien Herkes İçin Eğitim.</li>
+                </ul>
+            </div>
+
+            <a href="soru-bankasi.html?cat=9" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-blue-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition border border-slate-700 hover:border-blue-500">
+                <i class="fa-solid fa-arrow-right"></i> Bu Alanın Sorularını Çöz
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 mt-8">
+        Özel Eğitim Öğretmenliği ÖABT & AGS Hazırlık Platformu &copy; 2026
+    </footer>
+
+    <!-- Scriptler -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            if(body.classList.contains('bg-slate-950')) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
+    </script>
+</body>
+</html>

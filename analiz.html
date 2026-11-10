@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Eğitim Akademi - Detaylı Performans Analizi & AGS Raporu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Merkezi Yönetim Scripti -->
+    <script src="app-core.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+
+    <!-- Üst Menü -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Modern SVG Logo & Marka -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[2px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-sm tracking-tight text-white leading-none">ÖZEL EĞİTİM</span>
+                    <span class="font-bold text-[11px] tracking-widest text-indigo-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                        AKADEMİ <span class="bg-indigo-500/20 text-indigo-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-indigo-500/30">BETA</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigasyon Linkleri -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold">
+                <a href="index.html" class="text-slate-300 hover:text-indigo-400 transition">Ana Sayfa</a>
+                <a href="konu-anlatim.html" class="text-slate-300 hover:text-indigo-400 transition">Konu Anlatımları</a>
+                <a href="soru-bankasi.html" class="text-slate-300 hover:text-indigo-400 transition">Soru Bankası</a>
+                <a href="denemeler.html" class="text-slate-300 hover:text-indigo-400 transition">Deneme Sınavları</a>
+                <a href="analiz.html" class="text-indigo-400 font-bold">Performans Analizi</a>
+                <a href="ipuclari.html" class="text-slate-300 hover:text-indigo-400 transition">Püf Noktaları</a>
+            </nav>
+
+            <!-- Sağ Araçlar (XP, Streak ve Tema) -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="text-amber-400 font-bold flex items-center gap-1" title="Tecrübe Puanı">
+                        <i class="fa-solid fa-bolt text-xs"></i> <span id="headerXP">0 XP</span>
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-orange-400 font-bold flex items-center gap-1" title="Çalışma Serisi">
+                        <i class="fa-solid fa-fire text-xs"></i> <span id="headerStreak">1 Gün</span>
+                    </span>
+                </div>
+
+                <button onclick="toggleTheme()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl transition border border-slate-700 text-xs" title="Temayı Değiştir">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobil Uyumlu Alt Navigasyon -->
+        <div class="lg:hidden flex items-center justify-around bg-slate-950 border-t border-slate-800 px-2 py-2 text-[11px] overflow-x-auto">
+            <a href="index.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Ana Sayfa</a>
+            <a href="konu-anlatim.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Konu Anlatımı</a>
+            <a href="soru-bankasi.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Soru Bankası</a>
+            <a href="denemeler.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Denemeler</a>
+            <a href="analiz.html" class="text-indigo-400 font-bold whitespace-nowrap px-2 py-1">Analiz</a>
+            <a href="ipuclari.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Püf Noktaları</a>
+        </div>
+    </header>
+
+    <!-- Header Banner -->
+    <section class="bg-gradient-to-b from-indigo-950/50 via-slate-900/40 to-slate-950 py-10 border-b border-slate-800/80 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <span class="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+                <i class="fa-solid fa-chart-line text-indigo-400"></i> Akıllı Gelişim & Veri Analitiği
+            </span>
+            <h1 class="text-2xl md:text-4xl font-black text-white mb-3 tracking-tight">
+                Kişisel Performans & İstatistik Raporu
+            </h1>
+            <p class="text-slate-400 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+                Çözdüğün sorular, deneme sınavı sonuçların ve yanlış kutun üzerinden hesaplanan modül bazlı hakimiyet seviyen.
+            </p>
+        </div>
+    </section>
+
+    <!-- Ana İçerik -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 md:p-8 space-y-6">
+        
+        <!-- Üst Özet Kartları -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            
+            <div class="bg-slate-900/70 border border-slate-800 p-5 md:p-6 rounded-3xl backdrop-blur-xl shadow-lg">
+                <div class="text-xs text-slate-400 font-medium mb-1">Genel Başarı Oranı</div>
+                <div class="text-2xl md:text-3xl font-black text-indigo-400" id="successPercent">%100</div>
+                <div class="text-[11px] text-slate-500 mt-1 font-semibold">Tüm Havuz Performansı</div>
+            </div>
+
+            <div class="bg-slate-900/70 border border-slate-800 p-5 md:p-6 rounded-3xl backdrop-blur-xl shadow-lg">
+                <div class="text-xs text-slate-400 font-medium mb-1">Yanlış Soru Kutusu</div>
+                <div class="text-2xl md:text-3xl font-black text-rose-400" id="wrongCount">0</div>
+                <div class="text-[11px] text-slate-500 mt-1 font-semibold">Tekrar Bekleyen Soru</div>
+            </div>
+
+            <div class="bg-slate-900/70 border border-slate-800 p-5 md:p-6 rounded-3xl backdrop-blur-xl shadow-lg">
+                <div class="text-xs text-slate-400 font-medium mb-1">Favori Sorularım</div>
+                <div class="text-2xl md:text-3xl font-black text-amber-400" id="favCount">0</div>
+                <div class="text-[11px] text-slate-500 mt-1 font-semibold">Yıldızlanan Sorular</div>
+            </div>
+
+            <div class="bg-slate-900/70 border border-slate-800 p-5 md:p-6 rounded-3xl backdrop-blur-xl shadow-lg">
+                <div class="text-xs text-slate-400 font-medium mb-1">Kazanılan Toplam XP</div>
+                <div class="text-2xl md:text-3xl font-black text-emerald-400" id="totalXPStat">0 XP</div>
+                <div class="text-[11px] text-slate-500 mt-1 font-semibold">Aktif Lig Puanı</div>
+            </div>
+
+        </div>
+
+        <!-- Bölüm 2: Tüm ÖABT ve AGS Modüllerinin Hakimiyet İlerleme Çubukları -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-xl space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div>
+                    <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-indigo-400"></i>
+                        <span>ÖABT & AGS Modül Bazlı Hakimiyet Analizi</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Yanlış yapılan sorularınız düşülerek hesaplanan alan hakimiyet grafikleriniz.</p>
+                </div>
+            </div>
+
+            <!-- Modüllerin İlerleme Barları Grid Yapısı -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5" id="categoryBarsContainer">
+                <!-- JavaScript ile dinamik olarak doldurulacaktır -->
+            </div>
+        </div>
+
+        <!-- Bölüm 3: Yanlışları Tekrar Et Aksiyon Paneli -->
+        <div class="bg-gradient-to-r from-rose-950/40 via-slate-900/70 to-slate-900/70 border border-rose-900/30 rounded-3xl p-6 md:p-8 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+            <div class="space-y-1 text-center md:text-left">
+                <h3 class="font-extrabold text-white text-base flex items-center gap-2 justify-center md:justify-start">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
+                    <span>Zayıf Noktaları Hızla Telafi Edin</span>
+                </h3>
+                <p class="text-xs text-slate-400">Yanlış yaptığınız soruları tekrar çözerek netlerinizi ve XP puanınızı yükseltebilirsiniz.</p>
+            </div>
+            <a href="soru-bankasi.html?select=yanlislar" class="bg-rose-600 hover:bg-rose-500 text-white font-extrabold px-6 py-3.5 rounded-2xl transition text-xs flex items-center gap-2 shadow-lg shadow-rose-600/30 shrink-0">
+                <i class="fa-solid fa-rotate-right"></i> Yanlış Soruları Çöz (<span id="btnWrongCount">0</span>)
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 mt-8">
+        Özel Eğitim Öğretmenliği ÖABT & AGS Hazırlık Platformu &copy; 2026
+    </footer>
+
+    <!-- Veri Analizi ve Senkronizasyon Scripti -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            if(body.classList.contains('bg-slate-950')) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
+
+        // LocalStorage verileri
+        const wrongItems = JSON.parse(localStorage.getItem('ozel_egitim_yanlislar') || '[]');
+        const favItems = JSON.parse(localStorage.getItem('ozel_egitim_favoriler') || '[]');
+        const currentXP = localStorage.getItem('ozel_egitim_xp') || '0';
+
+        // Kart Verilerinin Güncellenmesi
+        document.getElementById('wrongCount').textContent = wrongItems.length;
+        document.getElementById('favCount').textContent = favItems.length;
+        document.getElementById('btnWrongCount').textContent = wrongItems.length;
+        document.getElementById('totalXPStat').textContent = `${currentXP} XP`;
+
+        // Genel Başarı Yüzdesi Hesaplama (229 toplam soru üzerinden)
+        const totalPool = 229;
+        let successPercent = Math.max(0, Math.round(((totalPool - wrongItems.length) / totalPool) * 100));
+        document.getElementById('successPercent').textContent = `%${successPercent}`;
+
+        // Modül Tanımları (AGS + 9 ÖABT Alanı)
+        const categories = [
+            { id: "ags_sozel", name: "🎓 AGS Sözel Akıl Yürütme", questionIds: [301, 302], color: "bg-indigo-600", textCol: "text-indigo-400" },
+            { id: "ags_sayisal", name: "🔢 AGS Sayısal Akıl Yürütme", questionIds: [303], color: "bg-emerald-600", textCol: "text-emerald-400" },
+            { id: "ags_mevzuat", name: "🏛️ AGS TMES & Meslek Mevzuatı", questionIds: [304], color: "bg-rose-600", textCol: "text-rose-400" },
+            { id: "1", name: "1. Zihinsel Yetersizlik & Uyumsal Davranışlar", start: 1, end: 25, color: "bg-indigo-500", textCol: "text-indigo-400" },
+            { id: "2", name: "2. Otizm Spektrum Bozukluğu (OSB)", start: 26, end: 50, color: "bg-purple-600", textCol: "text-purple-400" },
+            { id: "3", name: "3. Özel Öğrenme Güçlüğü (ÖÖG)", start: 51, end: 75, color: "bg-emerald-500", textCol: "text-emerald-400" },
+            { id: "4", name: "4. Üstün Yetenekliler Eğitimi", start: 76, end: 100, color: "bg-amber-600", textCol: "text-amber-400" },
+            { id: "5", name: "5. İşitme Yetersizliği", start: 101, end: 125, color: "bg-cyan-600", textCol: "text-cyan-400" },
+            { id: "6", name: "6. Görme Yetersizliği", start: 126, end: 150, color: "bg-rose-500", textCol: "text-rose-400" },
+            { id: "7", name: "7. Fiziksel Yetersizlik & Süreğen Hastalıklar", start: 151, end: 175, color: "bg-teal-600", textCol: "text-teal-400" },
+            { id: "8", name: "8. Erken Çocuklukta Özel Eğitim", start: 176, end: 200, color: "bg-pink-600", textCol: "text-pink-400" },
+            { id: "9", name: "9. Mevzuat & Uluslararası Politikalar", start: 201, end: 225, color: "bg-blue-600", textCol: "text-blue-400" }
+        ];
+
+        // Alan Bazlı Başarı Yüzdelerini Ekrana Basma
+        const container = document.getElementById('categoryBarsContainer');
+        container.innerHTML = '';
+
+        categories.forEach(cat => {
+            let catQuestionIds = [];
+            if(cat.questionIds) {
+                catQuestionIds = cat.questionIds;
+            } else {
+                for(let i = cat.start; i <= cat.end; i++) {
+                    catQuestionIds.push(i);
+                }
+            }
+
+            let catTotal = catQuestionIds.length;
+            let wrongInCat = wrongItems.filter(id => catQuestionIds.includes(Number(id))).length;
+            let catCorrectEstimate = catTotal - wrongInCat;
+            let catPercentage = Math.round((catCorrectEstimate / catTotal) * 100);
+
+            const barHTML = `
+                <div class="space-y-2 bg-slate-950/60 p-4 rounded-2xl border border-slate-800/80">
+                    <div class="flex justify-between items-center text-xs font-semibold">
+                        <span class="text-slate-200">${cat.name}</span>
+                        <span class="${cat.textCol} font-extrabold">%${catPercentage} Hakimiyet</span>
+                    </div>
+                    <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                        <div class="${cat.color} h-full rounded-full transition-all duration-500" style="width: ${catPercentage}%"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-slate-500 font-medium pt-0.5">
+                        <span>Toplam ${catTotal} Soru</span>
+                        <span>${wrongInCat} Yanlış Tespit Edildi</span>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += barHTML;
+        });
+    </script>
+</body>
+</html>

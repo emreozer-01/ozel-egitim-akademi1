@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Eğitim Akademi - Süreli ÖABT & AGS Deneme Sınavları</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Merkezi Yönetim Scripti -->
+    <script src="app-core.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+
+    <!-- Üst Menü -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Modern SVG Logo & Marka -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[2px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-sm tracking-tight text-white leading-none">ÖZEL EĞİTİM</span>
+                    <span class="font-bold text-[11px] tracking-widest text-indigo-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                        AKADEMİ <span class="bg-indigo-500/20 text-indigo-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-indigo-500/30">BETA</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigasyon Linkleri -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold">
+                <a href="index.html" class="text-slate-300 hover:text-indigo-400 transition">Ana Sayfa</a>
+                <a href="konu-anlatim.html" class="text-slate-300 hover:text-indigo-400 transition">Konu Anlatımları</a>
+                <a href="soru-bankasi.html" class="text-slate-300 hover:text-indigo-400 transition">Soru Bankası</a>
+                <a href="denemeler.html" class="text-indigo-400 font-bold">Deneme Sınavları</a>
+                <a href="analiz.html" class="text-slate-300 hover:text-indigo-400 transition">Performans Analizi</a>
+                <a href="ipuclari.html" class="text-slate-300 hover:text-indigo-400 transition">Püf Noktaları</a>
+            </nav>
+
+            <!-- Sağ Araçlar (XP, Streak ve Tema) -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="text-amber-400 font-bold flex items-center gap-1" title="Tecrübe Puanı">
+                        <i class="fa-solid fa-bolt text-xs"></i> <span id="headerXP">0 XP</span>
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-orange-400 font-bold flex items-center gap-1" title="Çalışma Serisi">
+                        <i class="fa-solid fa-fire text-xs"></i> <span id="headerStreak">1 Gün</span>
+                    </span>
+                </div>
+
+                <button onclick="toggleTheme()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl transition border border-slate-700 text-xs" title="Temayı Değiştir">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobil Uyumlu Alt Navigasyon -->
+        <div class="lg:hidden flex items-center justify-around bg-slate-950 border-t border-slate-800 px-2 py-2 text-[11px] overflow-x-auto">
+            <a href="index.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Ana Sayfa</a>
+            <a href="konu-anlatim.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Konu Anlatımı</a>
+            <a href="soru-bankasi.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Soru Bankası</a>
+            <a href="denemeler.html" class="text-indigo-400 font-bold whitespace-nowrap px-2 py-1">Denemeler</a>
+            <a href="analiz.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Analiz</a>
+            <a href="ipuclari.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Püf Noktaları</a>
+        </div>
+    </header>
+
+    <!-- Header Banner -->
+    <section id="pageHeader" class="bg-gradient-to-b from-indigo-950/50 via-slate-900/40 to-slate-950 py-10 border-b border-slate-800/80 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <span class="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+                <i class="fa-solid fa-stopwatch text-indigo-400"></i> Gerçek Sınav Provası & Zaman Yönetimi
+            </span>
+            <h1 class="text-2xl md:text-4xl font-black text-white mb-3 tracking-tight">
+                ÖABT & AGS Online Deneme Sınavları
+            </h1>
+            <p class="text-slate-400 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+                ÖSYM soru formatında süreli denemeler çözerek zaman yönetimi becerini geliştir, anlık netlerini ve kazanacağın tecrübe puanlarını (XP) gör.
+            </p>
+        </div>
+    </section>
+
+    <!-- Ana İçerik / Denemeler Listesi -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 md:p-8 flex flex-col justify-center">
+        
+        <div id="examsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Deneme 1 -->
+            <div class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 shadow-xl backdrop-blur-xl flex flex-col justify-between hover:border-indigo-500/60 transition-all duration-300 group">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl mb-4 border border-indigo-500/30 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-400 bg-indigo-950/80 px-2.5 py-1 rounded-full border border-indigo-800/60">
+                        Full Simülasyon
+                    </span>
+                    <h3 class="text-base font-extrabold text-white mt-3 mb-2">ÖABT Özel Eğitim Genel Deneme 1</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-6">
+                        Tüm 9 özel eğitim alanını kapsayan, ÖSYM standartlarına uygun 25 soruluk kapsamlı deneme sınavı.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 border-t border-b border-slate-800/80 py-3 mb-6">
+                        <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-indigo-400"></i> 35 Dakika</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-indigo-400"></i> 25 Soru</span>
+                    </div>
+                    <button onclick="startExam('genel1')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold py-3.5 rounded-xl transition shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-play"></i> Sınavı Başlat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Deneme 2 -->
+            <div class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 shadow-xl backdrop-blur-xl flex flex-col justify-between hover:border-amber-500/60 transition-all duration-300 group">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4 border border-amber-500/30 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-full border border-amber-800/60">
+                        AGS & Alan Karma
+                    </span>
+                    <h3 class="text-base font-extrabold text-white mt-3 mb-2">AGS Alan Bilgisi Karma Deneme</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-6">
+                        Mevzuat, zihinsel yetersizlik ve OSB ağırlıklı çıkması muhtemel sorulardan oluşan 20 soruluk hız denemesi.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 border-t border-b border-slate-800/80 py-3 mb-6">
+                        <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 25 Dakika</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-amber-400"></i> 20 Soru</span>
+                    </div>
+                    <button onclick="startExam('karma')" class="w-full bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-600/30 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-play"></i> Sınavı Başlat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Deneme 3 -->
+            <div class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 shadow-xl backdrop-blur-xl flex flex-col justify-between hover:border-emerald-500/60 transition-all duration-300 group">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 border border-emerald-500/30 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-800/60">
+                        Çıkmış Soru Analizi
+                    </span>
+                    <h3 class="text-base font-extrabold text-white mt-3 mb-2">ÖABT Çıkmış Soru Analiz Denemesi</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-6">
+                        Geçmiş yıllarda ÖSYM tarafından sorulmuş kritik köklerin derlendiği 15 soruluk özel analiz testi.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 border-t border-b border-slate-800/80 py-3 mb-6">
+                        <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-emerald-400"></i> 20 Dakika</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-emerald-400"></i> 15 Soru</span>
+                    </div>
+                    <button onclick="startExam('cikmis')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-3.5 rounded-xl transition shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-play"></i> Sınavı Başlat
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Canlı Sınav Oturum Ekranı (Varsayılan Gizli) -->
+        <div id="examSession" class="hidden max-w-3xl mx-auto w-full bg-slate-900/80 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl backdrop-blur-xl">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6 flex-wrap gap-3">
+                <div>
+                    <span class="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider">Canlı Sınav Oturumu</span>
+                    <h3 id="examTitle" class="text-base md:text-lg font-bold text-white">Deneme Sınavı</h3>
+                </div>
+                <div class="bg-rose-950/80 border border-rose-800/80 text-rose-400 text-xs font-bold px-4 py-2 rounded-2xl flex items-center gap-2 shadow-md">
+                    <i class="fa-regular fa-clock animate-pulse"></i> Kalan Süre: <span id="timeLeft" class="font-mono text-sm font-extrabold">35:00</span>
+                </div>
+            </div>
+
+            <div id="examContent"></div>
+
+            <div class="exam-nav-buttons flex items-center justify-between pt-6 border-t border-slate-800 mt-6 flex-wrap gap-3">
+                <button onclick="quitExam()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold px-4 py-3 rounded-xl transition flex items-center gap-2 border border-slate-700">
+                    <i class="fa-solid fa-arrow-left"></i> Sınavdan Çık
+                </button>
+                <button onclick="nextExamQuestion()" id="nextBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                    Sonraki Soru <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 mt-8">
+        Özel Eğitim Öğretmenliği ÖABT & AGS Hazırlık Platformu &copy; 2026
+    </footer>
+
+    <!-- Scriptler ve Tüm Soruları Barındıran Eksiksiz Veritabanı -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            if(body.classList.contains('bg-slate-950')) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
+
+        // 25, 20 ve 15 Soruluk Kapsamlı Soru Bankası (Eksiksiz)
+        const examData = {
+            genel1: [
+                { q: "1. Zihinsel yetersizliği olan bireylerde en sık karşılaşılan öğrenme ve bilgi aktarımı problemi aşağıdakilerden hangisidir?", options: ["A) Genelleme güçlüğü", "B) İşitme kaybı", "C) Zeka düzeyinin sürekli artması", "D) Uzun süreli bellek kapasitesinin sınırsız olması"], correct: 0 },
+                { q: "2. Aşağıdakilerden hangisi otizm spektrum bozukluğunun DSM-5'e göre temel tanı kriterlerinden biri değildir?", options: ["A) Sosyal iletişimde eksiklikler", "B) Tekrarlayıcı davranış kalıpları", "C) Akıcı yabancı dil konuşabilme", "D) Ortak dikkat becerilerinde yetersizlik"], correct: 2 },
+                { q: "3. Özel öğrenme güçlüğü olan bireylerin zeka düzeyleri nasıldır?", options: ["A) Çok ağır düzeyde geridir", "B) Normal veya normalin üstündedir", "C) Hafif düzeyde zihinsel engellidir", "D) Ölçülemez derecede düşüktür"], correct: 1 },
+                { q: "4. Renzulli'nin üç halka kuramına göre üstün yetenek hangi üç bileşenin kesişimidir?", options: ["A) Hafıza - Dikkat - Hız", "B) Ortalama üstü zeka - Yaratıcılık - Göreve adanmışlık", "C) Fiziksel güç - Yaş - Deneyim", "D) Motivasyon - Görme - İşitme"], correct: 1 },
+                { q: "5. Türkiye'de özel eğitimin yasal çerçevesini çizen temel KHK hangisidir?", options: ["A) 573 Sayılı KHK", "B) 1739 Sayılı Kanun", "C) 222 Sayılı Kanun", "D) 657 Sayılı Kanun"], correct: 0 },
+                { q: "6. İşitme kayıplarından dış ve orta kulak kaynaklı olup tıbbi müdahaleyle iyileştirilebilen tür hangisidir?", options: ["A) Sensörinöral işitme kaybı", "B) İletim tipi işitme kaybı", "C) Merkezi işitme kaybı", "D) Kalıcı sinir tipi kayıp"], correct: 1 },
+                { q: "7. Görme yetersizliği olan bireyler için dokunarak okuma yazma imkanı sunan 6 noktalı sistem nedir?", options: ["A) Morse alfabesi", "B) Braille alfabesi", "C) Fonetik alfabe", "D) İşaret dili alfabesi"], correct: 1 },
+                { q: "8. Serebral Palsi (CP) ile ilgili aşağıdaki ifadelerden hangisi doğrudur?", options: ["A) İlerleyici bir beyin rahatsızlığıdır", "B) Gelişmekte olan beyin hasarına bağlı ilerleyici olmayan hareket bozukluğudur", "C) Sadece işitme duyusunu etkiler", "D) Tedaviyle tamamen ortadan kalkar"], correct: 1 },
+                { q: "9. Erken çocuklukta özel eğitimde 0-6 yaş gelişimini taramak için kullanılan en yaygın araç hangisidir?", options: ["A) WISC-R", "B) AGTE (Ankara Gelişim Tarama Envanteri)", "C) MOXO Testi", "D) Bender Gestalt"], correct: 1 },
+                { q: "10. Okullarda Bireyselleştirilledi Eğitim Programı (BEP) geliştirme biriminin başkanı kimdir?", options: ["A) Sınıf rehber öğretmeni", "B) Okul müdürü veya görevlendireceği müdür yardımcısı", "C) RAM müdürü", "D) Psikolojik danışman"], correct: 1 },
+                { q: "11. Zihinsel yetersizlik tanısında IQ alt sınır değeri genel olarak kaçtır?", options: ["A) 50", "B) 70", "C) 85", "D) 100"], correct: 1 },
+                { q: "12. Otizmli çocuklarda erken dönemde görülen, başkasının baktığı yöne bakmama davranışı hangi kavramla ifade edilir?", options: ["A) Ekolali", "B) Ortak dikkat (Joint attention)", "C) Hiperaktivite", "D) Stereotipi"], correct: 1 },
+                { q: "13. Okuma güçlüğü çeken bireylerde en sık rastlanan özgül öğrenme güçlüğü alt türü hangisidir?", options: ["A) Disleksi", "B) Diskalkuli", "C) Disgrafi", "D) Dispraksi"], correct: 0 },
+                { q: "14. Üstün yetenekli çocukların örgün eğitim dışında destek eğitimi aldığı kurumlar hangisidir?", options: ["A) RAM", "B) BİLSEM (Bilim ve Sanat Merkezleri)", "C) Halk Eğitim Merkezi", "D) Özel Bakım Merkezi"], correct: 1 },
+                { q: "15. İç kulaktaki zedelenmelerden kaynaklanan ve kalıcı olan işitme kaybı türü hangisidir?", options: ["A) İletim tipi", "B) Sensörinöral", "C) Karışık tip", "D) Dış kulak yolu darlığı"], correct: 1 },
+                { q: "16. Görme yetersizliği olan bireylerin bağımsız hareket edebilmesini sağlayan temel araç nedir?", options: ["A) İşitme cihazı", "B) Beyaz baston", "C) Tekerlekli sandalye", "D) Koltuk değneği"], correct: 1 },
+                { q: "17. Omurganın kapanmasındaki kusur sonucu oluşan nöral tüp defekti aşağıdakilerden hangisidir?", options: ["A) Spina Bifida", "B) Epilepsi", "C) Skolyoz", "D) Hidrosefali"], correct: 0 },
+                { q: "18. Portage modeli hangi alanda yoğun olarak kullanılan bir eğitim programıdır?", options: ["A) Lise düzeyinde mesleki eğitim", "B) Ev tabanlı erken çocukluk özel eğitimi", "C) Üniversite hazırlık", "D) Yetişkin rehabilitasyonu"], correct: 1 },
+                { q: "19. Eğitsel değerlendirme ve tanılama işlemlerini yürüten resmi kurum hangisidir?", options: ["A) RAM (Rehberlik ve Araştırma Merkezi)", "B) Hastalık Sağlık Kurulu", "C) İl Milli Eğitim Müdürlüğü", "D) Bilim Kurulu"], correct: 0 },
+                { q: "20. Zihinsel yetersizliği olan bireylere beceri öğretiminde ipucunun giderek azaltılmasına dayanan yöntem hangisidir?", options: ["A) Düz anlatım", "B) Yanlışsız öğretim", "C) Ezberleme", "D) Serbest etkinlik"], correct: 1 },
+                { q: "21. Duyulan kelimelerin papağan gibi tekrarlanması durumu hangisidir?", options: ["A) Ekolali", "B) Apraksi", "C) Afazi", "D) Amnezi"], correct: 0 },
+                { q: "22. Matematiksel hesaplama ve sayısal işlemlerde yaşanan özgül öğrenme güçlüğü türü hangisidir?", options: ["A) Disleksi", "B) Diskalkuli", "C) Disgrafi", "D) Disfasi"], correct: 1 },
+                { q: "23. Bütünleştirme (kaynaştırma) eğitiminin felsefi temelini güçlendiren uluslararası temel belge hangisidir?", options: ["A) Salamanca Bildirgesi", "B) Kyoto Protokolü", "C) Paris Anlaşması", "D) Cenevre Sözleşmesi"], correct: 0 },
+                { q: "24. Koklear implant cihazı hangi duyu kaybı için cerrahi olarak takılır?", options: ["A) Görme", "B) İşitme", "C) Tatma", "D) Dokunma"], correct: 1 },
+                { q: "25. İki kere farklı (2E) kavramı neyi ifade eder?", options: ["A) Hem üstün yetenekli hem ek engeli olan bireyleri", "B) İki kez sınıf atlatan öğrencileri", "C) Görme ve işitme kaybı bir arada olanları", "D) İkiz çocukları"], correct: 0 }
+            ],
+            karma: [
+                { q: "1. Aşağıdakilerden hangisi zihinsel yetersizliği olan çocuklara yönelik yanlışsız öğretim tekniklerinden biridir?", options: ["A) Düz anlatım yöntemi", "B) Sabit ipucu ile öğretim", "C) Ezberletme tekniği", "D) Soru-cevap yöntemi"], correct: 1 },
+                { q: "2. Disleksi tanısı alan bir öğrenci için en uygun okuma yaklaşımı aşağıdakilerden hangisidir?", options: ["A) Orton-Gillingham yaklaşımı", "B) Sadece görsel hafıza çalışması", "C) Fiziksel egzersizler", "D) İşaret dili eğitimi"], correct: 0 },
+                { q: "3. İç kulaktaki zedelenmelerden kaynaklanan ve kalıcı olan işitme kaybı türü hangisidir?", options: ["A) İletim tipi işitme kaybı", "B) Sensörinöral işitme kaybı", "C) Dış kulak yolu tıkanıklığı", "D) Geçici orta kulak iltihabı"], correct: 1 },
+                { q: "4. Görme yetersizliği olan bireylerin bağımsız hareket edebilmesini sağlayan temel araç nedir?", options: ["A) İşitme cihazı", "B) Beyaz baston", "C) Büyüteçli gözlük", "D) Tekerlekli sandalye"], correct: 1 },
+                { q: "5. Otizmli çocuklarda erken dönemde en çok hangi alanda gelişim geriliği görülür?", options: ["A) Sosyal iletişim ve ortak dikkat", "B) Matematik becerileri", "C) Kas gücü", "D) Uzun boylu olma"], correct: 0 },
+                { q: "6. Özel öğrenme güçlüğü olan bireylerin zeka düzeyi nasıldır?", options: ["A) Normal veya normalin üstü", "B) Ağır düzey zihinsel engelli", "C) Çok düşük", "D) Ölçülemez"], correct: 0 },
+                { q: "7. Renzulli üç halka kuramında hangi bileşen yer almaz?", options: ["A) Ortalama üstü zeka", "B) Yaratıcılık", "C) Göreve adanmışlık", "D) Fiziksel dayanıklılık"], correct: 3 },
+                { q: "8. 573 Sayılı KHK'ya göre özel eğitimin temel ilkelerinden biri aşağıdakilerden hangisidir?", options: ["A) Özel eğitim sadece özel okullarda verilir", "B) Erken tanı ve erken müdahale esastır", "C) Kaynaştırma eğitimi kaldırılmalıdır", "D) Tanılama sadece tıp doktorları yapar"], correct: 1 },
+                { q: "9. Sınıf içinde arka plan gürültüsünü önlemek için kullanılan sistem nedir?", options: ["A) FM Telsiz Sistemi", "B) Projektör", "C) Akıllı tahta", "D) Klima"], correct: 0 },
+                { q: "10. El yazısı bozukluğu ve yazılı ifade zorluğu yaşayan bireyde görülen durum nedir?", options: ["A) Disleksi", "B) Disgrafi", "C) Diskalkuli", "D) Dispraksi"], correct: 1 },
+                { q: "11. Zihinsel yetersizlik tanısı konulurken akademik testlerin yanı sıra neye bakılır?", options: ["A) Uyumsal davranışlara", "B) Göz rengine", "C) Boy uzunluğuna", "D) Ailenin gelirine"], correct: 0 },
+                { q: "12. TEACCH modelinin temel amacı nedir?", options: ["A) Yapılandırılmış eğitim ortamı sunmak", "B) Ameliyat etmek", "C) Sadece ilaç vermek", "D) Spor yaptırmak"], correct: 0 },
+                { q: "13. Beyaz baston eğitimini hangi uzmanlık alanı verir?", options: ["A) Yönelim ve Bağımsız Hareket Uzmanı", "B) Matematik öğretmeni", "C) Fizyoterapist", "D) Okul müdürü"], correct: 0 },
+                { q: "14. Serebral Palsi hastalarında görülen en yaygın kas tonusu problemi nedir?", options: ["A) Spastisite (aşırı kasılma)", "B) Kasların tamamen yok olması", "C) Kemik erimesi", "D) Saç dökülmesi"], correct: 0 },
+                { q: "15. BEP hazırlama sürecinde velinin konumu nedir?", options: ["A) Ekip üyesidir, görüşü alınır", "B) Toplantıya katılamaz", "C) Sadece imza atar", "D) Karar yetkisi yoktur"], correct: 0 },
+                { q: "16. 6 noktalı matristen oluşan dokunsal okuma sistemi hangisidir?", options: ["A) Braille", "B) Morse", "C) Romen", "D) Kiril"], correct: 0 },
+                { q: "17. Üstün yetenekli çocukların sınıf atlatılması hangi eğitim modeline girer?", options: ["A) Hızlandırma", "B) Zenginleştirme", "C) Ayrıştırma", "D) Destek eğitim"], correct: 0 },
+                { q: "18. Çocuklarda ekolali hangi bozukluğun en tipik belirtilerindendir?", options: ["A) Otizm Spektrum Bozukluğu", "B) Disleksi", "C) Görme yetersizliği", "D) Ortopedik engel"], correct: 0 },
+                { q: "19. RAM'a yönlendirme yapılmadan önce okulda hangi kurul öncelikli olarak toplanır?", options: ["A) Okul Rehberlik Hizmetleri Yürütme Komisyonu", "B) Disiplin kurulu", "C) Kantin komisyonu", "D) Okul aile birliği"], correct: 0 },
+                { q: "20. Erken çocukluk özel eğitiminde ailenin merkeze alınması neden önemlidir?", options: ["A) Mücadelenin ev ortamında kalıcı olması için", "B) Sadece öğretmen yorulmasın diye", "C) Masrafları azaltmak için", "D) Yasal zorunluluk olmadığından"], correct: 0 }
+            ],
+            cikmis: [
+                { q: "1. Serebral Palsi (CP) ile ilgili aşağıdaki ifadelerden hangisi doğrudur?", options: ["A) İlerleyici bir beyin hastalığıdır", "B) Gelişmekte olan beyin hasarına bağlı, ilerleyici olmayan hareket bozukluğudur", "C) Sadece duyusal organları etkiler", "D) İlaç tedavisiyle tamamen ortadan kalkar"], correct: 1 },
+                { q: "2. Okul öncesi dönemde 0-6 yaş gelişimini değerlendirmek için kullanılan en yaygın araç hangisidir?", options: ["A) WISC-R", "B) AGTE (Ankara Gelişim Tarama Envanteri)", "C) Stanford-Binet", "D) MOXO Testi"], correct: 1 },
+                { q: "3. BEP geliştirme biriminin başkanı kimdir?", options: ["A) Sınıf rehber öğretmeni", "B) Okul müdürü veya görevlendireceği müdür yardımcısı", "C) RAM müdürü", "D) İlçe milli eğitim müdürü"], correct: 1 },
+                { q: "4. Zihinsel yetersizlik tanısı alan bireylerde en sık görülen öğrenme engeli aşağıdakilerden hangisidir?", options: ["A) Genelleme yapamama", "B) Konuşmayı tamamen unutma", "C) Yürüme yetisini kaybetme", "D) Sürekli uyuma"], correct: 0 },
+                { q: "5. Otizm spektrum bozukluğunda erken tanının en önemli göstergesi aşağıdakilerden hangisidir?", options: ["A) Ortak dikkat ve sosyal tepki eksikliği", "B) Matematik problemlerini çözememe", "C) Yabancı dil öğrenememe", "D) El yazısının bozuk olması"], correct: 0 },
+                { q: "6. Özel öğrenme güçlüğü tanısı alan bir çocukta zeka düzeyi nasıldır?", options: ["A) Normal veya normalin üstü", "B) Ağır düzey zihinsel engelli", "C) Çok düşük", "D) Ölçülemez"], correct: 0 },
+                { q: "7. Renzulli'nin üç halka kuramına göre üstün yetenek hangi unsurların birleşimidir?", options: ["A) Ortalama üstü zeka, yaratıcılık, göreve adanmışlık", "B) Hafıza, hız, güç", "C) Yaş, boy, kilo", "D) Görme, işitme, konuşma"], correct: 0 },
+                { q: "8. İşitme cihazı ve koklear implant kullanan çocuklarda en temel amaç nedir?", options: ["A) Sözel dil gelişimini ve iletişimi desteklemek", "B) Kulak ağrısını geçirmek", "C) Saç uzatmak", "D) Gözlük ihtiyacını gidermek"], correct: 0 },
+                { q: "9. Görme yetersizliği olan bireylerde yönelim ve bağımsız hareket eğitiminin temel aracı nedir?", options: ["A) Beyaz baston", "B) Koltuk değneği", "C) Tekerlekli sandalye", "D) İşitme cihazı"], correct: 0 },
+                { q: "10. Türkiye'de özel eğitim hizmetlerinin planlanması ve yürütülmesinden sorumlu bakanlık hangisidir?", options: ["A) Millî Eğitim Bakanlığı", "B) Sağlık Bakanlığı", "C) İçişleri Bakanlığı", "D) Adalet Bakanlığı"], correct: 0 },
+                { q: "11. Kaynaştırma/bütünleştirme eğitiminin temel amacı nedir?", options: ["A) Özel eğitime ihtiyacı olan bireylerin akranlarıyla birlikte eğitim almasını sağlamak", "B) Özel öğrencileri ayrı okulda toplamak", "C) Sınavları iptal etmek", "D) Ders saatlerini kısaltmak"], correct: 0 },
+                { q: "12. Disleksi tanısı olan bireylerde en çok hangi alanda zorluk yaşanır?", options: ["A) Okuma ve fonolojik farkındalık", "B) Yüzme", "C) Resim yapma", "D) Koşma"], correct: 0 },
+                { q: "13. Zihinsel yetersizliği olan çocuklara yönelik ipucunun giderek azaltıldığı öğretim yöntemi hangisidir?", options: ["A) Yanlışsız öğretim", "B) Düz anlatım", "C) Soru cevap", "D) Ödev kontrolü"], correct: 0 },
+                { q: "14. BİLSEM sınavlarına girebilecek öğrenciler hangi gruptandır?", options: ["A) Üstün yetenekli öğrenciler", "B) Görme engelli öğrenciler", "C) Fiziksel engelli öğrenciler", "D) Sınıfta kalan öğrenciler"], correct: 0 },
+                { q: "15. 573 Sayılı KHK'ya göre erken çocukluk dönemi özel eğitim hizmetleri kaç yaş arasını kapsar?", options: ["A) 0-36 ay (0-3 yaş)", "B) 7-12 yaş", "C) 15-18 yaş", "D) Sadece lise dönemi"], correct: 0 }
+            ]
+        };
+
+        let currentExamKey = '';
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let timerInterval = null;
+
+        function startExam(examKey) {
+            currentExamKey = examKey;
+            currentQuestionIndex = 0;
+            userAnswers = {};
+
+            document.getElementById('examsGrid').classList.add('hidden');
+            document.getElementById('pageHeader').classList.add('hidden');
+            document.getElementById('examSession').classList.remove('hidden');
+            document.querySelector('.exam-nav-buttons').style.display = 'flex';
+
+            if(examKey === 'genel1') {
+                document.getElementById('examTitle').textContent = "ÖABT Özel Eğitim Genel Deneme 1 (25 Soru)";
+                startTimer(2100); // 35 dakika
+            } else if(examKey === 'karma') {
+                document.getElementById('examTitle').textContent = "AGS Alan Bilgisi Karma Deneme (20 Soru)";
+                startTimer(1500); // 25 dakika
+            } else {
+                document.getElementById('examTitle').textContent = "ÖABT Çıkmış Soru Analiz Denemesi (15 Soru)";
+                startTimer(1200); // 20 dakika
+            }
+
+            renderExamQuestion();
+        }
+
+        function startTimer(duration) {
+            let timer = duration;
+            const timerDisplay = document.getElementById('timeLeft');
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                let minutes = parseInt(timer / 60, 10);
+                let seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                timerDisplay.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(timerInterval);
+                    alert("Süre bitti! Sınavınız otomatik olarak sonlandırılıyor.");
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function renderExamQuestion() {
+            const questions = examData[currentExamKey];
+            const q = questions[currentQuestionIndex];
+            const container = document.getElementById('examContent');
+
+            let html = `
+                <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-4">
+                    <span>Soru ${currentQuestionIndex + 1} / ${questions.length}</span>
+                    <span class="bg-indigo-950 text-indigo-300 text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-indigo-800/60">Tekli Seçim</span>
+                </div>
+                <h3 class="text-sm md:text-base font-semibold text-slate-100 mb-6 leading-relaxed">${q.q}</h3>
+                <div class="space-y-3 mb-6">
+            `;
+
+            q.options.forEach((opt, idx) => {
+                let checked = userAnswers[currentQuestionIndex] === idx ? 'checked' : '';
+                let activeClass = checked ? 'bg-indigo-950/60 border-indigo-500 text-indigo-200' : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700';
+
+                html += `
+                    <label class="w-full text-left p-4 rounded-2xl border text-xs md:text-sm font-medium transition flex items-center gap-3 cursor-pointer ${activeClass}">
+                        <input type="radio" name="exam_opt" value="${idx}" ${checked} class="accent-indigo-500 w-4 h-4" onclick="selectExamOption(${idx})">
+                        <span>${opt}</span>
+                    </label>
+                `;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+
+            const nextBtn = document.getElementById('nextBtn');
+            if(currentQuestionIndex === questions.length - 1) {
+                nextBtn.innerHTML = 'Sınavı Bitir & Sonucu Gör <i class="fa-solid fa-check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Sonraki Soru <i class="fa-solid fa-arrow-right"></i>';
+            }
+        }
+
+        function selectExamOption(idx) {
+            userAnswers[currentQuestionIndex] = idx;
+            renderExamQuestion();
+        }
+
+        function nextExamQuestion() {
+            const questions = examData[currentExamKey];
+            if(currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderExamQuestion();
+            } else {
+                finishExam();
+            }
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            const questions = examData[currentExamKey];
+            let correctCount = 0;
+            let wrongCount = 0;
+
+            questions.forEach((q, idx) => {
+                if(userAnswers[idx] === q.correct) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            });
+
+            let total = questions.length;
+            let successRate = Math.round((correctCount / total) * 100);
+            let earnedXP = correctCount * 15;
+
+            // Merkezi XP ekleme
+            if(typeof addXP === 'function') {
+                addXP(earnedXP);
+            }
+
+            let stats = JSON.parse(localStorage.getItem('akademi_stats')) || { total: 0, correct: 0, wrong: 0 };
+            stats.total += total;
+            stats.correct += correctCount;
+            stats.wrong += wrongCount;
+            localStorage.setItem('akademi_stats', JSON.stringify(stats));
+
+            document.getElementById('examContent').innerHTML = `
+                <div class="text-center py-6">
+                    <div class="w-20 h-20 bg-indigo-600/20 text-indigo-400 rounded-3xl flex items-center justify-center mx-auto mb-4 text-3xl border border-indigo-500/30 shadow-lg">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h2 class="text-2xl font-black text-white mb-1">Deneme Sınavı Tamamlandı!</h2>
+                    <p class="text-slate-400 mb-6 text-xs">Sınav karneniz hesaplandı ve tecrübe puanınız profilinize işlendi.</p>
+                    
+                    <div class="grid grid-cols-4 gap-3 max-w-lg mx-auto mb-8">
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                            <div class="text-xl font-black text-emerald-400">${correctCount}</div>
+                            <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Doğru</div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                            <div class="text-xl font-black text-rose-400">${wrongCount}</div>
+                            <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Yanlış</div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                            <div class="text-xl font-black text-indigo-400">%${successRate}</div>
+                            <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Başarı</div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                            <div class="text-xl font-black text-amber-400">+${earnedXP}</div>
+                            <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Kazanılan XP</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4 flex-wrap">
+                        <button onclick="location.reload()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold px-6 py-3 rounded-xl transition text-xs flex items-center gap-2 cursor-pointer shadow-lg shadow-indigo-600/30">
+                            <i class="fa-solid fa-rotate-right"></i> Denemelere Geri Dön
+                        </button>
+                        <a href="analiz.html" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3 rounded-xl transition text-xs flex items-center gap-2 border border-slate-700">
+                            Performans Analizine Git <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.querySelector('.exam-nav-buttons').style.display = 'none';
+        }
+
+        function quitExam() {
+            if(confirm("Sınavdan çıkmak istediğinize emin misiniz? İlerlemeniz kaydedilmeyecektir.")) {
+                clearInterval(timerInterval);
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

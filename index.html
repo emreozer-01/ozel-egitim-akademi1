@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Eğitim Akademi - ÖABT & AGS Hazırlık Platformu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Merkezi Yönetim Mantığı -->
+    <script src="app-core.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+
+    <!-- Üst Menü (Navbar) -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Modern SVG Logo & Marka -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[2px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-sm tracking-tight text-white leading-none">ÖZEL EĞİTİM</span>
+                    <span class="font-bold text-[11px] tracking-widest text-indigo-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                        AKADEMİ <span class="bg-indigo-500/20 text-indigo-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-indigo-500/30">BETA</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigasyon Linkleri -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold">
+                <a href="index.html" class="text-indigo-400">Ana Sayfa</a>
+                <a href="konu-anlatim.html" class="text-slate-300 hover:text-indigo-400 transition">Konu Anlatımları</a>
+                <a href="soru-bankasi.html" class="text-slate-300 hover:text-indigo-400 transition">Soru Bankası</a>
+                <a href="denemeler.html" class="text-slate-300 hover:text-indigo-400 transition">Deneme Sınavları</a>
+                <a href="analiz.html" class="text-slate-300 hover:text-indigo-400 transition">Performans Analizi</a>
+                <a href="ipuclari.html" class="text-slate-300 hover:text-indigo-400 transition">Püf Noktaları</a>
+            </nav>
+
+            <!-- Sağ Araçlar (Güneş/Ay Tema, Kayıt/Profil ve XP Widget'ları) -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="text-amber-400 font-bold flex items-center gap-1" title="Tecrübe Puanı">
+                        <i class="fa-solid fa-bolt text-xs"></i> <span id="headerXP">150 XP</span>
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-orange-400 font-bold flex items-center gap-1" title="Çalışma Serisi">
+                        <i class="fa-solid fa-fire text-xs"></i> <span id="headerStreak">1 Gün</span>
+                    </span>
+                </div>
+
+                <button onclick="toggleTheme()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl transition border border-slate-700 text-xs" title="Temayı Değiştir">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+
+                <button onclick="openRegisterModal()" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-lg shadow-indigo-600/20 flex items-center gap-2">
+                    <i class="fa-solid fa-user"></i> <span id="headerUserBtn">Kayıt Ol / Profil</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobil Uyumlu Alt Navigasyon -->
+        <div class="lg:hidden flex items-center justify-around bg-slate-950 border-t border-slate-800 px-2 py-2 text-[11px] overflow-x-auto">
+            <a href="index.html" class="text-indigo-400 font-bold whitespace-nowrap px-2 py-1">Ana Sayfa</a>
+            <a href="konu-anlatim.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Konu Anlatımı</a>
+            <a href="soru-bankasi.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Soru Bankası</a>
+            <a href="denemeler.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Denemeler</a>
+            <a href="analiz.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Analiz</a>
+            <a href="ipuclari.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Püf Noktaları</a>
+        </div>
+    </header>
+
+    <!-- Öğrenci Özet & Canlı Takip Paneli -->
+    <section class="bg-slate-900/60 border-b border-slate-800 py-4 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div id="userAvatar" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 font-black text-white text-base flex items-center justify-center shadow-md">
+                    ÖA
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span id="userNameDisplay">Özel Eğitim Adayı</span>
+                        <span id="leagueBadge" class="bg-amber-500/10 text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-md border border-amber-500/30">Bronz Lig</span>
+                    </h2>
+                    <p class="text-xs text-slate-400">ÖABT & AGS Hazırlık Programı • <span id="userEmailDisplay">demo@ozelegitim.com</span></p>
+                </div>
+            </div>
+
+            <!-- Süre Takibi ve Görev Sayacı -->
+            <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+                <div class="bg-slate-950/80 px-4 py-2.5 rounded-2xl border border-slate-800 text-center">
+                    <span class="block text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Toplam Süre</span>
+                    <span id="headerTime" class="text-xs font-bold text-indigo-400">0 dk</span>
+                </div>
+                <div class="bg-slate-950/80 px-4 py-2.5 rounded-2xl border border-slate-800 text-center">
+                    <span class="block text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Günlük Seri</span>
+                    <span id="streakDisplay" class="text-xs font-bold text-orange-400">🔥 1 Gün</span>
+                </div>
+                <div class="bg-slate-950/80 px-4 py-2.5 rounded-2xl border border-slate-800 text-center">
+                    <span class="block text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Toplam XP</span>
+                    <span id="xpDisplay" class="text-xs font-bold text-amber-400">⚡ 150 XP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Bölümü -->
+    <section class="relative py-12 px-4 overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/30 mb-4">
+                <i class="fa-solid fa-award text-indigo-400"></i> ÖABT Özel Eğitim & AGS Akademi Giriş Sınavı
+            </span>
+            <h1 class="text-2xl md:text-4xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+                Özel Eğitim Öğretmenliği Sınavlarında Zirveye Ulaşın
+            </h1>
+            <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-6 leading-relaxed">
+                9 Farklı Özel Eğitim alanı ve yeni eklenen <strong>AGS Sözel/Sayısal Mantık & Mevzuat</strong> modülleriyle soru çözün, ligde yükselin ve çalışma sürenizi anlık takip edin.
+            </p>
+            <div class="flex items-center justify-center gap-4 flex-wrap">
+                <a href="soru-bankasi.html" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold px-6 py-3.5 rounded-2xl transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-play"></i> Soru Bankasına Başla (+25 XP)
+                </a>
+                <a href="denemeler.html" class="bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold px-6 py-3.5 rounded-2xl transition border border-slate-700 flex items-center gap-2">
+                    <i class="fa-solid fa-file-signature"></i> AGS Deneme Simülasyonu
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oyunlaştırma & Motivasyon Merkezi (Heatmap & Lig Tablosu) -->
+    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-1 space-y-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Aktivite Takvimi (Sıralı Aylık Takvim: 1..30/31) -->
+            <div class="lg:col-span-2 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-base text-white flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-days text-indigo-400"></i> Çalışma Aktivite Takvimi
+                        </h3>
+                        <p class="text-xs text-slate-400">Bu ayın günlerine göre günlük çalışma yoğunluğunuz</p>
+                    </div>
+                    <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                        Canlı Kayıt Aktif ⏱️
+                    </span>
+                </div>
+
+                <!-- Heatmap Izgarası (1'den Ayın Son Gününe Kadar Sıralı) -->
+                <div id="heatmapContainer" class="grid grid-cols-7 sm:grid-cols-10 gap-2 py-4">
+                    <!-- JavaScript ile sırayla 1, 2, 3... 30/31 kareleri üretilecek -->
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-[11px] text-slate-400">
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-slate-800"></span> Çalışılmadı</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-indigo-900"></span> 1-15 Dk</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-indigo-600"></span> 15-45 Dk</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> 45+ Dk</span>
+                </div>
+            </div>
+
+            <!-- Lig & Haftalık Sıralama Tablosu -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-base text-white flex items-center gap-2">
+                            <i class="fa-solid fa-trophy text-amber-400"></i> Liderlik Sıralaması
+                        </h3>
+                        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30">
+                            Haftalık Lig
+                        </span>
+                    </div>
+
+                    <!-- Sıralama Listesi -->
+                    <div class="space-y-2.5" id="leaderboardList">
+                        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+                            <div class="flex items-center gap-2.5">
+                                <span class="font-black text-amber-400 text-xs w-4">1</span>
+                                <div class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center font-bold text-[10px] text-amber-300">İT</div>
+                                <div>
+                                    <p class="text-xs font-bold text-white leading-none">Melek A.</p>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">12 Gün Seri 🔥</p>
+                                </div>
+                            </div>
+                            <span class="font-extrabold text-xs text-amber-400">2,450 XP</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-indigo-600/20 border border-indigo-500/50">
+                            <div class="flex items-center gap-2.5">
+                                <span class="font-black text-indigo-400 text-xs w-4">2</span>
+                                <div id="lbUserAvatar" class="w-7 h-7 rounded-full bg-indigo-500/30 border border-indigo-400 flex items-center justify-center font-bold text-[10px] text-indigo-300">AÖ</div>
+                                <div>
+                                    <p id="lbUserName" class="text-xs font-bold text-white leading-none">Ahmet B</p>
+                                    <p id="lbUserStreak" class="text-xs text-indigo-300 mt-0.5">1 Gün Seri 🔥</p>
+                                </div>
+                            </div>
+                            <span id="lbUserXP" class="font-extrabold text-xs text-indigo-400">150 XP</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                            <div class="flex items-center gap-2.5">
+                                <span class="font-black text-slate-500 text-xs w-4">3</span>
+                                <div class="w-7 h-7 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-[10px] text-slate-300">FS</div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-300 leading-none">Cemil S.</p>
+                                    <p class="text-[10px] text-slate-500 mt-0.5">4 Gün Seri 🔥</p>
+                                </div>
+                            </div>
+                            <span class="font-extrabold text-xs text-slate-400">1,120 XP</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                            <div class="flex items-center gap-2.5">
+                                <span class="font-black text-slate-500 text-xs w-4">4</span>
+                                <div class="w-7 h-7 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-[10px] text-slate-300">FY</div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-300 leading-none">Furkan Y.</p>
+                                    <p class="text-[10px] text-slate-500 mt-0.5">3 Gün Seri 🔥</p>
+                                </div>
+                            </div>
+                            <span class="font-extrabold text-xs text-slate-400">980 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-800">
+                    <p class="text-[11px] text-slate-400 text-center">Soru çözerek XP kazanın ve üst lige yükselin!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modüller & Özellikler Izgarası -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 hover:border-indigo-500/50 transition duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl mb-4 border border-indigo-500/30 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Mega Soru Bankası</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                        9 Farklı Özel Eğitim kategorisinde 225+ uzman çözümlü soru ve çeldirici analizleri.
+                    </p>
+                </div>
+                <a href="soru-bankasi.html" class="text-indigo-400 hover:text-indigo-300 font-bold text-xs flex items-center gap-2">
+                    Soruları Çözmeye Başla <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 hover:border-indigo-500/50 transition duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl mb-4 border border-purple-500/30 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">AGS & ÖABT Konu Özetleri</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                        Zihinsel Yetersizlikten Ulusal Mevzuata ve Mantık Yürütmeye nokta atışı ders notları.
+                    </p>
+                </div>
+                <a href="konu-anlatim.html" class="text-purple-400 hover:text-purple-300 font-bold text-xs flex items-center gap-2">
+                    Konuları İncele <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 hover:border-indigo-500/50 transition duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl mb-4 border border-emerald-500/30 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Performans & Yanlışlar</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                        Yanlış yaptığınız soruları otomatik biriktiren ve zayıf konularınızı raporlayan analiz sistemi.
+                    </p>
+                </div>
+                <a href="analiz.html" class="text-emerald-400 hover:text-emerald-300 font-bold text-xs flex items-center gap-2">
+                    Raporuma Git <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Kayıt & Profil Düzenleme Modalı -->
+    <div id="registerModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-indigo-500/30 text-xl">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Öğrenci Profili</h3>
+                <p class="text-xs text-slate-400 mt-1">İlerlemenizin kaydedilmesi ve lig sıralaması için bilgilerinizi girin.</p>
+            </div>
+            
+            <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Adınız</label>
+                    <input type="text" id="regName" required class="w-full bg-slate-950 border border-slate-800 text-slate-100 text-xs rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500" placeholder="Ahmet Emre">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Soyadınız</label>
+                    <input type="text" id="regSurname" required class="w-full bg-slate-950 border border-slate-800 text-slate-100 text-xs rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500" placeholder="Özer">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">E-posta Adresiniz</label>
+                    <input type="email" id="regEmail" required class="w-full bg-slate-950 border border-slate-800 text-slate-100 text-xs rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500" placeholder="ahmet@example.com">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold py-3.5 rounded-xl transition shadow-lg shadow-indigo-600/30">
+                    Kaydet ve Başla
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Alt Bilgi (Footer) -->
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 mt-8">
+        Özel Eğitim ÖABT & AGS Hazırlık Platformu &copy; 2026
+    </footer>
+
+    <!-- Scriptler & Dinamik İşlevler -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            if(body.classList.contains('bg-slate-950')) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.add('hidden');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const surname = document.getElementById('regSurname').value;
+            const email = document.getElementById('regEmail').value;
+
+            const user = (typeof getUserData === 'function') ? getUserData() : {};
+            user.name = name;
+            user.surname = surname;
+            user.email = email;
+
+            if(typeof saveUserData === 'function') {
+                saveUserData(user);
+            } else {
+                localStorage.setItem('ozel_egitim_user', JSON.stringify(user));
+            }
+
+            closeRegisterModal();
+            updateUI();
+        }
+
+        // Ayın 1'inden Son Gününe Kadar Düzgün Sıralı Takvim Oluşturucu
+        function renderHeatmap() {
+            const container = document.getElementById('heatmapContainer');
+            if(!container) return;
+            container.innerHTML = '';
+
+            const user = (typeof getUserData === 'function') ? getUserData() : {};
+            const activityMap = user.activityMap || JSON.parse(localStorage.getItem('ozel_egitim_activity') || '{}');
+
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth();
+            const todayDate = today.getDate();
+
+            // Bu ayın kaç gün çektiğini bulalım (28, 30 veya 31)
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            for(let day = 1; day <= daysInMonth; day++) {
+                const monthStr = String(currentMonth + 1).padStart(2, '0');
+                const dayStr = String(day).padStart(2, '0');
+                const dateStr = `${currentYear}-${monthStr}-${dayStr}`;
+
+                const minutes = activityMap[dateStr] || 0;
+
+                const square = document.createElement('div');
+                square.className = 'h-9 rounded-xl border flex items-center justify-center text-xs font-bold transition cursor-pointer hover:scale-110';
+
+                if(day === todayDate) {
+                    square.className += ' bg-indigo-950 border-2 border-indigo-500 text-indigo-200 shadow-lg shadow-indigo-500/30';
+                } else if(minutes === 0) {
+                    square.className += ' bg-slate-950 border-slate-800/80 text-slate-600';
+                } else if(minutes < 15) {
+                    square.className += ' bg-indigo-950 border-indigo-800 text-indigo-300';
+                } else if(minutes < 45) {
+                    square.className += ' bg-indigo-600 border-indigo-500 text-white';
+                } else {
+                    square.className += ' bg-emerald-500 border-emerald-400 text-slate-950';
+                }
+
+                square.textContent = day;
+                square.title = `${day} ${getTurkishMonthName(currentMonth)}: ${minutes} dk çalışıldı`;
+                container.appendChild(square);
+            }
+        }
+
+        function getTurkishMonthName(monthIndex) {
+            const months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+            return months[monthIndex];
+        }
+
+        function updateUI() {
+            const user = (typeof getUserData === 'function') ? getUserData() : JSON.parse(localStorage.getItem('ozel_egitim_user') || '{}');
+            
+            if(user.name) {
+                document.getElementById('userNameDisplay').textContent = `${user.name} ${user.surname || ''}`;
+                document.getElementById('userEmailDisplay').textContent = user.email || '';
+                document.getElementById('headerUserBtn').textContent = user.name;
+                
+                const initials = (user.name[0] + (user.surname ? user.surname[0] : '')).toUpperCase();
+                document.getElementById('userAvatar').textContent = initials;
+                document.getElementById('lbUserAvatar').textContent = initials;
+                document.getElementById('lbUserName').textContent = `${user.name} (Sen)`;
+            }
+
+            if(user.xp !== undefined) {
+                document.getElementById('headerXP').textContent = `${user.xp} XP`;
+                document.getElementById('xpDisplay').textContent = `⚡ ${user.xp} XP`;
+                document.getElementById('lbUserXP').textContent = `${user.xp} XP`;
+                
+                if(typeof calculateLeague === 'function') {
+                    const l = calculateLeague(user.xp);
+                    const b = document.getElementById('leagueBadge');
+                    b.textContent = l.name;
+                    b.className = `text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${l.color} ${l.bg} ${l.border}`;
+                }
+            }
+
+            if(user.streak !== undefined) {
+                document.getElementById('headerStreak').textContent = `${user.streak} Gün`;
+                document.getElementById('streakDisplay').textContent = `🔥 ${user.streak} Gün`;
+                document.getElementById('lbUserStreak').textContent = `${user.streak} Gün Seri 🔥`;
+            }
+
+            renderHeatmap();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateUI();
+            setInterval(updateUI, 5000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Eğitim Akademi - Soru Bankası & AGS Havuzu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Merkezi Yönetim Scripti -->
+    <script src="app-core.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+
+    <!-- Üst Menü -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Modern SVG Logo & Marka -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[2px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-sm tracking-tight text-white leading-none">ÖZEL EĞİTİM</span>
+                    <span class="font-bold text-[11px] tracking-widest text-indigo-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                        AKADEMİ <span class="bg-indigo-500/20 text-indigo-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-indigo-500/30">BETA</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigasyon Linkleri -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold">
+                <a href="index.html" class="text-slate-300 hover:text-indigo-400 transition">Ana Sayfa</a>
+                <a href="konu-anlatim.html" class="text-slate-300 hover:text-indigo-400 transition">Konu Anlatımları</a>
+                <a href="soru-bankasi.html" class="text-indigo-400 font-bold">Soru Bankası</a>
+                <a href="denemeler.html" class="text-slate-300 hover:text-indigo-400 transition">Deneme Sınavları</a>
+                <a href="analiz.html" class="text-slate-300 hover:text-indigo-400 transition">Performans Analizi</a>
+                <a href="ipuclari.html" class="text-slate-300 hover:text-indigo-400 transition">Püf Noktaları</a>
+            </nav>
+
+            <!-- Sağ Araçlar (XP, Streak ve Tema) -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="text-amber-400 font-bold flex items-center gap-1" title="Tecrübe Puanı">
+                        <i class="fa-solid fa-bolt text-xs"></i> <span id="headerXP">0 XP</span>
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-orange-400 font-bold flex items-center gap-1" title="Çalışma Serisi">
+                        <i class="fa-solid fa-fire text-xs"></i> <span id="headerStreak">1 Gün</span>
+                    </span>
+                </div>
+
+                <button onclick="toggleTheme()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl transition border border-slate-700 text-xs" title="Temayı Değiştir">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobil Uyumlu Alt Navigasyon -->
+        <div class="lg:hidden flex items-center justify-around bg-slate-950 border-t border-slate-800 px-2 py-2 text-[11px] overflow-x-auto">
+            <a href="index.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Ana Sayfa</a>
+            <a href="konu-anlatim.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Konu Anlatımı</a>
+            <a href="soru-bankasi.html" class="text-indigo-400 font-bold whitespace-nowrap px-2 py-1">Soru Bankası</a>
+            <a href="denemeler.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Denemeler</a>
+            <a href="analiz.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Analiz</a>
+            <a href="ipuclari.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Püf Noktaları</a>
+        </div>
+    </header>
+
+    <!-- Ana İçerik Alanı -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 md:p-8 flex flex-col justify-center my-auto">
+        
+        <!-- Kategori Seçim Barı ve Anlık Sayaçlar -->
+        <div class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="w-full flex-1">
+                <label class="block text-xs font-semibold text-slate-400 mb-2">Çalışmak İstediğiniz Soru Havuzunu Seçin:</label>
+                <select id="categorySelect" class="w-full bg-slate-900 border border-slate-700 text-slate-100 text-xs md:text-sm rounded-2xl px-4 py-3.5 focus:ring-2 focus:ring-indigo-500 focus:outline-none shadow-lg cursor-pointer font-medium">
+                    <optgroup label="🌟 Genel Havuz">
+                        <option value="all">Tüm Soru Havuzu (229 Soru - ÖABT & AGS Karma)</option>
+                    </optgroup>
+                    <optgroup label="📘 AGS (Akademi Giriş Sınavı) Modülleri">
+                        <option value="ags_sozel">🎓 AGS Sözel Akıl Yürütme & Mantık</option>
+                        <option value="ags_sayisal">🔢 AGS Sayısal Akıl Yürütme & Problem Çözme</option>
+                        <option value="ags_mevzuat">🏛️ AGS Türk Milli Eğitim Sistemi & Meslek Mevzuatı</option>
+                    </optgroup>
+                    <optgroup label="📗 Özel Eğitim ÖABT Alan Soruları">
+                        <option value="1">1. Zihinsel Yetersizlik & Uyumsal Davranışlar (25 Soru)</option>
+                        <option value="2">2. Otizm Spektrum Bozukluğu (25 Soru)</option>
+                        <option value="3">3. Özel Öğrenme Güçlüğü - ÖÖG (25 Soru)</option>
+                        <option value="4">4. Üstün Yetenekliler Eğitimi (25 Soru)</option>
+                        <option value="5">5. İşitme Yetersizliği (25 Soru)</option>
+                        <option value="6">6. Görme Yetersizliği (25 Soru)</option>
+                        <option value="7">7. Fiziksel Yetersizlik & Süreğen Hastalıklar (25 Soru)</option>
+                        <option value="8">8. Erken Çocuklukta Özel Eğitim (25 Soru)</option>
+                        <option value="9">9. Mevzuat & Uluslararası Politikalar (25 Soru)</option>
+                    </optgroup>
+                    <optgroup label="📌 Kişisel Kayıtlar">
+                        <option value="yanlislar">❌ Yanlış Yapılan Sorularım</option>
+                        <option value="favoriler">💛 Favori Sorularım</option>
+                    </optgroup>
+                </select>
+            </div>
+            
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end pt-2 md:pt-5">
+                <div class="bg-slate-900 px-4 py-3 rounded-2xl border border-slate-800 text-emerald-400 text-xs font-bold shadow-md">
+                    <span id="statCorrect">0</span> Doğru
+                </div>
+                <div class="bg-slate-900 px-4 py-3 rounded-2xl border border-slate-800 text-rose-400 text-xs font-bold shadow-md">
+                    <span id="statWrong">0</span> Yanlış
+                </div>
+                <div class="bg-slate-900 px-4 py-3 rounded-2xl border border-slate-800 text-amber-400 text-xs font-bold shadow-md" title="Bu testten kazanılan XP">
+                    +<span id="sessionXP">0</span> XP
+                </div>
+            </div>
+        </div>
+
+        <!-- Soru Kartı -->
+        <div id="quizContainer" class="bg-slate-900/70 border border-slate-800 rounded-3xl shadow-2xl p-6 md:p-8 backdrop-blur-xl relative">
+            
+            <div class="flex items-center justify-between mb-6 border-b border-slate-800/80 pb-4">
+                <span id="questionBadge" class="bg-indigo-950 text-indigo-300 text-[11px] font-extrabold px-3.5 py-1.5 rounded-full border border-indigo-800/60 tracking-wide">
+                    Yükleniyor...
+                </span>
+                <div class="flex items-center gap-3">
+                    <button id="favBtn" onclick="toggleFavorite()" class="text-slate-400 hover:text-amber-400 transition text-lg" title="Favorilere Ekle">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
+                    <span id="questionCounter" class="text-xs text-slate-400 font-semibold">Soru 1 / 229</span>
+                </div>
+            </div>
+
+            <h2 id="questionText" class="text-base md:text-lg font-semibold text-slate-100 mb-6 leading-relaxed">
+                Soru metni yükleniyor...
+            </h2>
+
+            <div id="optionsContainer" class="space-y-3 mb-6"></div>
+
+            <div id="explanationContainer" class="hidden bg-slate-950/90 border border-indigo-500/30 rounded-2xl p-4 mb-6 text-xs md:text-sm">
+                <div class="font-bold text-indigo-400 mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-400"></i> Çözümlü Açıklama:
+                </div>
+                <p id="explanationText" class="text-slate-300 leading-relaxed"></p>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+                <button onclick="prevQuestion()" id="prevBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-arrow-left"></i> Önceki Soru
+                </button>
+                <button onclick="nextQuestion()" id="nextBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-6 py-3 rounded-xl transition flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+                    Sonraki <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div id="resultContainer" class="hidden bg-slate-900/70 border border-slate-800 rounded-3xl shadow-2xl p-8 text-center backdrop-blur-xl">
+            <div class="w-20 h-20 bg-indigo-600/20 text-indigo-400 rounded-3xl flex items-center justify-center mx-auto mb-4 text-3xl border border-indigo-500/30 shadow-lg">
+                <i class="fa-solid fa-award"></i>
+            </div>
+            <h2 class="text-2xl font-black text-white mb-1">Test Tamamlandı!</h2>
+            <p class="text-slate-400 mb-6 text-xs">Tebrikler! Bu oturumdan kazandığınız tecrübe puanları lig hesabınıza eklendi.</p>
+            
+            <div class="grid grid-cols-4 gap-3 max-w-lg mx-auto mb-8">
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <div class="text-xl font-black text-emerald-400" id="resCorrect">0</div>
+                    <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Doğru</div>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <div class="text-xl font-black text-rose-400" id="resWrong">0</div>
+                    <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Yanlış</div>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <div class="text-xl font-black text-indigo-400" id="resScore">%0</div>
+                    <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Başarı</div>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <div class="text-xl font-black text-amber-400" id="resEarnedXP">+0</div>
+                    <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Kazanılan XP</div>
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-4 flex-wrap">
+                <button onclick="restartTest()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold px-6 py-3.5 rounded-xl transition shadow-lg shadow-indigo-600/30 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i> Testi Yeniden Başlat
+                </button>
+                <a href="analiz.html" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3.5 rounded-xl transition text-xs flex items-center gap-2 border border-slate-700">
+                    Performans Analizine Git <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 mt-8">
+        Özel Eğitim Öğretmenliği ÖABT & AGS Hazırlık Platformu &copy; 2026
+    </footer>
+
+    <!-- Scriptler ve Tüm Soruları Barındıran Eksiksiz Veritabanı -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            if(body.classList.contains('bg-slate-950')) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
+
+        const questionDatabase = [
+            // AGS Modülü Soruları
+            { id: 301, cat: "ags_sozel", badge: "AGS Sözel Akıl Yürütme", text: "Bir özel eğitim okulundaki 5 öğretmen (A, B, C, D, E) nöbet tutmaktadır. A, B'den hemen sonra; C ise D'den hemen önce nöbet tutmaktadır. E ilk sırada nöbet tuttuğuna göre, 3. sırada nöbet tutan kim olamaz?", options: [{ text: "A", correct: false }, { text: "B", correct: false }, { text: "C", correct: false }, { text: "D", correct: true }, { text: "E", correct: false }], explanation: "Mantıksal sıralama diziliminde D şıkkı 3. sırada yer alamaz." },
+            { id: 302, cat: "ags_sozel", badge: "AGS Sözel Akıl Yürütme", text: "Özel eğitim kavramları arasındaki 'Yetersizlik' ve 'Engellilik' ilişkisine benzer anlamsal ilişki hangisinde vardır?", options: [{ text: "Zeka - Başarı", correct: false }, { text: "Organ Bozukluğu - Toplumsal Rol Kısıtlılığı", correct: true }, { text: "Okuma - Yazma", correct: false }, { text: "Okul - RAM", correct: false }, { text: "BEP - Ders", correct: false }], explanation: "Yetersizlik organ düzeyindeki hasardır; engellilik ise bunun toplumsal rolü kısıtlamasıdır." },
+            { id: 303, cat: "ags_sayisal", badge: "AGS Sayısal Akıl Yürütme", text: "Bir özel eğitim sınıfındaki öğrencilerin %40'ı otizm, %35'i ÖÖG ve kalan 5 öğrenci zihinsel yetersizlik tanılıdır. Sınıfta toplam kaç öğrenci vardır?", options: [{ text: "15", correct: false }, { text: "20", correct: true }, { text: "25", correct: false }, { text: "30", correct: false }, { text: "40", correct: false }], explanation: "%40 + %35 = %75. Kalan %25'lik kısım 5 öğrenciye eşit ise toplam öğrenci sayısı 20'dir." },
+            { id: 304, cat: "ags_mevzuat", badge: "AGS Mevzuat & Meslek Bilgisi", text: "1739 Sayılı Millî Eğitim Temel Kanunu'na göre, öğretmenlik mesleği kaç ana kariyer basamağına ayrılır?", options: [{ text: "2", correct: false }, { text: "3 (Öğretmen, Uzman Öğretmen, Başöğretmen)", correct: true }, { text: "4", correct: false }, { text: "5", correct: false }, { text: "Tek basamaktır", correct: false }], explanation: "Öğretmenlik mesleği Öğretmen, Uzman Öğretmen ve Başöğretmen olmak üzere 3 kariyer basamağından oluşur." },
+
+            // Kategori 1: Zihinsel Yetersizlik & Uyumsal Davranışlar (1-25)
+            { id: 1, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "AAIDD'nin güncel tanımlama sistemlerine göre, zihinsel yetersizlik tanısının konulabilmesinde aşağıdaki ölçütlerden hangisi doğrudan temel bir ön koşul olarak kabul edilir?", options: [{ text: "Kronolojik yaşın 18'i geçmemiş olması", correct: false }, { text: "Zeka bölümünün standart testlerde 70 veya altında olması", correct: true }, { text: "Motor becerilerde tam bağımsızlık sağlanmış olması", correct: false }, { text: "Soyut akademik becerilerin tamamen kazanılmış olması", correct: false }, { text: "İşitme veya görme kaybının eşlik etmesi", correct: false }], explanation: "Zihinsel yetersizlik tanısında standart zeka testlerinden elde edilen 70 ve altı IQ puanı temel kriterdir ve gelişim döneminde ortaya çıkması gerekir." },
+            { id: 2, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Aşağıdakilerden hangisi AAIDD sınıflama sistemine göre uyumsal davranışlar alanları arasında yer almaz?", options: [{ text: "Kavramsal beceriler", correct: false }, { text: "Sosyal beceriler", correct: false }, { text: "Pratik beceriler", correct: false }, { text: "Nörolojik refleks hızları ve duyusal entegrasyon kapasitesi", correct: true }, { text: "Toplumsal kurallara uyum sağlama", correct: false }], explanation: "Uyumsal davranışlar kavramsal, sosyal ve pratik olmak üzere üç ana grupta incelenir." },
+            { id: 3, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Zihinsel yetersizliği olan öğrencilerin eğitim süreçlerinde karşılaşılan 'öğrenilmiş çaresizlik' durumunu kırmak için en etkili öğretimsel düzenleme hangisidir?", options: [{ text: "Beklenti düzeyini ortadan kaldırmak", correct: false }, { text: "Karmaşık görevleri tek bütün halinde vermek", correct: false }, { text: "Beceri analizi yaparak küçük basamaklara bölmek ve anında başarılı yaşantılar sunmak", correct: true }, { text: "Sürekli sözlü uyarılar yapmak", correct: false }, { text: "Zor görevleri tamamen kaldırmak", correct: false }], explanation: "Küçük basamaklara bölme ve anında pekiştirme öğrenilmiş çaresizliği kırar." },
+            { id: 4, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Aşağıdakilerden hangisi zihinsel yetersizliği olan bireylerde görülen bilişsel özelliklerden biri değildir?", options: [{ text: "Kısa süreli bellek kapasitesinde sınırlılık", correct: false }, { text: "Genellemede güçlük", correct: false }, { text: "Üst bilişsel stratejileri kendiliğinden etkili kullanabilme", correct: true }, { text: "Dikkat süresinin kısa olması", correct: false }, { text: "Soyut kavramları anlamakta zorlanma", correct: false }], explanation: "Zihinsel yetersizliği olan bireyler üst bilişsel stratejileri kendiliğinden kullanamazlar." },
+            { id: 5, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Destekli Yaşam modelinin en temel felsefesi nedir?", options: [{ text: "Bireyin korumalı kurumda kalması", correct: false }, { text: "En az kısıtlayıcı ortam ilkesiyle doğal çevrede maksimum bağımsızlık sağlamak", correct: true }, { text: "Akademik becerileri öne koymak", correct: false }, { text: "Tüm kararları vasinin alması", correct: false }, { text: "Yalnızca aile desteğiyle sınırlamak", correct: false }], explanation: "Destekli yaşam bireylerin doğal çevrede bağımsız yaşamlarını hedefler." },
+            { id: 6, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Aşağıdakilerden hangisi prenatal dönemde zihinsel yetersizlik nedeni değildir?", options: [{ text: "Kromozomal anormallikler", correct: false }, { text: "Gebelikte kızamıkçık geçirme", correct: false }, { text: "Doğum anında oksijensizlik (anoksi)", correct: true }, { text: "Madde kullanımı", correct: false }, { text: "Fenilketonüri", correct: false }], explanation: "Doğum anında oksijensizlik kalma perinatal bir risktir." },
+            { id: 7, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Öğrenilen para üstü becerisinin kantinde uygulanamaması hangi sorundur?", options: [{ text: "Bilişsel esneklik", correct: false }, { text: "Genelleme yapmada yetersizlik", correct: true }, { text: "İşleyen bellek fazlalığı", correct: false }, { text: "Geriye dönük amnezi", correct: false }, { text: "Algısal seçicilik", correct: false }], explanation: "Bilginin farklı ortama aktarılamaması genelleme sorunudur." },
+            { id: 8, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Fenilketonüri ile ilgili doğru ifade hangisidir?", options: [{ text: "Cerrahiyle geçer", correct: false }, { text: "Erken teşhis ve diyet uygulanmazsa kalıcı zihinsel yetersizliğe yol açan kalıtsal metabolizma hatasıdır", correct: true }, { text: "Geçici enfeksiyondur", correct: false }, { text: "Gen tedavisiyle sonradan kazanılır", correct: false }, { text: "Radyasyonla oluşur", correct: false }], explanation: "PKU erken diyetle önlenebilen kalıtsal metabolik hastalıktır." },
+            { id: 9, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "BEP hazırlanırken uyulması gereken temel ilke hangisi değildir?", options: [{ text: "Ölçülebilir amaçlar yazılması", correct: false }, { text: "Güçlü yanların dikkate alınması", correct: false }, { text: "BEP'in ailenin onayı alınmadan tek başına uygulanması", correct: true }, { text: "Materyallerin uyarlanması", correct: false }, { text: "Multidisipliner ekip anlayışı", correct: false }], explanation: "BEP ekip çalışmasıdır; onaysız uygulanamaz." },
+            { id: 10, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Trizomi 21 olarak bilinen genetik sendrom hangisidir?", options: [{ text: "Fragile X", correct: false }, { text: "Down Sendromu", correct: true }, { text: "Tourette", correct: false }, { text: "Asperger", correct: false }, { text: "Rett", correct: false }], explanation: "Trizomi 21 Down Sendromu'dur." },
+            { id: 11, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Yanlışsız öğretim yöntemlerinin temel amacı nedir?", options: [{ text: "Hata yaparak öğrenme", correct: false }, { text: "Hata yapma olasılığını en aza indirerek doğru tepkiyi pekiştirmek", correct: true }, { text: "Süreyi kısmak", correct: false }, { text: "Kaygıyı artırmak", correct: false }, { text: "Puan kırmak", correct: false }], explanation: "Yanlışsız öğretim hata şansını sıfıra indirerek öğrenmeyi sağlar." },
+            { id: 12, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Zihinsel yetersizliği olanlarda dil gelişimi nasıldır?", options: [{ text: "Alıcı dil becerileri ifade edici dilden daha gelişmiştir", correct: true }, { text: "Soyut kelime dağarcığı çok zengindir", correct: false }, { text: "İfade edici dil her zaman ileridedir", correct: false }, { text: "Fonolojik farkındalık üst düzeydedir", correct: false }, { text: "Hatasız ve normal hızdadır", correct: false }], explanation: "Alıcı dil ifade edici dilden daha iyidir." },
+            { id: 13, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Küresel standartları belirleyen kurumlar hangileridir?", options: [{ text: "WHO ve UNESCO", correct: true }, { text: "IMF", correct: false }, { text: "WTO", correct: false }, { text: "IOC", correct: false }, { text: "IAU", correct: false }], explanation: "WHO ve UNESCO küresel standartlarda öncüdür." },
+            { id: 14, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Çalışma belleği sınırlı bireye derste ne yapılmamalıdır?", options: [{ text: "Kısa yönerge verilmeli", correct: false }, { text: "Görsel kullanılmalı", correct: false }, { text: "Aynı anda çok uzun ve karmaşık talimatlar silsilesi sunulmalı", correct: true }, { text: "Sık hatırlatma yapılmalı", correct: false }, { text: "Eski bilgiyle bağ kurulmalı", correct: false }], explanation: "Karmaşık ve uzun talimatlar bilişsel yükü artırır." },
+            { id: 15, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Zihinsel yetersizlik derecelendirilmesinde ne temel alınır?", options: [{ text: "Boy kilo oranı", correct: false }, { text: "Gereksinim duyulan destek sistemlerinin yoğunluğu", correct: true }, { text: "Ailenin geliri", correct: false }, { text: "Sanatsal ilgi", correct: false }, { text: "İklim", correct: false }], explanation: "Derecelendirme destek yoğunluğuna göre yapılır." },
+            { id: 16, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Perinatal risk faktörü hangisidir?", options: [{ text: "Akraba evliliği", correct: false }, { text: "Zor ve uzun süren doğumlar nedeniyle beyin zedelenmesi", correct: true }, { text: "Gebelikte zehirlenme", correct: false }, { text: "Menenjit", correct: false }, { text: "Kurşun zehirlenmesi", correct: false }], explanation: "Doğum anındaki oksijensizlik/travma perinataldir." },
+            { id: 17, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Akranlarla aynı sınıfta eğitim görme modeline ne denir?", options: [{ text: "Ayrıştırma", correct: false }, { text: "Kaynaştırma / Bütünleştirme", correct: true }, { text: "Yatılı okul", correct: false }, { text: "Tecrit", correct: false }, { text: "Evde bakım", correct: false }], explanation: "Kaynaştırma/bütünleştirme esastır." },
+            { id: 18, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Dikkat özelliklerinden biri hangisidir?", options: [{ text: "Alakasız uyaranları ayıklamak", correct: false }, { text: "Uzun süre odaklanmak", correct: false }, { text: "Dikkat dağıtıcılar karşısında odaklanmayı korumakta güçlük", correct: true }, { text: "Çoklu uyaranı işlemek", correct: false }, { text: "Görsele duyarsızlık", correct: false }], explanation: "Seçici dikkat zayıflığı yaygındır." },
+            { id: 19, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Sosyal öykülerin temel işlevi nedir?", options: [{ text: "Matematik öğretmek", correct: false }, { text: "Sosyal durumlarda nasıl davranılması gerektiğini kısa ve net dille modellemek", correct: true }, { text: "Masal anlatmak", correct: false }, { text: "Cezalandırmak", correct: false }, { text: "Kelime ezberletmek", correct: false }], explanation: "Sosyal öyküler sosyal kuralları açıklar." },
+            { id: 20, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Dış denetim odaklılık ne anlama gelir?", options: [{ text: "Başarıyı kendi çabasına bağlama", correct: false }, { text: "Başarı veya başarısızlığı dış etkenlere veya şansa bağlama eğilimi", correct: true }, { text: "Aşırı özgüven", correct: false }, { text: "Liderlik isteği", correct: false }, { text: "Risk alma", correct: false }], explanation: "Başarısızlıklar dış denetim odaklılığı tetikler." },
+            { id: 21, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Ailelerin uyum süreçleriyle ilgili hangisi söylenemez?", options: [{ text: "Şok, inkâr aşamaları görülebilir", correct: false }, { text: "Profesyonel destek süreci kolaylaştırır", correct: false }, { text: "Her ailede tepkiler tam olarak aynı sıra ve şiddettedir", correct: true }, { text: "Kardeşler de etkilenir", correct: false }, { text: "Kabullenme gelişebilir", correct: false }], explanation: "Tepkiler kişiye ve aileye göre değişir." },
+            { id: 22, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Günlük yaşam becerisi olmayan hangisidir?", options: [{ text: "Kişisel hijyen", correct: false }, { text: "Toplu taşıma kullanma", correct: false }, { text: "Kuantum fizik denklemi çözme", correct: true }, { text: "Yemek hazırlama", correct: false }, { text: "Alışveriş", correct: false }], explanation: "Kuantum fizik günlük yaşam becerisi değildir." },
+            { id: 23, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Zeka testlerinin sınırlılığı olmayan hangisidir?", options: [{ text: "Kültürel önyargı", correct: false }, { text: "Anlık kaygıdan etkilenme", correct: false }, { text: "Gelecek potansiyelini tam yansıtamama", correct: false }, { text: "Günlük uyumsal davranış düzeyini tek başına kusursuz ölçmesi", correct: true }, { text: "Uygulayıcı hatası", correct: false }], explanation: "Zeka testleri uyumsal davranışları tek başına ölçemez." },
+            { id: 24, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "İpuçlu öğretim yöntemlerinde ne amaçlanır?", options: [{ text: "Bağımlı kılmak", correct: false }, { text: "İpuçlarını kademeli olarak azaltarak bağımsızlaşmayı sağlamak", correct: true }, { text: "Sözel talimatla sınırlamak", correct: false }, { text: "Hiç ipucu vermemek", correct: false }, { text: "Başarıyı düşürmek", correct: false }], explanation: "İpucu silikleştirilerek bağımsızlık kazandırılır." },
+            { id: 25, cat: "1", badge: "Zihinsel Yetersizlik & Uyumsal Davranışlar", text: "Mesleki eğitimde en büyük engellerden biri nedir?", options: [{ text: "Destekli istihdam imkanlarının ve iş yeri uyarlamalarının yetersiz olması", correct: true }, { text: "Çalışma isteğinin aşırı olması", correct: false }, { text: "Mesleği çok hızlı öğrenmeleri", correct: false }, { text: "İş yerlerinin kusursuz olması", correct: false }, { text: "Vergi muafiyeti", correct: false }], explanation: "Destekli istihdam yetersizliği en büyük engeldir." },
+
+            // Kategori 2: Otizm Spektrum Bozukluğu (26-50)
+            { id: 26, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "DSM-5'e göre OSB tanı ölçütleri nelerdir?", options: [{ text: "Motor ve işitsel bozukluklar", correct: false }, { text: "Toplumsal iletişimde kalıcı eksiklikler ile sınırlı/yineleyici davranışlar", correct: true }, { text: "Yalnızca zeka geriliği", correct: false }, { text: "Görsel-uzamsal problem", correct: false }, { text: "Akademik öğrenme güçlüğü", correct: false }], explanation: "DSM-5 iki temel alan belirler: Sosyal iletişim ve sınırlı/yineleyici davranışlar." },
+            { id: 27, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Erken bebeklikte ilk göze çarpan sosyal ipucu eksikliği nedir?", options: [{ text: "Yüksek sese tepkisizlik", correct: false }, { text: "Ortak dikkat eksikliği", correct: true }, { text: "Kas zayıflığı", correct: false }, { text: "Renk körlüğü", correct: false }, { text: "Beslenme sorunu", correct: false }], explanation: "Ortak dikkat eksikliği otizmin en erken habercisidir." },
+            { id: 28, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Yineleyici davranışlardan biri değildir?", options: [{ text: "El çırpma", correct: false }, { text: "Nesne sıralama", correct: false }, { text: "Rutinlerde ısrar", correct: false }, { text: "Spontan ve esnek hayali oyunlar kurma", correct: true }, { text: "Kendi etrafında dönme", correct: false }], explanation: "Spontan ve esnek hayali oyunlar otizmde genellikle görülmez." },
+            { id: 29, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "ABA prensibi nedir?", options: [{ text: "Serbest bırakmak", correct: false }, { text: "Davranışları çevresel uyaranlar ve sonuçlarla ele alıp sistematik pekiştirmek", correct: true }, { text: "Grup terapisi", correct: false }, { text: "İlaç tedavisi", correct: false }, { text: "Sanat", correct: false }], explanation: "ABA veri temelli pekiştirme sistemine dayanır." },
+            { id: 30, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Resimler veya cihazlarla iletişim kurma sistemine ne denir?", options: [{ text: "Tarama testi", correct: false }, { text: "Alternatif ve Destekleyici İletişim Sistemleri (AAC)", correct: true }, { text: "Braille", correct: false }, { text: "Fonolojik program", correct: false }, { text: "İşitme kalibrasyon", correct: false }], explanation: "AAC sistemleri konuşmayı destekler veya yerine geçer." },
+            { id: 31, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Hiper-reaktivite örneği hangisidir?", options: [{ text: "Süpürge sesinden aşırı korkup kulak kapama", correct: true }, { text: "Seslere hiç tepki vermeme", correct: false }, { text: "Acıyı hissetmeme", correct: false }, { text: "Sürekli nesneye vurma", correct: false }, { text: "Fiziksel tepkisizlik", correct: false }], explanation: "Hiper-reaktivite uyaranların aşırı şiddetli algılanmasıdır." },
+            { id: 32, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Otizmin etiyolojisi ile ilgili doğru olan nedir?", options: [{ text: "Nedeni yanlış anne tutumudur", correct: false }, { text: "Genetik yatkınlık, nörobiyoloji ve çevrenin karmaşık etkileşimidir", correct: true }, { text: "Aşılar tek sebeptir", correct: false }, { text: "Beslenme yetersizliğidir", correct: false }, { text: "Psikolojiktir", correct: false }], explanation: "Otizm genetik ve nörobiyolojik temellidir." },
+            { id: 33, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Günlük akışı öngörülebilir kılan görsel strateji nedir?", options: [{ text: "Görsel Zaman Çizelgeleri / Günlük Akış Panoları", correct: true }, { text: "Uzun sözel metin", correct: false }, { text: "Sözlü kural", correct: false }, { text: "Sürprizler", correct: false }, { text: "Yalnız bırakma", correct: false }], explanation: "Görsel çizelgeler kaygıyı azaltır." },
+            { id: 34, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Sosyal etkileşim özelliği hangisidir?", options: [{ text: "Duyguları paylaşma ve empati kurmada sınırlılık", correct: true }, { text: "Doğal jestleri zengin kullanma", correct: false }, { text: "Liderlik", correct: false }, { text: "Yabancıyla hızlı bağ", correct: false }, { text: "Kuralı anında sezme", correct: false }], explanation: "Karşılıklı duyuşsal etkileşim sınırlıdır." },
+            { id: 35, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Söylenenleri aynen tekrarlama durumuna ne denir?", options: [{ text: "Disleksi", correct: false }, { text: "Ekolali", correct: true }, { text: "Afazi", correct: false }, { text: "Apraksi", correct: false }, { text: "Disgrafi", correct: false }], explanation: "Ekolali seslerin tekrarlanmasıdır." },
+            { id: 36, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Erken müdahale programı olmayan hangisidir?", options: [{ text: "TEACCH", correct: false }, { text: "ESDM", correct: false }, { text: "WISC-R Zeka Ölçeği", correct: true }, { text: "PECS", correct: false }, { text: "ABA", correct: false }], explanation: "WISC-R zeka testidir." },
+            { id: 37, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "TEACCH yaklaşımının felsefesi nedir?", options: [{ text: "Çevrenin, zamanın ve etkinliklerin görsel olarak yapılandırılması", correct: true }, { text: "Plansız doğal ortam", correct: false }, { text: "Sözel talimat", correct: false }, { text: "Yalnız bırakma", correct: false }, { text: "Akademik baskı", correct: false }], explanation: "TEACCH fiziksel ve görsel yapılandırma sağlar." },
+            { id: 38, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Ayrıntılara odaklanıp bütünü kavramada zorlanmayı açıklayan kuram?", options: [{ text: "Zihin Kuramı", correct: false }, { text: "Zayıf Merkezi Uyum Kuramı", correct: true }, { text: "Yönetici İşlevler", correct: false }, { text: "Sosyal Öykü", correct: false }, { text: "Aşırı uyarılma", correct: false }], explanation: "Zayıf merkezi uyum parçaya odaklanmayı açıklar." },
+            { id: 39, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Zihin Kuramı eksikliğinin yansıması hangisidir?", options: [{ text: "Başkalarının da farklı zihne sahip olabileceğini anlamada güçlük", correct: true }, { text: "Matematik hatası", correct: false }, { text: "İşitme kaybı", correct: false }, { text: "Kas zayıflığı", correct: false }, { text: "Aynalı yazma", correct: false }], explanation: "Zihin kuramı başkasının zihnini okuma becerisidir." },
+            { id: 40, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Problem davranışta ilk yapılması gereken aşama nedir?", options: [{ text: "Cezalandırmak", correct: false }, { text: "İşlevsel değerlendirme yapmak", correct: true }, { text: "Soyutlamak", correct: false }, { text: "Aileyi suçlamak", correct: false }, { text: "Görmezden gelmek", correct: false }], explanation: "İşlevsel değerlendirme davranışın işlevini bulur." },
+            { id: 41, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Yönetici işlevler arasında olmayan hangisidir?", options: [{ text: "Plan yapma", correct: false }, { text: "Esneklik", correct: false }, { text: "Dürtü kontrolü", correct: false }, { text: "Tanıdık şarkıyı ezbere okuma", correct: true }, { text: "Geçiş yapma", correct: false }], explanation: "Şarkı okuma yönetici işlev değildir." },
+            { id: 42, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Akran destekli en etkili uygulamalardan biri nedir?", options: [{ text: "Akran Aracılı Öğretim", correct: true }, { text: "Yalnız bırakma", correct: false }, { text: "Yarışma", correct: false }, { text: "İletişim yasağı", correct: false }, { text: "Otorite", correct: false }], explanation: "Akran aracılı öğretim doğal etkileşim sağlar." },
+            { id: 43, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Duyusal arayış örneği hangisidir?", options: [{ text: "Hafif dokunmadan ürkme", correct: false }, { text: "Nesneleri yalama, koklama, sert vurma ihtiyacı", correct: true }, { text: "Gün ışığından rahatsız olma", correct: false }, { text: "Pürüzsüz kıyafet isteme", correct: false }, { text: "Sesten kulak kapama", correct: false }], explanation: "Hipo-reaktivite duyusal arayış yaratır." },
+            { id: 44, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Tanılamada altın standart gözlem ölçeği nedir?", options: [{ text: "WISC-R", correct: false }, { text: "ADOS", correct: true }, { text: "Denver", correct: false }, { text: "Bender", correct: false }, { text: "Peabody", correct: false }], explanation: "ADOS tanısal gözlem ölçeğidir." },
+            { id: 45, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Sosyal Öyküleri kim geliştirmiştir?", options: [{ text: "Carol Gray", correct: true }, { text: "Piaget", correct: false }, { text: "Skinner", correct: false }, { text: "Vygotsky", correct: false }, { text: "Montessori", correct: false }], explanation: "Carol Gray tarafından geliştirilmiştir." },
+            { id: 46, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Oyun gelişim özelliklerinden biri nedir?", options: [{ text: "Nesnelerin işlevleri dışında oynamaya odaklanma", correct: true }, { text: "Erken hayali oyun", correct: false }, { text: "Lider grup oyunu", correct: false }, { text: "Amaca uygun kullanım", correct: false }, { text: "Rol paylaşımı", correct: false }], explanation: "Otizmliler parçalara ve yineleyici kullanıma odaklanır." },
+            { id: 47, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Üstün beceriye sahip otizmli birey durumu nedir?", options: [{ text: "Savant Becerisi", correct: true }, { text: "Ataksi", correct: false }, { text: "Dispraksi", correct: false }, { text: "Gelişimsel gecikme", correct: false }, { text: "Afazi", correct: false }], explanation: "Savant becerisi dar alanda olağanüstü yetenektir." },
+            { id: 48, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Ailelerin süreçte yaşadıklarından biri değildir?", options: [{ text: "Stres ve belirsizlik", correct: false }, { text: "Bürokratik engel", correct: false }, { text: "Dışlanma", correct: false }, { text: "Durumu ilk günden hiç kaygı duymadan kabullenme", correct: true }, { text: "Bakım yükü", correct: false }], explanation: "Aileler ilk günlerde yoğun kaygı ve şok yaşarlar." },
+            { id: 49, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Kaynaştırmada en az işlevsel uyarlama hangisidir?", options: [{ text: "Fiziksel düzen", correct: false }, { text: "Karmaşık, uzun ve soyut sözlü komut verme", correct: true }, { text: "Görsel ipucu", correct: false }, { text: "Süre esnetme", correct: false }, { text: "Akran bilgilendirme", correct: false }], explanation: "Soyut ve uzun komutlar bilişsel yükü artırır." },
+            { id: 50, cat: "2", badge: "Otizm Spektrum Bozukluğu", text: "Ebeveynlere uygulanan erken tarama ölçeği nedir?", options: [{ text: "M-CHAT", correct: true }, { text: "WISC-R", correct: false }, { text: "Bender", correct: false }, { text: "Peabody", correct: false }, { text: "Metropolitan", correct: false }], explanation: "M-CHAT ebeveyn bildirimli otizm tarama ölçeğidir." },
+
+            // Kategori 3: Özel Öğrenme Güçlüğü - ÖÖG (51-75)
+            { id: 51, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "ÖÖG tanısında zeka düzeyi hangi aralıkta beklenir?", options: [{ text: "70 ve altı", correct: false }, { text: "Normal veya normalin üstü (IQ >= 85)", correct: true }, { text: "Sadece 130+", correct: false }, { text: "50-69", correct: false }, { text: "Zeka önemsizdir", correct: false }], explanation: "ÖÖG'de zeka normal veya üstüdür." },
+            { id: 52, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Okuma becerisinde güçlük yaşanan ÖÖG alt türü nedir?", options: [{ text: "Diskalkuli", correct: false }, { text: "Disleksi", correct: true }, { text: "Disgrafi", correct: false }, { text: "Dispraksi", correct: false }, { text: "Afazi", correct: false }], explanation: "Okuma güçlüğü disleksidir." },
+            { id: 53, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Yazılı anlatım ve harf karıştırma sorunu olan ÖÖG türü nedir?", options: [{ text: "Disgrafi", correct: true }, { text: "Diskalkuli", correct: false }, { text: "Disleksi", correct: false }, { text: "İşitsel bozukluk", correct: false }, { text: "Ataksi", correct: false }], explanation: "Yazma güçlüğü disgrafidir." },
+            { id: 54, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Matematik ve sayısal işlemlerde yaşanan ÖÖG türü nedir?", options: [{ text: "Disleksi", correct: false }, { text: "Disgrafi", correct: false }, { text: "Diskalkuli", correct: true }, { text: "Dispraksi", correct: false }, { text: "Agnozi", correct: false }], explanation: "Matematik güçlüğü diskalkulidir." },
+            { id: 55, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Disleksinin temel bilişsel temeli nedir?", options: [{ text: "Fonolojik farkındalık ve harf-ses uyumunda yetersizlik", correct: true }, { text: "Göz körlüğü", correct: false }, { text: "Sayısal mantık yokluğu", correct: false }, { text: "İşitme kaybı", correct: false }, { text: "Bellek silinmesi", correct: false }], explanation: "Fonolojik farkındalık eksikliği disleksinin temelidir." },
+            { id: 56, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "ÖÖG'ye en sık eşlik eden nörogelişimsel durum nedir?", options: [{ text: "DEHB", correct: true }, { text: "Down Sendromu", correct: false }, { text: "Otizm", correct: false }, { text: "Ağır zihinsel yetersizlik", correct: false }, { text: "Kas distrofisi", correct: false }], explanation: "ÖÖG ile DEHB yüksek oranlarda birliktelik gösterir." },
+            { id: 57, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Orton-Gillingham yaklaşımının temel ilkesi nedir?", options: [{ text: "Tek duyu kullanımı", correct: false }, { text: "Görsel, işitsel, kinestetik ve dokunsal kanalların eşgüdümlü kullanımı", correct: true }, { text: "Ezber", correct: false }, { text: "Teknolojisizlik", correct: false }, { text: "Ev ödevi", correct: false }], explanation: "Çoklu duyusal öğretim esastır." },
+            { id: 58, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "ÖÖG özelliklerinden biri değildir?", options: [{ text: "Yavaş okuma", correct: false }, { text: "Yazılıda organize olamama", correct: false }, { text: "Zeka testinin normal çıkması", correct: false }, { text: "Sözel olmayan zeka puanının akademik başarıyla tam örtüşmesi", correct: true }, { text: "Yön karıştırma", correct: false }], explanation: "Zeka ile akademik başarı arasında çelişki vardır." },
+            { id: 59, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Benzer harfleri karıştırma hangi sürece bağlıdır?", options: [{ text: "Görsel-işitsel ayrımcılık ve fonolojik kodlama", correct: true }, { text: "Matematik soyutlama", correct: false }, { text: "Kaba motor", correct: false }, { text: "Sosyal öykü", correct: false }, { text: "Tat alma", correct: false }], explanation: "Fonolojik kodlama sorunudur." },
+            { id: 60, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Tanılamada kullanılan klinik zeka ölçeği nedir?", options: [{ text: "WISC-R / WISC-IV", correct: true }, { text: "M-CHAT", correct: false }, { text: "ADOS", correct: false }, { text: "Denver", correct: false }, { text: "Peabody", correct: false }], explanation: "WISC ölçekleri z profili tutarsızlıkları için kullanılır." },
+            { id: 61, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Diskalkulide gözlenen tipik bulgu nedir?", options: [{ text: "Sayısal sembolleri kavramakta ve parmak hesabından kurtulamamakta zorlanma", correct: true }, { text: "Edebiyatta üstünlük", correct: false }, { text: "Yabancı dil becerisi", correct: false }, { text: "Geometri hatasızlığı", correct: false }, { text: "Zaman planlaması", correct: false }], explanation: "Diskalkulide sayısal semboller ve parmak hesabı sorunu yaşanır." },
+            { id: 62, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Uygulanan akademik uyarlamalardan hangisi doğrudur?", options: [{ text: "Ek süre verilmesi ve soruların sesli okunabilmesi", correct: true }, { text: "Müfredattan muaf tutma", correct: false }, { text: "Çoktan seçmeli kaldırma", correct: false }, { text: "En arkaya oturtma", correct: false }, { text: "Ödev artırma", correct: false }], explanation: "Ek süre ve sesli okuma en temel akomodasyonlardandır." },
+            { id: 63, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Beklenmeyen başarı düşüklüğü ne demektir?", options: [{ text: "Zeka düzeyinin çok altında akademik performans sergileme", correct: true }, { text: "Ders çalışmadan birinci olma", correct: false }, { text: "Zekanın düşük olması", correct: false }, { text: "Ailenin ilgisizliği", correct: false }, { text: "Devamsızlık", correct: false }], explanation: "Zeka ile gerçek başarı arasındaki çelişkidir." },
+            { id: 64, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Görsel ters dönme eğilimi en çok nerede görülür?", options: [{ text: "Harf ve rakamların yönlerinin karıştırılması (b/d, p/q)", correct: true }, { text: "Renk körlüğü", correct: false }, { text: "İşitsel ses karışması", correct: false }, { text: "Yürüyüş bozukluğu", correct: false }, { text: "Müzik notası", correct: false }], explanation: "b/d, p/q gibi harf yönleri karıştırılır." },
+            { id: 65, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Duygusal ve sosyal gelişimde en sık ne görülür?", options: [{ text: "Özgüven kaybı ve kaygı", correct: true }, { text: "Aşırı liderlik", correct: false }, { text: "Hiç duygu olmaması", correct: false }, { text: "Popülerlik", correct: false }, { text: "Uyum sorunu yokluğu", correct: false }], explanation: "Başarısızlıklar özgüven kaybı ve kaygı yaratır." },
+            { id: 66, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Bellek özelliklerinden biri nedir?", options: [{ text: "Çalışma belleğinde bilgi tutma ve işlemede sınırlılıklar", correct: true }, { text: "Fotografik hafıza", correct: false }, { text: "İşitsel üstünlük", correct: false }, { text: "Geniş kısa süreli bellek", correct: false }, { text: "Kusursuz hafıza", correct: false }], explanation: "Çalışma belleği sınırlılıkları ÖÖG'de yaygındır." },
+            { id: 67, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Dispraksi tanısı olan bireyde görülen bulgu nedir?", options: [{ text: "İnce ve kaba motor becerilerde, el-göz koordinasyonunda sakarlık", correct: true }, { text: "Matematik üstünlüğü", correct: false }, { text: "Yabancı dil", correct: false }, { text: "İşitsel hassasiyet", correct: false }, { text: "Harita okuma", correct: false }], explanation: "Dispraksi motor planlama ve koordinasyon bozukluğudur." },
+            { id: 68, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Sınıf içinde yapılmaması gereken yanlış nedir?", options: [{ text: "Öğrencinin tahtaya kalkıp sesli okumaya zorlanması ve rencide edilmesi", correct: true }, { text: "Görsel şema kullanma", correct: false }, { text: "Anahtar kelimeyi renklendirme", correct: false }, { text: "Sakin oturma düzeni", correct: false }, { text: "Büyük puntolu yazı", correct: false }], explanation: "Akran önünde sesli okumaya zorlamak kaygıyı artırır." },
+            { id: 69, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Erken tanı ve müdahalenin en büyük avantajı nedir?", options: [{ text: "İkincil duygusal sorunların önlenebilmesi", correct: true }, { text: "IQ katsayısının artırılması", correct: false }, { text: "ÖÖG'nin tamamen yok olması", correct: false }, { text: "Dersten muafiyet", correct: false }, { text: "Okul süresinin kısalması", correct: false }], explanation: "Erken tanı özgüven kaybı ve ikincil sorunları önler." },
+            { id: 70, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Üst biliş stratejileri geliştirmek için ne yapılmalıdır?", options: [{ text: "Kendi öğrenme süreçlerini planlama, izleme ve değerlendirme stratejilerinin öğretilmesi", correct: true }, { text: "Ezberletmek", correct: false }, { text: "Kendi haline bırakmak", correct: false }, { text: "Sözel anlatımı yasaklamak", correct: false }, { text: "Vasi denetimi", correct: false }], explanation: "Üst bilişin doğrudan öğretimi bağımsızlık sağlar." },
+            { id: 71, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Kalemi çok sert tutma ve çabuk yorulma hangi alanı işaret eder?", options: [{ text: "Disgrafi", correct: true }, { text: "Diskalkuli", correct: false }, { text: "Disleksi", correct: false }, { text: "İşitsel agnozi", correct: false }, { text: "Hiperaktivite", correct: false }], explanation: "Kalem kontrolü ve yazı disgrafi kapsamındadır." },
+            { id: 72, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Tanılamada kullanılmayan unsur hangisidir?", options: [{ text: "Ailenin ekonomik gelir düzeyi ve mesleki statüsü", correct: true }, { text: "Tıbbi değerlendirme", correct: false }, { text: "Eğitsel testler", correct: false }, { text: "Duyu organı sağlamlığı", correct: false }, { text: "Akademik aksama", correct: false }], explanation: "Ailenin ekonomik durumu tanı kriteri değildir." },
+            { id: 73, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Yabancı dil öğrenirken disleksik bireyin en çok zorlandığı nokta nedir?", options: [{ text: "Yazılış ile okunuş arasındaki sesbilgisel tutarsızlıkları çözmek", correct: true }, { text: "Film izlemek", correct: false }, { text: "Müzik dinlemek", correct: false }, { text: "Bayrak tanımak", correct: false }, { text: "El becerisi", correct: false }], explanation: "Fonolojik kodlama sorunu yabancı dilde zorluk yaratır." },
+            { id: 74, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Soyut kavramları somutlaştırmak için en etkili aşama nedir?", options: [{ text: "Somut - Yarı Somut - Soyut (SCS) aşamaları", correct: true }, { text: "Doğrudan formül ezberleme", correct: false }, { text: "Yalnız bırakma", correct: false }, { text: "Müfredatı kaldırma", correct: false }, { text: "Sözel anlatım", correct: false }], explanation: "SCS aşamaları matematiği somutlaştırır." },
+            { id: 75, cat: "3", badge: "Özel Öğrenme Güçlüğü - ÖÖG", text: "Yetişkinlik yaşamını kolaylaştıran etken nedir?", options: [{ text: "Güçlü yönlerin desteklenmesi ve uygun mesleki yönlendirme", correct: true }, { text: "Akademik beklentiyi bitirme", correct: false }, { text: "İzole etme", correct: false }, { text: "Teknolojiyi yasaklama", correct: false }, { text: "Görmezden gelme", correct: false }], explanation: "Güçlü yönlerin keşfi ve teknoloji başarıyı getirir." },
+
+            // Kategori 4: Üstün Yetenekliler Eğitimi (76-100)
+            { id: 76, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Renzulli'nin Üç Halka Üstün Yeteneklilik Modelindeki bileşenler nelerdir?", options: [{ text: "Zeka - Hafıza - Hız", correct: false }, { text: "Ortalamanın üstü yetenek - Yaratıcılık - Görev bağlılığı", correct: true }, { text: "Liderlik - Empati - Fizik", correct: false }, { text: "Akademik başarı - Duygu - Esneklik", correct: false }, { text: "Kritik düşünme - Sentez", correct: false }], explanation: "Renzulli modeli üç halkanın kesişimini savunur." },
+            { id: 77, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Müfredat hızını artırarak sınıf atlatma modeline ne denir?", options: [{ text: "Zenginleştirme", correct: false }, { text: "Hızlandırma", correct: true }, { text: "Gruplama", correct: false }, { text: "Bireyselleştirilmiş destek", correct: false }, { text: "Ayrıştırma", correct: false }], explanation: "Hızlandırma erken sınıf atlama modelidir." },
+            { id: 78, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Zenginleştirmenin temel amacı nedir?", options: [{ text: "Sınıf atlatmaksızın içeriği derinleştirip bilişsel düzeye uygun öğrenme sağlamak", correct: true }, { text: "Liseyi 2 yılda bitirtmek", correct: false }, { text: "Zor konuları silmek", correct: false }, { text: "Ödev yüküyle hınç oluşturmak", correct: false }, { text: "Yarışma yaratmak", correct: false }], explanation: "Zenginleştirme içeriği derinleştirir." },
+            { id: 79, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Gagne modeline göre yeteneğin başarıya dönüşmesinde ne rol oynar?", options: [{ text: "Katalizörler (kişisel özellikler, motivasyon, çevre)", correct: true }, { text: "Sadece genler", correct: false }, { text: "Okul binası", correct: false }, { text: "Bütçe", correct: false }, { text: "Gelenekler", correct: false }], explanation: "Katalizörler yeteneği başarıya dönüştürür." },
+            { id: 80, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Özelliklerinden biri değildir?", options: [{ text: "İdealist olma", correct: false }, { text: "Mükemmeliyetçilik", correct: false }, { text: "Akranlarıyla her anlamda tam uyum içinde olup hiçbir sosyal kaygı yaşamama", correct: true }, { text: "Asenkron gelişim", correct: false }, { text: "Derin mizah", correct: false }], explanation: "Asenkron gelişim nedeniyle sosyal kaygı ve uyumsuzluk yaşayabilirler." },
+            { id: 81, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Okul dışında destek eğitimi veren resmi kurum nedir?", options: [{ text: "RAM", correct: false }, { text: "BİLSEM", correct: true }, { text: "Halk Eğitimi", correct: false }, { text: "Özel Eğitim Okulu", correct: false }, { text: "Mesleki Eğitim", correct: false }], explanation: "BİLSEM üstün yeteneklilere destek eğitim verir." },
+            { id: 82, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Asenkron gelişim ne demektir?", options: [{ text: "Zihinsel, duygusal ve sosyal gelişim hızlarının birbirinden farklı ve dengesiz olması", correct: true }, { text: "Tüm alanların aynı hızda gitmesi", correct: false }, { text: "Fizikselin zihinselden geride olması", correct: false }, { text: "Dilin tek başına durması", correct: false }, { text: "IQ ile başarının örtüşmesi", correct: false }], explanation: "Asenkron gelişim alanlar arası hız farkıdır." },
+            { id: 83, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Tanılamada kullanılan bireysel zeka testi nedir?", options: [{ text: "WISC-R / WISC-IV", correct: true }, { text: "M-CHAT", correct: false }, { text: "ADOS", correct: false }, { text: "Denver", correct: false }, { text: "Peabody", correct: false }], explanation: "WISC zeka katsayısını belirler." },
+            { id: 84, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Esnek gruplamanın avantajı nedir?", options: [{ text: "Dersin konusuna ve ilgiye göre dinamik gruplar oluşturmak", correct: true }, { text: "Sabit gruba hapsetmek", correct: false }, { text: "Zayıfı ayırmak", correct: false }, { text: "Planı kaldırmak", correct: false }, { text: "Yarışma yaratmak", correct: false }], explanation: "Esnek gruplama dinamik çalışma sağlar." },
+            { id: 85, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Yaratıcılığı geliştirmek için kullanılan tekniklerden biri değildir?", options: [{ text: "Beyin fırtınası", correct: false }, { text: "Altı şapka", correct: false }, { text: "Mekanik ezber ve tek tip test çözme maratonu", correct: true }, { text: "SCAMPER", correct: false }, { text: "Problem çözme", correct: false }], explanation: "Mekanik ezber yaratıcılığı köreltir." },
+            { id: 86, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Sıkılma ve düşük başarıyı önlemek için en etkili öğretmen tutumu nedir?", options: [{ text: "Farklılaştırılmış ve üst düzey düşünme becerileri gerektiren görevler sunmak", correct: true }, { text: "5 kat fazla ödev vermek", correct: false }, { text: "Kendi haline bırakmak", correct: false }, { text: "Ezber ödevi vermek", correct: false }, { text: "Diğerine ders anlattırmak", correct: false }], explanation: "Zenginleştirilmiş içerik sıkılmayı önler." },
+            { id: 87, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Bilişsel özelliklerinden biri nedir?", options: [{ text: "Soyut düşünme, analitik akıl yürüttme ve problem çözme hızında ileride olma", correct: true }, { text: "Yavaş öğrenme", correct: false }, { text: "Meraksızlık", correct: false }, { text: "Nedensellik kuramama", correct: false }, { text: "Görsel hafıza zayıflığı", correct: false }], explanation: "Hızlı öğrenme ve analitik akıl yürütme belirgindir." },
+            { id: 88, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Mentörlük sistemi neyi ifade eder?", options: [{ text: "Uzman bir kişiyle eşleştirilip birebir rehberlik ve proje desteği alma", correct: true }, { text: "Evde eğitim", correct: false }, { text: "Zayıf öğrenciye öğretmenlik yapma", correct: false }, { text: "Maddi maaş", correct: false }, { text: "Kamp yapma", correct: false }], explanation: "Mentörlük alanında uzmanla birebir çalışmadır." },
+            { id: 89, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Ailelerin yaşadığı durumlardan biri değildir?", options: [{ text: "Erken okuma karşısında şaşkınlık", correct: false }, { text: "Okul bulmada bürokratik engel", correct: false }, { text: "Akademik başarıdan hiç endişe duymayıp her şeyin kusursuz olacağına inanma", correct: true }, { text: "Yoğun enerji karşısında tükenmişlik", correct: false }, { text: "Sosyal uyum kaygısı", correct: false }], explanation: "Aileler asenkron gelişim ve sosyal uyum konusunda yoğun kaygı yaşarlar." },
+            { id: 90, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Stanley tarafından geliştirilen hızlandırma modeli nedir?", options: [{ text: "SMP", correct: true }, { text: "TEACCH", correct: false }, { text: "ABA", correct: false }, { text: "Orton-Gillingham", correct: false }, { text: "Renzulli", correct: false }], explanation: "SMP modeli üstün yetenekli gençlerin hızlandırılmasını savunur." },
+            { id: 91, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Bloom'un üst düzey basamakları neden vurgulanır?", options: [{ text: "Basit bilgilerde sıkıldıkları için üst düzey zihinsel meydan okumalara ihtiyaç duyarlar", correct: true }, { text: "Sadece okul öncesi içindir", correct: false }, { text: "Alt düzey yasaktır", correct: false }, { text: "Ezber için", correct: false }, { text: "Zeka testi sorusudur", correct: false }], explanation: "Üst düzey düşünme becerileri üstün yeteneklileri besler." },
+            { id: 92, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Mükemmeliyetçiliğin olumsuz yönü nedir?", options: [{ text: "En küçük hatada yoğun başarısızlık korkusu yaşayıp hiç denememek", correct: true }, { text: "Özenli çalışma", correct: false }, { text: "Projeye bağlanma", correct: false }, { text: "Eleştirel süzgeç", correct: false }, { text: "Kaliteli ürün", correct: false }], explanation: "Uyumsuz mükemmeliyetçilik paralizasyona yol açabilir." },
+            { id: 93, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Farklılaştırılmış öğretimde hangi unsur esastır?", options: [{ text: "İçerik, süreç, ürün ve ortamın hazır bulunuşluğa ve ilgiye göre uyarlanması", correct: true }, { text: "Aynı testi uygulama", correct: false }, { text: "Koridorda çalıştırma", correct: false }, { text: "Düz anlatım", correct: false }, { text: "Teknolojisizlik", correct: false }], explanation: "Farklılaştırma öğrenci profiline göre yapılır." },
+            { id: 94, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Sadece zeka testine dayanılmamasının gerekçesi nedir?", options: [{ text: "Yaratıcılık, liderlik ve motivasyon gibi çok boyutlu potansiyelleri tek başına yansıtamaması", correct: true }, { text: "Testlerin pahalı olması", correct: false }, { text: "IQ'nun değişmemesi", correct: false }, { text: "Başarısız olmaları", correct: false }, { text: "MEB yasağı", correct: false }], explanation: "Tanılama çok boyutlu olmalıdır." },
+            { id: 95, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Düşük başarı nedeni gösterilemez?", options: [{ text: "Derslerin çok kolay gelmesi", correct: false }, { text: "Akran baskısı", correct: false }, { text: "Zeka düzeyinin 140 ve üzerinde olması nedeniyle başarıyı yakalaması", correct: true }, { text: "Öğretmen tutumu", correct: false }, { text: "Çift istisnalılık", correct: false }], explanation: "Yüksek IQ düşük başarıya sebep olmaz." },
+            { id: 96, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Gardner'ın Çoklu Zeka Kuramı'na göre üstün yetenek nedir?", options: [{ text: "Tek zeka değil; müzik, kinestetik, uzamsal gibi farklı alanlarda da tezahür edebilir", correct: true }, { text: "Sadece sözeldir", correct: false }, { text: "Değiştirilemezdir", correct: false }, { text: "Doğuştan tektir", correct: false }, { text: "IQ testidir", correct: false }], explanation: "Çoklu zeka kuramı farklı alanlardaki üstünlükleri savunur." },
+            { id: 97, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Hızlandırma modellerinden biri değildir?", options: [{ text: "Erken okula başlama", correct: false }, { text: "Sınıf atlama", correct: false }, { text: "Müfredatı derinlemesine zenginleştirme", correct: true }, { text: "Üst kademe dersine katılım", correct: false }, { text: "Erken mezuniyet", correct: false }], explanation: "Zenginleştirme hızlandırma değil, içerik genişletmedir." },
+            { id: 98, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Hem üstün yetenekli hem yetersizliği olanlara ne denir?", options: [{ text: "Çift İstisnai (2e)", correct: true }, { text: "Global gecikmeli", correct: false }, { text: "Çoklu ağır yetersiz", correct: false }, { text: "Monosemptomatik", correct: false }, { text: "Uyumsuz", correct: false }], explanation: "Çift istisnai hem üstün hem yetersizlik barındırandır." },
+            { id: 99, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Erken çocuklukta en belirgin erken uyarı işareti nedir?", options: [{ text: "Erken konuşma, karmaşık cümleler, erken okuryazarlık merakı ve doymak bilmeyen merak", correct: true }, { text: "Yürüme gecikmesi", correct: false }, { text: "Göz temassızlığı", correct: false }, { text: "Duyarsızlık", correct: false }, { text: "Sürekli uyuma", correct: false }], explanation: "Erken dil ve derin merak üstün yeteneğin habercisidir." },
+            { id: 100, cat: "4", badge: "Üstün Yetenekliler Eğitimi", text: "Problem Dayalı Öğrenmenin temel gerekçesi nedir?", options: [{ text: "Gerçek hayat problemleri üzerinden eleştirel düşünme, araştırma ve buluş yoluyla öğrenme sağlamak", correct: true }, { text: "Formül ezberletmek", correct: false }, { text: "Yarışma yaratmak", correct: false }, { text: "Ders dışını yasaklamak", correct: false }, { text: "Test hızını artırmak", correct: false }], explanation: "PDÖ gerçek hayat problemleriyle üst düzey düşünmeyi besler." },
+
+            // Kategori 5: İşitme Yetersizliği (101-125)
+            { id: 101, cat: "5", badge: "İşitme Yetersizliği", text: "Yenidoğanda kokleanın dış saç hücrelerini ölçen tarama testi nedir?", options: [{ text: "Otoakustik Emisyon (OAE)", correct: true }, { text: "WISC-R", correct: false }, { text: "Bender", correct: false }, { text: "Peabody", correct: false }, { text: "Denver", correct: false }], explanation: "OAE dış saç hücrelerinin yanıtını ölçen tarama testidir." },
+            { id: 102, cat: "5", badge: "İşitme Yetersizliği", text: "Dış veya orta kulaktan sesin iletilememesi sonucu oluşan kayıp?", options: [{ text: "İletim Tipi İşitme Kaybı", correct: true }, { text: "Sensorinöral", correct: false }, { text: "Merkezi", correct: false }, { text: "Mikst", correct: false }, { text: "Fonolojik", correct: false }], explanation: "İletim tipi kulaktaki iletim engellerinden kaynaklanır." },
+            { id: 103, cat: "5", badge: "İşitme Yetersizliği", text: "Koklea veya işitme siniri hasarından kaynaklanan kalıcı kayıp?", options: [{ text: "İletim tipi", correct: false }, { text: "Sensorinöral işitme kaybı", correct: true }, { text: "Geçici orta kulak kaybı", correct: false }, { text: "Buşon kaybı", correct: false }, { text: "Dış kulak darlığı", correct: false }], explanation: "Sensorinöral kayıplar iç kulak veya sinir hasarlıdır." },
+            { id: 104, cat: "5", badge: "İşitme Yetersizliği", text: "Hafif düzey işitme kaybı desibel aralığı nedir?", options: [{ text: "0-15 dB", correct: false }, { text: "26 - 40 dB", correct: true }, { text: "56-70 dB", correct: false }, { text: "91+ dB", correct: false }, { text: "41-55 dB", correct: false }], explanation: "Hafif düzey 26-40 dB aralığındadır." },
+            { id: 105, cat: "5", badge: "İşitme Yetersizliği", text: "Arka plan gürültüsünü ekarte eden ses aktarımlı sistem nedir?", options: [{ text: "FM Sistemleri", correct: true }, { text: "Braille", correct: false }, { text: "Ekran okuyucu", correct: false }, { text: "Zaman çizelgesi", correct: false }, { text: "İşaret tahtası", correct: false }], explanation: "FM sistemleri sesi doğrudan cihaza iletir." },
+            { id: 106, cat: "5", badge: "İşitme Yetersizliği", text: "Dil ve konuşma gelişiminde doğru olmayan ifade hangisidir?", options: [{ text: "Fonemleri ayırt etmede güçlük yaşanır", correct: false }, { text: "İfade edici dilde gecikme olur", correct: false }, { text: "Erken cihazla normal akran yakalanabilir", correct: false }, { text: "Kayıp ne kadar ağır olursa olsun fonolojik farkındalık müdahalesiz kusursuz gelişir", correct: true }, { text: "Ekler zor öğrenilir", correct: false }], explanation: "Fonolojik farkındalık müdahalesiz kusursuz gelişemez." },
+            { id: 107, cat: "5", badge: "İşitme Yetersizliği", text: "Kokleayı bypass edip işitme sinirini uyaran cerrahi sistem nedir?", options: [{ text: "Koklear İmplant", correct: true }, { text: "Klasik cihaz", correct: false }, { text: "Kemik yolu", correct: false }, { text: "Akustik filtre", correct: false }, { text: "Otoakustik prob", correct: false }], explanation: "Koklear implant işitme sinirini doğrudan uyarır." },
+            { id: 108, cat: "5", badge: "İşitme Yetersizliği", text: "İki Dilli / İki Kültürlü Yaklaşım neyi savunur?", options: [{ text: "İşaret dilinin doğal dil olarak öğretilmesi ve yazılı/sözel dilin ikinci dil olması", correct: true }, { text: "İşaret dilinin yasaklanması", correct: false }, { text: "Yabancı dil eğitimi", correct: false }, { text: "Yalnızca işaret dili", correct: false }, { text: "Sesli iletişimin dışlanması", correct: false }], explanation: "İki dilli yaklaşım hem TİD hem yazılı dili savunur." },
+            { id: 109, cat: "5", badge: "İşitme Yetersizliği", text: "Prenatal nedenlerden biridir?", options: [{ text: "Annenin kızamıkçık veya CMV enfeksiyonu geçirmesi", correct: true }, { text: "Kordon dolanması", correct: false }, { text: "Orta kulak iltihabı", correct: false }, { text: "Yabancı cisim kaçması", correct: false }, { text: "Yüksek ses", correct: false }], explanation: "Gebelikte geçirilen enfeksiyonlar prenatal nedendir." },
+            { id: 110, cat: "5", badge: "İşitme Yetersizliği", text: "Cihazın çalışıp çalışmadığını test eden pratik yöntem nedir?", options: [{ text: "Ling Ses Testi (6 Ses Testi)", correct: true }, { text: "WISC-R", correct: false }, { text: "ADOS", correct: false }, { text: "M-CHAT", correct: false }, { text: "Bender", correct: false }], explanation: "Ling 6 ses testi cihaz kontrolü için kullanılır." },
+            { id: 111, cat: "5", badge: "İşitme Yetersizliği", text: "Sosyal ve duygusal gelişimde ne görülür?", options: [{ text: "Sesleri kaçırmaya bağlı yanlış anlama ve sosyal izolasyon/kaygı", correct: true }, { text: "Her zaman liderlik", correct: false }, { text: "Hiç arkadaşlık kuramama", correct: false }, { text: "Agresiflik", correct: false }, { text: "Kural sezinleme üstünlüğü", correct: false }], explanation: "İletişim engelleri sosyal kaygı yaratabilir." },
+            { id: 112, cat: "5", badge: "İşitme Yetersizliği", text: "Türkiye'deki resmi ulusal işaret dilinin adı nedir?", options: [{ text: "Türk İşaret Dili (TİD)", correct: true }, { text: "Morse", correct: false }, { text: "Braille", correct: false }, { text: "Fonetik kod", correct: false }, { text: "Parmak alfabesi", correct: false }], explanation: "TİD Türkiye'nin resmi işaret dilidir." },
+            { id: 113, cat: "5", badge: "İşitme Yetersizliği", text: "Odyogramda dikey ve yatay eksen neyi gösterir?", options: [{ text: "Dikey eksen desibel, yatay eksen Hertz", correct: true }, { text: "Zeka - yaş", correct: false }, { text: "Kelime - hız", correct: false }, { text: "Zar esnekliği - iletkenlik", correct: false }, { text: "Zaman - sıcaklık", correct: false }], explanation: "Odyogramda dikey ses şiddetini, yatay frekansı gösterir." },
+            { id: 114, cat: "5", badge: "İşitme Yetersizliği", text: "Fiziksel düzenlemede hangisi doğrudur?", options: [{ text: "Öğrencinin önde oturması, ışığı arkaya almaması ve dudağı okuyabilmesi", correct: true }, { text: "En arka köşe", correct: false }, { text: "Sırtı dönük öğretmen", correct: false }, { text: "Gürültülü ortam", correct: false }, { text: "Görselsizlik", correct: false }], explanation: "Ön sıra ve dudak okuma imkanı şarttır." },
+            { id: 115, cat: "5", badge: "İşitme Yetersizliği", text: "Post-natal nedenlerden biridir?", options: [{ text: "Bakteriyel menenjit, kabakulak veya kulak enfeksiyonları", correct: true }, { text: "Akraba evliliği", correct: false }, { text: "Gebelik ilaç kullanımı", correct: false }, { text: "Oksijensizlik", correct: false }, { text: "Sarılık", correct: false }], explanation: "Menenjit ve kabakulak post-natal nedenlerdendir." },
+            { id: 116, cat: "5", badge: "İşitme Yetersizliği", text: "Dudak hareketleriyle anlamaya ne denir?", options: [{ text: "Dudaktan Okuma", correct: true }, { text: "Braille", correct: false }, { text: "Fonetik çeviri", correct: false }, { text: "Akustik kalibrasyon", correct: false }, { text: "Taktil kodlama", correct: false }], explanation: "Dudaktan okuma görsel ipuçlarıyla anlamadır." },
+            { id: 117, cat: "5", badge: "İşitme Yetersizliği", text: "İşitsel yaklaşımların temel hedefi nedir?", options: [{ text: "Kalıntı işitmeyi maksimum düzeyde eğiterek sesleri anlamlandırmak", correct: true }, { text: "Cihazı yasaklamak", correct: false }, { text: "İşaret dili şartı", correct: false }, { text: "Sesleri silmek", correct: false }, { text: "Sessizlik", correct: false }], explanation: "Kalıntı işitmenin eğitilmesi esastır." },
+            { id: 118, cat: "5", badge: "İşitme Yetersizliği", text: "ABR testinin en önemli özelliği nedir?", options: [{ text: "Bebeklerde uykudayken işitme siniri ve beyin sapı yanıtını objektif ölçmesi", correct: true }, { text: "Sadece yetişkin testi olması", correct: false }, { text: "Röntgen çekmesi", correct: false }, { text: "Zeka ölçmesi", correct: false }, { text: "Göz tansiyonu", correct: false }], explanation: "ABR elektrofizyolojik objektif bebek testidir." },
+            { id: 119, cat: "5", badge: "İşitme Yetersizliği", text: "Gramer yapılarında görülen tipik özellik nedir?", options: [{ text: "Ekleri ve bağlaçları atlama veya yanlış kullanma", correct: true }, { text: "Soyut kelime zenginliği", correct: false }, { text: "Metaforları anlama", correct: false }, { text: "Fonolojik kusursuzluk", correct: false }, { text: "Akademik dilbilgisi", correct: false }], explanation: "İşitsel geri bildirim eksikliği eklerin atlanmasına yol açar." },
+            { id: 120, cat: "5", badge: "İşitme Yetersizliği", text: "Cihazdan gelen ıslık sesine ne denir?", options: [{ text: "Feedback (Geri Bildirim / Ötme)", correct: true }, { text: "Otoakustik rezonans", correct: false }, { text: "Parazit", correct: false }, { text: "Senkronizasyon", correct: false }, { text: "Koklear blokaj", correct: false }], explanation: "Feedback cihazın ötmesidir." },
+            { id: 121, cat: "5", badge: "İşitme Yetersizliği", text: "Ailelerin erken dönem psikolojilerinden biri değildir?", options: [{ text: "Şok, inkâr ve suçluluk", correct: false }, { text: "Uzman arayışı", correct: false }, { text: "İlk günden hiçbir kaygı duymadan doğal karşılama", correct: true }, { text: "Rehabilitasyon öğrenme", correct: false }, { text: "Gelecek kaygısı", correct: false }], explanation: "Aileler ilk günlerde yoğun kaygı ve şok yaşarlar." },
+            { id: 122, cat: "5", badge: "İşitme Yetersizliği", text: "Öğretimsel uyarlamalardan biridir?", options: [{ text: "Anahtar kelimeleri yazma, görsel artırma ve öğrenciye dönük olma", correct: true }, { text: "Sözlü sınav zorunluluğu", correct: false }, { text: "Görseli silme", correct: false }, { text: "Sırtı dönük anlatım", correct: false }, { text: "İletişimi kısıtlama", correct: false }], explanation: "Görsel destek ve yüz yüze duruş şarttır." },
+            { id: 123, cat: "5", badge: "İşitme Yetersizliği", text: "Koklear implant başarısında en kritik etken nedir?", options: [{ text: "Erken yaşta (ilk 1-2 yaş) implantasyon ve yoğun işitsel rehabilitasyon", correct: true }, { text: "Haftada 1 takma", correct: false }, { text: "Ayarları değiştirmeme", correct: false }, { text: "Terapiyi kesme", correct: false }, { text: "Evde eğitim", correct: false }], explanation: "Erken yaş ve rehabilitasyon başarıyı getirir." },
+            { id: 124, cat: "5", badge: "İşitme Yetersizliği", text: "Dış kulak yolunun kapalı olması durumuna ne denir?", options: [{ text: "Atrezi (Mikrotia)", correct: true }, { text: "Otoskleroz", correct: false }, { text: "Presbiakuzi", correct: false }, { text: "Meniere", correct: false }, { text: "Tinnitus", correct: false }], explanation: "Atrezi dış kulak yolunun kapalı olmasıdır." },
+            { id: 125, cat: "5", badge: "İşitme Yetersizliği", text: "Mesleki eğitimde en temel hedef nedir?", options: [{ text: "İletişim engellerini aşarak bağımsız ve üretken istihdam sağlamak", correct: true }, { text: "Korumalı atölyede ömür boyu tutma", correct: false }, { text: "Eğitimi engelleme", correct: false }, { text: "El becerisi dayatma", correct: false }, { text: "Uyarlama yapmama", correct: false }], explanation: "Bağımsız istihdam en temel hedeftir." },
+
+            // Kategori 6: Görme Yetersizliği (126-150)
+            { id: 126, cat: "6", badge: "Görme Yetersizliği", text: "Braille alfabesi toplam kaç kabartma noktadan oluşur?", options: [{ text: "4 nokta", correct: false }, { text: "6 nokta", correct: true }, { text: "8 nokta", correct: false }, { text: "12 nokta", correct: false }, { text: "10 nokta", correct: false }], explanation: "Braille 6 noktalı hücre sistemidir." },
+            { id: 127, cat: "6", badge: "Görme Yetersizliği", text: "Eğitsel tanımda merkezi görme keskinliği en iyi düzeltmeden sonra ne olmalıdır?", options: [{ text: "20/200 ve altı", correct: true }, { text: "20/20", correct: false }, { text: "20/70", correct: false }, { text: "20/40", correct: false }, { text: "Hiç görmeme", correct: false }], explanation: "20/200 ve altı görme yetersizliği sınırı kabul edilir." },
+            { id: 128, cat: "6", badge: "Görme Yetersizliği", text: "Yön bulma ve hareket becerilerine ne denir?", options: [{ text: "Bağımsız Hareket ve Yönelim (O&M)", correct: true }, { text: "Braille", correct: false }, { text: "Fonolojik eğitim", correct: false }, { text: "Duyusal terapi", correct: false }, { text: "Motor planlama", correct: false }], explanation: "O&M yönelim ve bağımsız harekettir." },
+            { id: 129, cat: "6", badge: "Görme Yetersizliği", text: "Güvenli seyahat ve engel saptama aracı nedir?", options: [{ text: "Uzun Beyaz Baston", correct: true }, { text: "FM cihazı", correct: false }, { text: "Akustik pil", correct: false }, { text: "Optik büyüteç", correct: false }, { text: "Taktil kalem", correct: false }], explanation: "Uzun beyaz baston temel bağımsızlık aracıdır." },
+            { id: 130, cat: "6", badge: "Görme Yetersizliği", text: "Prenatal nedenlerden biridir?", options: [{ text: "Kalıtsal genetik göz hastalıkları (katarakt, glokom)", correct: true }, { text: "Oksijensizlik", correct: false }, { text: "Travma", correct: false }, { text: "A vitamini eksikliği", correct: false }, { text: "Okul kazası", correct: false }], explanation: "Kalıtsal genetik hastalıklar prenataldir." },
+            { id: 131, cat: "6", badge: "Görme Yetersizliği", text: "Göz içi basınç artışına bağlı görme siniri hasarı nedir?", options: [{ text: "Glokom (Göz Tansiyonu)", correct: true }, { text: "Katarakt", correct: false }, { text: "Miyopi", correct: false }, { text: "Şaşılık", correct: false }, { text: "Albinizm", correct: false }], explanation: "Glokom göz tansiyonudur." },
+            { id: 132, cat: "6", badge: "Görme Yetersizliği", text: "Göz merceğinin saydamlığını yitirerek matlaşması nedir?", options: [{ text: "Katarakt", correct: true }, { text: "Glokom", correct: false }, { text: "Tavuk karası", correct: false }, { text: "Astigmat", correct: false }, { text: "Optik atrofi", correct: false }], explanation: "Katarakt mercek bulanıklığıdır." },
+            { id: 133, cat: "6", badge: "Görme Yetersizliği", text: "Ekran okuyucu yazılımlar ne iş yapar?", options: [{ text: "Ekranı sentetik seslendirerek erişim sağlar", correct: true }, { text: "Parlaklığı artırır", correct: false }, { text: "Braille basar", correct: false }, { text: "Yüz tarar", correct: false }, { text: "FM gönderir", correct: false }], explanation: "Ekran okuyucular dijital metni seslendirir." },
+            { id: 134, cat: "6", badge: "Görme Yetersizliği", text: "Gelişim özellikleriyle ilgili doğru bilgi nedir?", options: [{ text: "Görsel geri bildirim eksikliğinden dolayı motor hareketlerde gecikmeler yaşanabilir", correct: true }, { text: "İşitme de kör olur", correct: false }, { text: "Zeka düşüktür", correct: false }, { text: "Dil gelişmez", correct: false }, { text: "Baston otomatik öğrenilir", correct: false }], explanation: "Görsel gözlem olmaması motor hareketlerde gecikme yaratabilir." },
+            { id: 135, cat: "6", badge: "Görme Yetersizliği", text: "Göz kaslarının farklı yönlere bakması nedir?", options: [{ text: "Şaşılık", correct: true }, { text: "Nistagmus", correct: false }, { text: "Miyopi", correct: false }, { text: "Hipermetrop", correct: false }, { text: "Presbiyopi", correct: false }], explanation: "Şaşılık gözlerin farklı yönlere bakmasıdır." },
+            { id: 136, cat: "6", badge: "Görme Yetersizliği", text: "Gözlerin istem dışı titremesi nedir?", options: [{ text: "Nistagmus", correct: true }, { text: "Katarakt", correct: false }, { text: "Glokom", correct: false }, { text: "Atrezi", correct: false }, { text: "Astigmat", correct: false }], explanation: "Nistagmus göz titremesidir." },
+            { id: 137, cat: "6", badge: "Görme Yetersizliği", text: "Braille okumak için en temel gereksinim nedir?", options: [{ text: "Dokunma duyusu hassasiyeti ve ince motor", correct: true }, { text: "0 dB işitme", correct: false }, { text: "Keskin görme", correct: false }, { text: "Kaba koşu", correct: false }, { text: "Şarkı söyleme", correct: false }], explanation: "Braille parmak uçlarıyla okunur." },
+            { id: 138, cat: "6", badge: "Görme Yetersizliği", text: "Az görenler için optik yardımcı araç nedir?", options: [{ text: "Optik büyüteçler, teleskopik gözlükler", correct: true }, { text: "Uzun baston", correct: false }, { text: "FM kulaklık", correct: false }, { text: "İşaret sözlüğü", correct: false }, { text: "Perkin daktilo", correct: false }], explanation: "Büyüteçler kalıntı görmeyi destekler." },
+            { id: 139, cat: "6", badge: "Görme Yetersizliği", text: "Prematüre bebeklerde yüksek oksijene bağlı durum nedir?", options: [{ text: "Retinopati (ROP)", correct: true }, { text: "Akraba kataraktı", correct: false }, { text: "Gebelik kızamıkçığı", correct: false }, { text: "Yetişkin glokomu", correct: false }, { text: "Sarı nokta", correct: false }], explanation: "ROP prematüre bebeklerde oksijen tedavisinden kaynaklanır." },
+            { id: 140, cat: "6", badge: "Görme Yetersizliği", text: "Matematik ve grafik için kullanılan malzeme nedir?", options: [{ text: "Kabartma mat ve grafik tabletleri", correct: true }, { text: "Stetoskop", correct: false }, { text: "Ses kaydedici", correct: false }, { text: "FM verici", correct: false }, { text: "Beyaz tahta kalemi", correct: false }], explanation: "Kabartma grafik tabletleri çizim yapmayı sağlar." },
+            { id: 141, cat: "6", badge: "Görme Yetersizliği", text: "Kaynaştırmada uyarlamalardan biri değildir?", options: [{ text: "Braille veya sesli formata çevirme", correct: false }, { text: "Ek süre verme", correct: false }, { text: "Sınıf içi eşyaların yerini haber vermeden sürekli değiştirip sürpriz yapma", correct: true }, { text: "Uygun konuma oturtma", correct: false }, { text: "Kabartma harita kullanma", correct: false }], explanation: "Eşyaların yeri habersiz değiştirilmemelidir." },
+            { id: 142, cat: "6", badge: "Görme Yetersizliği", text: "Kornea kavis düzensizliğine bağlı bulanık görme nedir?", options: [{ text: "Astigmatizma", correct: true }, { text: "Miyopi", correct: false }, { text: "Hipermetropi", correct: false }, { text: "Katarakt", correct: false }, { text: "Glokom", correct: false }], explanation: "Astigmatizma kavis kusurudur." },
+            { id: 143, cat: "6", badge: "Görme Yetersizliği", text: "Öz bakım ve yemek yeme becerilerini kazanmaya ne denir?", options: [{ text: "Günlük Yaşam Becerileri", correct: true }, { text: "Fonolojik kodlama", correct: false }, { text: "Akustik yönelim", correct: false }, { text: "Optik büyüme", correct: false }, { text: "Transkripsiyon", correct: false }], explanation: "Günlük yaşam becerileri bağımsızlığı artırır." },
+            { id: 144, cat: "6", badge: "Görme Yetersizliği", text: "Sosyal gelişimde neyle karşılaşılabilir?", options: [{ text: "Göz teması kuramamaya bağlı iletişimde zorluklar", correct: true }, { text: "Kuralları doğuştan bilme", correct: false }, { text: "Kaygısızlık", correct: false }, { text: "Mimikleri hızlı taklit", correct: false }, { text: "Her zaman liderlik", correct: false }], explanation: "Görsel ipuçlarının alınamaması sosyal etkileşimde zorluk yaratabilir." },
+            { id: 145, cat: "6", badge: "Görme Yetersizliği", text: "Braille yazmak için kullanılan kalem ve tabla nedir?", options: [{ text: "Stylus ve Slate", correct: true }, { text: "Perkin daktilo", correct: false }, { text: "Ekran okuyucu", correct: false }, { text: "Grafik tablet", correct: false }, { text: "Baston ucu", correct: false }], explanation: "Slate ve stylus el yazımı için kullanılır." },
+            { id: 146, cat: "6", badge: "Görme Yetersizliği", text: "Uzağı net görememe kusuru nedir?", options: [{ text: "Miyopi", correct: true }, { text: "Hipermetropi", correct: false }, { text: "Presbiyopi", correct: false }, { text: "Astigmat", correct: false }, { text: "Glokom", correct: false }], explanation: "Miyopi uzağın seçilememesidir." },
+            { id: 147, cat: "6", badge: "Görme Yetersizliği", text: "Erken çocuklukta keşfi destekleyen yaklaşım nedir?", options: [{ text: "Dokunma, işitme ve hareketle zenginleştirilmiş deneyim sunma", correct: true }, { text: "Eve kapama", correct: false }, { text: "Görsel ezber", correct: false }, { text: "Sesleri kesme", correct: false }, { text: "Baston yasağı", correct: false }], explanation: "Dokunma ve işitme duyularıyla zenginleştirme esastır." },
+            { id: 148, cat: "6", badge: "Görme Yetersizliği", text: "İstihdamda karşılaşılan en büyük engel nedir?", options: [{ text: "Erişilebilirlik düzenlemeleri, ekran okuyucu uyumsuzluğu ve ön yargılar", correct: true }, { text: "Kapasite eksikliği", correct: false }, { text: "Braille yasağı", correct: false }, { text: "Yüksek maaş", correct: false }, { text: "Baston kullanımı", correct: false }], explanation: "Fiziksel erişilebilirlik ve ön yargılar en büyük engeldir." },
+            { id: 149, cat: "6", badge: "Görme Yetersizliği", text: "Yakını net görememe kusuru nedir?", options: [{ text: "Hipermetropi", correct: true }, { text: "Miyopi", correct: false }, { text: "Katarakt", correct: false }, { text: "Nistagmus", correct: false }, { text: "Şaşılık", correct: false }], explanation: "Hipermetropi yakının net seçilememesidir." },
+            { id: 150, cat: "6", badge: "Görme Yetersizliği", text: "Yönelim ve hareket çalışmalarında kullanılan temel teknik nedir?", options: [{ text: "Gören rehber eşliğinde yürüme ve baston tarama teknikleri", correct: true }, { text: "Kör koşu", correct: false }, { text: "İşitme ayarı", correct: false }, { text: "Ayakla Braille", correct: false }, { text: "Sokakta büyüteç", correct: false }], explanation: "Gösteren rehber ve baston tarama temel tekniklerdir." },
+
+            // Kategori 7: Fiziksel Yetersizlik & Süreğen Hastalıklar (151-175)
+            { id: 151, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Beyin hasarı sonucu oluşan, ilerleyici olmayan ancak motor hareket bozukluklarına yol açan durum nedir?", options: [{ text: "Serebral Palsi (CP)", correct: true }, { text: "Musküler Distrofi", correct: false }, { text: "Spina Bifida", correct: false }, { text: "Epilepsi", correct: false }, { text: "Hemofili", correct: false }], explanation: "Serebral Palsi ilerleyici olmayan motor bozukluktur." },
+            { id: 152, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Omurganın kapanmaması sonucunda ortaya çıkan doğumsal yetersizlik nedir?", options: [{ text: "Spina Bifida", correct: true }, { text: "Serebral Palsi", correct: false }, { text: "Musküler Distrofi", correct: false }, { text: "Juvenil Artrit", correct: false }, { text: "Astım", correct: false }], explanation: "Spina bifida omurga açıklığıdır." },
+            { id: 153, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "İskelet kaslarının zamanla erimesiyle ilerleyen kalıtsal hastalık nedir?", options: [{ text: "Musküler Distrofi", correct: true }, { text: "Serebral Palsi", correct: false }, { text: "Spina Bifida", correct: false }, { text: "Epilepsi", correct: false }, { text: "Tip 1 Diyabet", correct: false }], explanation: "Musküler distrofi ilerleyici kas erimesidir." },
+            { id: 154, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Ani ve anormal elektrik deşarjlarıyla seyreden nörolojik rahatsızlık nedir?", options: [{ text: "Epilepsi (Sara)", correct: true }, { text: "Spina Bifida", correct: false }, { text: "Serebral Palsi", correct: false }, { text: "Juvenil Artrit", correct: false }, { text: "Hemofili", correct: false }], explanation: "Epilepsi tekrarlayan nöbetlerle karakterizedir." },
+            { id: 155, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Binalara erişim için yapılan düzenlemelere ne denir?", options: [{ text: "Fiziksel Erişilebilirlik ve Mimari Uyarlamalar", correct: true }, { text: "Fonolojik yapılandırma", correct: false }, { text: "Odyolojik kalibrasyon", correct: false }, { text: "Optik büyütme", correct: false }, { text: "Braille transkripsiyon", correct: false }], explanation: "Rampa ve asansörler fiziksel erişilebilirlik sağlar." },
+            { id: 156, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Kas tonusunun aşırı yüksek olduğu en yaygın CP formu nedir?", options: [{ text: "Spastik Serebral Palsi", correct: true }, { text: "Ataksik", correct: false }, { text: "Diskinetik", correct: false }, { text: "Hipotonik", correct: false }, { text: "Mikst", correct: false }], explanation: "Spastik tip en yaygın sertlik formudur." },
+            { id: 157, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Çocukluk çağında en sık görülen insülin eksikliği metabolik hastalık nedir?", options: [{ text: "Tip 1 Diyabet", correct: true }, { text: "Fenilketonüri", correct: false }, { text: "Hemofili", correct: false }, { text: "Astım", correct: false }, { text: "Juvenil Romatizma", correct: false }], explanation: "Tip 1 diyabet insülin yetersizliğidir." },
+            { id: 158, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Solunum yollarının kronik daralmasıyla seyreden hastalık nedir?", options: [{ text: "Astım", correct: true }, { text: "Epilepsi", correct: false }, { text: "Hemofili", correct: false }, { text: "Serebral Palsi", correct: false }, { text: "Spina Bifida", correct: false }], explanation: "Astım kronik solunum yolu darlığıdır." },
+            { id: 159, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Kanamanın durdurulamadığı kalıtsal kan hastalığı nedir?", options: [{ text: "Hemofili", correct: true }, { text: "Lösemi", correct: false }, { text: "Anemi", correct: false }, { text: "Tip 1 Diyabet", correct: false }, { text: "Musküler Distrofi", correct: false }], explanation: "Hemofili pıhtılaşma faktörü eksikliğidir." },
+            { id: 160, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Ortez ve protezler hangi amaca hizmet eder?", options: [{ text: "Duruşu desteklemek ve hareket bağımsızlığını artırmak", correct: true }, { text: "Genetiği değiştirmek", correct: false }, { text: "IQ artırmak", correct: false }, { text: "İşitmeyi tedavi etmek", correct: false }, { text: "Görme keskinliği sağlamak", correct: false }], explanation: "Ortez ve protezler postür ve hareketliliği destekler." },
+            { id: 161, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "İstemsiz kıvrılma tarzı hareketlerin görüldüğü CP formu nedir?", options: [{ text: "Diskinetik (Atetoid) Serebral Palsi", correct: true }, { text: "Spastik", correct: false }, { text: "Ataksik", correct: false }, { text: "Normotonik", correct: false }, { text: "Statik", correct: false }], explanation: "Diskinetik tip istemsiz kıvrılma hareketleriyle seyreder." },
+            { id: 162, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Süreğen hastalıklı çocuklara evde veya hastanede sunulan hizmet nedir?", options: [{ text: "Hastane ve Evde Eğitim Hizmetleri", correct: true }, { text: "Yatılı okul", correct: false }, { text: "Tam zamanlı özel okul", correct: false }, { text: "Çıraklık", correct: false }, { text: "Açık lise", correct: false }], explanation: "Evde ve hastanede eğitim hizmeti verilmektedir." },
+            { id: 163, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Ataksik Serebral Palsi'nin en belirgin özelliği nedir?", options: [{ text: "Denge ve koordinasyon bozukluğu, sarsak yürüyüş", correct: true }, { text: "Kas sertliği", correct: false }, { text: "İstemsiz kıvrılma", correct: false }, { text: "Tam felç", correct: false }, { text: "Kas erimesi", correct: false }], explanation: "Ataksi beyincik tutulumuna bağlı denge bozukluğudur." },
+            { id: 164, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Omurilik zarının kese şeklinde dışarı sarktığı en ağır Spina Bifida formu nedir?", options: [{ text: "Miyelomeningosel", correct: true }, { text: "Okkulta", correct: false }, { text: "Meningosel", correct: false }, { text: "Hidrosefali", correct: false }, { text: "Skolyoz", correct: false }], explanation: "Miyelomeningosel en ağır formdur." },
+            { id: 165, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Çevresel uyarlamalardan biri hangisidir?", options: [{ text: "Sıra yüksekliklerini tekerlekli sandalyeye göre ayarlamak ve geçiş yollarını açmak", correct: true }, { text: "Dar köşeye oturtmak", correct: false }, { text: "Masaları sabitlemek", correct: false }, { text: "Asansörü kapatmak", correct: false }, { text: "Tahtayı yükseğe asmak", correct: false }], explanation: "Geçiş yolları ve sıra yükseklikleri uyarlanmalıdır." },
+            { id: 166, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Epilepsi nöbeti geçirene ilk yardımda ne yapılmalıdır?", options: [{ text: "Güvenli yere yan yatırıp başı korumak, ağza cisim sokmamak", correct: true }, { text: "Kol ve bacakları sertçe tutmak", correct: false }, { text: "Diş arasına kaşık sokmak", correct: false }, { text: "Soğuk su çarpmak", correct: false }, { text: "Yalnız bırakmak", correct: false }], explanation: "Yan yatırılır, baş korunur, asla kaşık sokulmaz." },
+            { id: 167, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Yardımcı teknolojilere örnek gösterilemez?", options: [{ text: "Akülü sandalye", correct: false }, { text: "Sesle kontrol sistemi", correct: false }, { text: "Kalem adaptörü", correct: false }, { text: "Braille daktilosu", correct: true }, { text: "Kumandalı kapı", correct: false }], explanation: "Braille daktilosu görme engelliler içindir." },
+            { id: 168, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Omurilik sıvısının beyinde birikmesi durumuna ne denir?", options: [{ text: "Hidrosefali", correct: true }, { text: "Skolyoz", correct: false }, { text: "Nistagmus", correct: false }, { text: "Ataksi", correct: false }, { text: "Epilepsi", correct: false }], explanation: "Hidrosefali beyinde sıvı birikimidir." },
+            { id: 169, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Ailelerin yaşadığı süreçlerin özelliklerinden biri nedir?", options: [{ text: "Yoğun bakım yükü ve tükenmişlik", correct: true }, { text: "Kaygısızlık", correct: false }, { text: "Ekonomik baskı olmaması", correct: false }, { text: "Hastalığın hemen geçeceği inancı", correct: false }, { text: "Kusursuz destek", correct: false }], explanation: "Tıbbi bakım yükü ailede tükenmişlik yaratabilir." },
+            { id: 170, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Fizyoterapinin hedeflerinden biri değildir?", options: [{ text: "Kas tonusunu düzenlemek", correct: false }, { text: "Günlük yaşamda bağımsızlığı artırmak", correct: false }, { text: "Zeka katsayısını cerrahiyle artırmak", correct: true }, { text: "Doğru postür kazandırmak", correct: false }, { text: "Ortez sağlamak", correct: false }], explanation: "Fizyoterapi zekayı artırma amacı taşımaz." },
+            { id: 171, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Omurganın yana doğru eğrilmesi nedir?", options: [{ text: "Skolyoz", correct: true }, { text: "Hidrosefali", correct: false }, { text: "Ataksi", correct: false }, { text: "Spastisite", correct: false }, { text: "Epilepsi", correct: false }], explanation: "Skolyoz omurganın yana eğrilmesidir." },
+            { id: 172, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Tip 1 diyabette hipoglisemi belirtisi nedir?", options: [{ text: "Ani terleme, titreme, halsizlik, baş dönmesi", correct: true }, { text: "Pembeleşip koşma", correct: false }, { text: "42 derece ateş", correct: false }, { text: "İşitme kaybı", correct: false }, { text: "Göz sabitleme", correct: false }], explanation: "Hipoglisemi titreme ve terleme ile başlar." },
+            { id: 173, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Sınavlarda yapılması gereken temel uyarlama nedir?", options: [{ text: "Ek süre verme, sözlü sınav veya bilgisayar/klavye kullanımı", correct: true }, { text: "Muaf tutma", correct: false }, { text: "Soru artırma", correct: false }, { text: "Süre kısaltma", correct: false }, { text: "Yazılıyı yasaklama", correct: false }], explanation: "Yazma zorluğuna karşı ek süre ve klavye verilir." },
+            { id: 174, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "Serebral Palsi'nin prenatal nedenidir?", options: [{ text: "Gebelikte geçirilen enfeksiyonlar ve plasenta yetmezliği", correct: true }, { text: "Doğum anı oksijensizlik", correct: false }, { text: "Menenjit", correct: false }, { text: "Trafik kazası", correct: false }, { text: "Sarılık", correct: false }], explanation: "Gebelikteki enfeksiyonlar prenataldir." },
+            { id: 175, cat: "7", badge: "Fiziksel Yetersizlik & Süreğen Hastalıklar", text: "En kritik uluslararası model felsefesi hangisidir?", options: [{ text: "Engelliliği tıbbi eksiklik değil, çevresel engelleri kaldıran 'Sosyal Model'", correct: true }, { text: "Kapalı kurum modeli", correct: false }, { text: "Sadece hafiflere eğitim", correct: false }, { text: "Erişilebilirlik erteleme", correct: false }, { text: "Eğitimi dışlama", correct: false }], explanation: "Sosyal model çevresel engellerin kaldırılmasını savunur." },
+
+            // Kategori 8: Erken Çocuklukta Özel Eğitim (176-200)
+            { id: 176, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "0-3 yaş grubuna sunulan gelişimsel gecikmeyi önleme sistemine ne denir?", options: [{ text: "Erken Müdahale", correct: true }, { text: "İleri düzey rehabilitasyon", correct: false }, { text: "Destekli istihdam", correct: false }, { text: "Çıraklık", correct: false }, { text: "Sınav kursu", correct: false }], explanation: "Erken müdahale yaşamın ilk yıllarında başlar." },
+            { id: 177, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Erken müdahalenin vazgeçilmez odak noktası kimdir?", options: [{ text: "Aile Merkezi Yaklaşım", correct: true }, { text: "Yalnızca idareciler", correct: false }, { text: "Cerrahlar", correct: false }, { text: "Memurlar", correct: false }, { text: "Yalnız öğretmen", correct: false }], explanation: "Aile sürecin merkezidir." },
+            { id: 178, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Bireyselleştirilmiş Aile Hizmet Planı (BAHP / IFSP) nedir?", options: [{ text: "Çocuk ve ailenin gereksinimlerini, güçlü yanlarını kapsayan resmi plan", correct: true }, { text: "18 yaş üstü sözleşmesi", correct: false }, { text: "Öğretmenin gizli kararı", correct: false }, { text: "Lise sınav belgesi", correct: false }, { text: "Cerrahi onay", correct: false }], explanation: "BAHP aile ve çocuk odaklı 0-3 yaş planıdır." },
+            { id: 179, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Gelişimsel gecikmeleri tarayan standart test nedir?", options: [{ text: "Denver Gelişimsel Tarama Testi II", correct: true }, { text: "WISC-R", correct: false }, { text: "ADOS", correct: false }, { text: "Bender", correct: false }, { text: "Peabody", correct: false }], explanation: "Denver II gelişimsel tarama testidir." },
+            { id: 180, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Doğal ortamlarda öğretim ilkesi nedir?", options: [{ text: "Eğitimin ev, park, kreş gibi günlük yaşam akışı içinde yürütülmesi", correct: true }, { text: "Klinik odalar", correct: false }, { text: "Doğaya bırakma", correct: false }, { text: "Hastane", correct: false }, { text: "Orman ürünü malzeme", correct: false }], explanation: "Doğal ortam günlük yaşam alanlarıdır." },
+            { id: 181, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Gelişimi desteklemede en temel araç nedir?", options: [{ text: "Oyun", correct: true }, { text: "Test çözme", correct: false }, { text: "Ezber dersi", correct: false }, { text: "Masa başı oturma", correct: false }, { text: "Ekran", correct: false }], explanation: "Erken çocuklukta öğrenme oyunla gerçekleşir." },
+            { id: 182, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Erken müdahale amaçlarından biri değildir?", options: [{ text: "Potansiyeli artırmak", correct: false }, { text: "İkincil engelleri önlemek", correct: false }, { text: "Ailenin stresle başa çıkmasını sağlamak", correct: false }, { text: "Çocuğu okul öncesinde özel kurumda kapatıp soyutlamak", correct: true }, { text: "Bağımsızlık temelleri atmak", correct: false }], explanation: "Erken müdahale çocukları soyutlamayı değil, entegre etmeyi amaçlar." },
+            { id: 183, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Multidisipliner ekip neden önemlidir?", options: [{ text: "Gelişim çok boyutlu olduğu için farklı uzmanlıkların ortak değerlendirme yapması", correct: true }, { text: "Tek uzman yeterli olduğu için", correct: false }, { text: "Aile katılamasın diye", correct: false }, { text: "Süreç uzasın diye", correct: false }, { text: "Tıbbi tetkik gereksiz olduğu için", correct: false }], explanation: "Gelişim çok boyutlu olduğundan ekip çalışması şarttır." },
+            { id: 184, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Ailelere yaklaşımda en doğru tutum nedir?", options: [{ text: "Empatiyle dinlemek, suçlamadan rehberlik etmek ve kararlara ortak etmek", correct: true }, { text: "Kaygıyı görmezden gelmek", correct: false }, { text: "Sorumluluğu tek yıkmak", correct: false }, { text: "Soru sormayı yasaklamak", correct: false }, { text: "Eğitimi dışlamak", correct: false }], explanation: "Empatik, destekleyici ve iş birliğine dayalı olunmalıdır." },
+            { id: 185, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Gömülü öğretim yaklaşımı neyi ifade eder?", options: [{ text: "Öğretim hedeflerinin günlük rutinler içine doğal yerleştirilmesi", correct: true }, { text: "Bodrumda eğitim", correct: false }, { text: "Oyun yasağı", correct: false }, { text: "Ezber", correct: false }, { text: "Aileyi dışlama", correct: false }], explanation: "Gömülü öğretim rutinler içinde fırsat yaratır." },
+            { id: 186, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Dil gelişimini desteklemek için ne yapılmalıdır?", options: [{ text: "Çıkardığı seslere anında duyarlı yanıt verip modeli zenginleştirerek konuşmak", correct: true }, { text: "Görmezden gelmek", correct: false }, { text: "Karmaşık cümle beklemek", correct: false }, { text: "Yabancı video izletmek", correct: false }, { text: "Cezalandırmak", correct: false }], explanation: "Duyarlı yanıtlar dil gelişimini hızlandırır." },
+            { id: 187, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Beyin plastisitesi erken müdahale önemini nasıl açıklar?", options: [{ text: "Erken yaşta verilen uyaranlarla beyin bağlantılarının olumlu şekillenmesi ve yetersizlik etkisinin azaltılması", correct: true }, { text: "Beynin 18'den sonra başlaması", correct: false }, { text: "Etkisizlik", correct: false }, { text: "Yetişkin üstünlüğü", correct: false }, { text: "Yaşla hızlanma", correct: false }], explanation: "Beyin plastisitesi erken yaşta en üst düzeydedir." },
+            { id: 188, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Akran destekli uygulamanın avantajı nedir?", options: [{ text: "Tipik gelişen akranların modeliyle sosyal becerilerin doğal kazanılması", correct: true }, { text: "Ayrıştırma", correct: false }, { text: "Yetişkin baskısı", correct: false }, { text: "Kavga ortamı", correct: false }, { text: "Öğretmensizlik", correct: false }], explanation: "Akran modeli doğal sosyalleşme sağlar." },
+            { id: 189, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Ailelerin ilk dönem kriz tepkilerinden biri nedir?", options: [{ text: "Şok, inkâr, suçluluk ve yas", correct: true }, { text: "Kutlama", correct: false }, { text: "Anında profesör olma", correct: false }, { text: "Ödül alma", correct: false }, { text: "Kaygısızlık", correct: false }], explanation: "Engelli çocuk sahibi olmak kriz tepkileri doğurur." },
+            { id: 190, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Portage Envanterinin amacı nedir?", options: [{ text: "Gelişim basamaklarını değerlendirip ev tabanlı eğitim sunmak", correct: true }, { text: "Sınav sıralaması", correct: false }, { text: "IQ artırma", correct: false }, { text: "Ev ziyaretini yasaklama", correct: false }, { text: "Tek alan ölçme", correct: false }], explanation: "Portage ev tabanlı erken eğitim envanteridir." },
+            { id: 191, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Fiziksel çevre düzenlenirken dikkat edilmemesi gereken hangisidir?", options: [{ text: "Pencerelerin tehlikeli biçimde kilitlenip saklanması", correct: true }, { text: "Materyallerin boya uygun olması", correct: false }, { text: "Köşelere bölünmesi", correct: false }, { text: "Erişilebilirlik", correct: false }, { text: "Sade ortam", correct: false }], explanation: "Pencerelerin tehlikeli şekilde saklanması doğru değildir." },
+            { id: 192, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Ailenin haklarını savunabilmesi hangi kavramdır?", options: [{ text: "Ailenin Güçlendirilmesi (Savunuculuk)", correct: true }, { text: "Soyutlama", correct: false }, { text: "Bağımlılık yaratma", correct: false }, { text: "Körlemesine bağlılık", correct: false }, { text: "Bürokrasi", correct: false }], explanation: "Ailenin güçlendirilmesi savunuculuğu artırır." },
+            { id: 193, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Motor gelişim geriliğine yönelik strateji nedir?", options: [{ text: "Fizyoterapist eşliğinde doğru pozisyonlama ve oyunla yürüme teşviki", correct: true }, { text: "Yatakta tutma", correct: false }, { text: "Cezalandırma", correct: false }, { text: "Okul öncesi çalışmama", correct: false }, { text: "Sandalye reddi", correct: false }], explanation: "Fizyoterapi ve oyun motor gelişimi destekler." },
+            { id: 194, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Geçiş Planlaması neyi ifade eder?", options: [{ text: "Evden kuruma veya anaokulundan ilkokula geçerken uyumu sağlamak için hazırlık süreci", correct: true }, { text: "Ani nakil", correct: false }, { text: "Saat değiştirme", correct: false }, { text: "Kademeyi kaldırma", correct: false }, { text: "Şehir değiştirme", correct: false }], explanation: "Geçiş planlaması uyumu kolaylaştırır." },
+            { id: 195, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Ortak dikkati artırmaya yönelik strateji nedir?", options: [{ text: "Yetişkinin çocuğun ilgi duyduğu nesneye bakışı yönlendirip jestlerle dikkati ortaklaştırması", correct: true }, { text: "Tersine bakıp iletişimi kesme", correct: false }, { text: "Karanlık oda", correct: false }, { text: "Yalnız kitap", correct: false }, { text: "Göz temasını cezalandırma", correct: false }], explanation: "Ortak dikkat oyunlarla ve jestlerle kurulur." },
+            { id: 196, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Öğretmenin sahip olmaması gereken özellik nedir?", options: [{ text: "Aileleri suçlayıcı ve çocukların yetersizliğinden dolayı yargılayıcı tutum benimseme", correct: true }, { text: "Güncel bilgi", correct: false }, { text: "Empati", correct: false }, { text: "Değerlendirme", correct: false }, { text: "Multidisipliner çalışma", correct: false }], explanation: "Öğretmen asla aileleri suçlamaz." },
+            { id: 197, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Ev merkezli müdahalenin avantajı nedir?", options: [{ text: "Eğitimin evde verilmesi ve ailenin eğitici konumuna getirilmesi", correct: true }, { text: "Eve kapama", correct: false }, { text: "Uzmanın ev işi yapması", correct: false }, { text: "Maliyet sıfırlama", correct: false }, { text: "Akran artırma", correct: false }], explanation: "Ev merkezli model aileye doğrudan rehberlik eder." },
+            { id: 198, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Duyusal işleme sorunlarında en doğru strateji nedir?", options: [{ text: "Duyusal profil çıkarıp ortamı ve uyaranları tolerans düzeyine göre uyarlamak", correct: true }, { text: "Zorla maruz bırakmak", correct: false }, { text: "Hayal ürünü saymak", correct: false }, { text: "Odaya kitlemek", correct: false }, { text: "Tüm uyaranı yasaklamak", correct: false }], explanation: "Çocuk duyusal profiline göre desteklenir." },
+            { id: 199, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "AAC sistemlerinin 2-3 yaşta kullanılma gerekçesi nedir?", options: [{ text: "Konuşma gelişene kadar hayal kırıklığını önlemek ve sözel dili desteklemek", correct: true }, { text: "Konuşmayı bitirmek", correct: false }, { text: "Sözel dili yasaklamak", correct: false }, { text: "IQ ölçmek", correct: false }, { text: "Maliyet kısmak", correct: false }], explanation: "AAC sistemleri sözel dili destekler." },
+            { id: 200, cat: "8", badge: "Erken Çocuklukta Özel Eğitim", text: "Hizmetlerin yaygınlaştırılmasında en kritik ilke nedir?", options: [{ text: "Erken tanılama, evrensel tarama ve nitelikli eğitime ücretsiz erişim hakkı", correct: true }, { text: "Ücretli sunum", correct: false }, { text: "İlkokul 4'te tanılama", correct: false }, { text: "Uzman azaltma", correct: false }, { text: "Aileyi dışlama", correct: false }], explanation: "Ücretsiz ve nitelikli eğitime erişim temel haktır." },
+
+            // Kategori 9: Mevzuat & Uluslararası Politikalar (201-225)
+            { id: 201, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Tanılama ve yerleştirme kararı veren resmi kurul nedir?", options: [{ text: "RAM - Eğitsel Değerlendirme ve Tanılama Kurulu", correct: true }, { text: "Disiplin Kurulu", correct: false }, { text: "BİLSEM Kurulu", correct: false }, { text: "İlçe Milli Eğitim Komisyonu", correct: false }, { text: "Sağlık Kurulu", correct: false }], explanation: "RAM tanılama ve yerleştirme yetkili kuruludur." },
+            { id: 202, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Engelli haklarını uluslararası bağlayıcı kılan temel BM sözleşmesi nedir?", options: [{ text: "BM Engelli Hakları Sözleşmesi (CRPD)", correct: true }, { text: "Salamanca Bildirgesi", correct: false }, { text: "AİHS", correct: false }, { text: "Çocuk Hakları", correct: false }, { text: "Maastricht", correct: false }], explanation: "CRPD engelli haklarını güvence altına alan BM sözleşmesidir." },
+            { id: 203, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Kapsayıcı eğitimi küresel ilke olarak benimseyen 1994 tarihli belge nedir?", options: [{ text: "Salamanca Bildirgesi ve Eylem Çerçevesi", correct: true }, { text: "Jomtien Bildirgesi", correct: false }, { text: "Maastricht", correct: false }, { text: "Birlik Sözleşmesi", correct: false }, { text: "Kyoto", correct: false }], explanation: "Salamanca Bildirgesi kapsayıcı eğitimin miladıdır." },
+            { id: 204, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Anayasa 42. madde özel eğitimle ilgili ne hükmeder?", options: [{ text: "Devlet, özel eğitimi gerektiren vatandaşları topluma yararlı kılmak için tedbirler alır", correct: true }, { text: "Eğitim aileye bırakılır", correct: false }, { text: "Sadece ücretli özel okul", correct: false }, { text: "Anayasada yer almaz", correct: false }, { text: "Zorunlu değildir", correct: false }], explanation: "Anayasa devlete özel eğitim için tedbir alma yükümlülüğü yükler." },
+            { id: 205, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Temel yasal dayanağı oluşturan KHK ve kanun nedir?", options: [{ text: "573 Sayılı Özel Eğitim KHK ve 1739 Sayılı Millî Eğitim Temel Kanunu", correct: true }, { text: "İş Kanunu", correct: false }, { text: "Medeni Kanun", correct: false }, { text: "Belediye Kanunu", correct: false }, { text: "YÖK Kanunu", correct: false }], explanation: "573 sayılı KHK ve 1739 sayılı Kanun temel dayanaklardır." },
+            { id: 206, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "En Az Kısıtlayıcı Ortam (LRE) ilkesi nedir?", options: [{ text: "Normal akranlarla birlikte, en az tecrit edilmiş eğitim ortamında desteklenmesi", correct: true }, { text: "Evde tecrit", correct: false }, { text: "Yatılı okul", correct: false }, { text: "Fiziksel kısıtlama", correct: false }, { text: "Akademik beklentisizlik", correct: false }], explanation: "En az kısıtlayıcı ortam kaynaştırma/bütünleştirmeyi savunur." },
+            { id: 207, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "BEP hazırlamakla sorumlu yasal birim hangisidir?", options: [{ text: "BEP Geliştirme Birimi (Müdür başkanlığında öğretmenler, uzmanlar ve aile)", correct: true }, { text: "Yalnız RAM", correct: false }, { text: "Kaymakamlık", correct: false }, { text: "Başhekim", correct: false }, { text: "Öğrenci başkanı", correct: false }], explanation: "BEP birimi ekip olarak BEP hazırlar." },
+            { id: 208, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "573 sayılı KHK temel ilkelerinden biri değildir?", options: [{ text: "Erken çocuklukta başlanması", correct: false }, { text: "Sosyal ve fiziksel gelişim gözetilmesi", correct: false }, { text: "Akranlarından tamamen ayrı okullarda ömür boyu tecrit edilmesi", correct: true }, { text: "Kaynaştırma yoluyla sürdürülmesi", correct: false }, { text: "Ailenin katılımı", correct: false }], explanation: "Tecrit etmek değil, kaynaştırma esastır." },
+            { id: 209, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Kaynaştırmada sınıftaki özel gereksinimli öğrenci sayısı nasıldır?", options: [{ text: "Aynı sınıfta türü aynı/farklı en fazla belirli sayıda (genellikle 1-2) öğrenci bulunur", correct: true }, { text: "Tüm sınıf engelli olmalıdır", correct: false }, { text: "Yarı yarıya olmalıdır", correct: false }, { text: "Sınır yoktur", correct: false }, { text: "Sadece koridorda olur", correct: false }], explanation: "Sınıf mevcudu ve verim için sayı mevzuatla sınırlanmıştır." },
+            { id: 210, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Çocuk Haklarına Dair Sözleşme'de engelli çocukları güvence altına alan madde hangisidir?", options: [{ text: "Madde 23", correct: true }, { text: "Madde 1", correct: false }, { text: "Madde 50", correct: false }, { text: "Madde 5", correct: false }, { text: "Madde 10", correct: false }], explanation: "BM Çocuk Hakları Sözleşmesi Madde 23 engelli çocukların haklarını düzenler." },
+            { id: 211, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Destek eğitim odalarının kurulması hangi mevzuatla düzenlenmiştir?", options: [{ text: "Özel Eğitim Hizmetleri Yönetmeliği", correct: true }, { text: "İş Kanunu", correct: false }, { text: "Trafik yönetmeliği", correct: false }, { text: "Ticaret Kanunu", correct: false }, { text: "YÖK", correct: false }], explanation: "Destek eğitim odası yönetmelikle düzenlenmiştir." },
+            { id: 212, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "ICF sınıflandırma sistemi hangi kurum tarafından yayımlanmıştır?", options: [{ text: "Dünya Sağlık Örgütü (WHO / DSÖ)", correct: true }, { text: "IMF", correct: false }, { text: "WTO", correct: false }, { text: "Olimpiyat Komitesi", correct: false }, { text: "BM Güvenlik Konseyi", correct: false }], explanation: "ICF DSÖ tarafından yayımlanmıştır." },
+            { id: 213, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Merkezi sınavlarda ek süre ve okuyucu desteği neye dayanır?", options: [{ text: "RAM Sağlık/Eğitsel Değerlendirme Kurulu Raporu ve Sağlık Kurulu Raporu", correct: true }, { text: "Müdür izni", correct: false }, { text: "Öğretmen kanaati", correct: false }, { text: "Aile dilekçesi", correct: false }, { text: "Rehberlik kulübü", correct: false }], explanation: "Sınav tedbirleri resmi RAM ve sağlık raporuna dayanır." },
+            { id: 214, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Kapsayıcı Eğitim'in temel felsefesi nedir?", options: [{ text: "Okulların tüm çocukların gereksinimlerine uyum sağlaması ve çeşitliliği kucaklaması", correct: true }, { text: "Bodrumda ayrı sınıf", correct: false }, { text: "Sadece üstünleri alarak", correct: false }, { text: "Muaf tutarak", correct: false }, { text: "Ücretli devrederek", correct: false }], explanation: "Kapsayıcı eğitim okulun sistemsel uyumunu savunur." },
+            { id: 215, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Ailelerin haklarıyla ilgili doğru ifade nedir?", options: [{ text: "Tanılama ve yerleştirmeye itiraz etme, yeniden değerlendirme isteme hakkı vardır", correct: true }, { text: "İtiraz hakkı yoktur", correct: false }, { text: "BEP'e katılamazlar", correct: false }, { text: "Raporlar habersiz alınır", correct: false }, { text: "Okul seçemezler", correct: false }], explanation: "Aileler itiraz etme ve BEP'e katılma yasal hakkına sahiptir." },
+            { id: 216, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "1990 Jomtien Konferansı'nın ana hedefi nedir?", options: [{ text: "Herkes İçin Eğitim (EFA) - temel öğrenme ihtiyaçlarının karşılanması ve fırsat eşitliği", correct: true }, { text: "Üniversite bursu", correct: false }, { text: "Çıraklığı kapatma", correct: false }, { text: "Gelişmiş ülke okullaşması", correct: false }, { text: "Sınav kaldırma", correct: false }], explanation: "Jomtien Herkes İçin Eğitim hedefini koymuştur." },
+            { id: 217, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "BEP yasal olarak hangi sıklıkla gözden geçirilir?", options: [{ text: "En az yılda bir kez", correct: true }, { text: "Mezuniyette bir kez", correct: false }, { text: "10 yılda bir", correct: false }, { text: "Hiç güncellenmez", correct: false }, { text: "Yaz tatilinde", correct: false }], explanation: "BEP en az yılda bir kez güncellenir." },
+            { id: 218, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Erken tanı ve müdahale prensibinin gerekçesi nedir?", options: [{ text: "Yetersizliğin olumsuz etkilerini en aza indirip potansiyeli artırmak", correct: true }, { text: "Süreci geciktirmek", correct: false }, { text: "Aileyi okuldan koparmak", correct: false }, { text: "Öğrenciyi azaltmak", correct: false }, { text: "Bütçeyi sıfırlamak", correct: false }], explanation: "Erken müdahale potansiyeli en üst düzeye çıkarır." },
+            { id: 219, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "İstihdamı düzenleyen temel yasal zorunluluk nedir?", options: [{ text: "İş Kanunu kapsamında belirli oranlarda engelli personel çalıştırma zorunluluğu (kota)", correct: true }, { text: "Çalışma yasağı", correct: false }, { text: "Gönüllülük", correct: false }, { text: "Sadece kamu", correct: false }, { text: "Özel sektör muafiyeti", correct: false }], explanation: "İş Kanunu kota sistemiyle engelli istihdamını zorunlu kılar." },
+            { id: 220, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Fırsat Eşitliği ilkesinin yansıması nedir?", options: [{ text: "Eğitim, sağlık ve istihdamda eşit koşullarda ve engelsiz yararlanabilme", correct: true }, { text: "Standart test uygulama", correct: false }, { text: "İzole yaşatma", correct: false }, { text: "Bütçeyi normalle sınırlama", correct: false }, { text: "Farklılıkları görmezden gelme", correct: false }], explanation: "Fırsat eşitliği engelsiz ve eşit koşulları savunur." },
+            { id: 221, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Destek eğitim odası kuralı nedir?", options: [{ text: "Tam zamanlı kaynaştırma öğrencisinin eksiklerini gidermek için belirli derslerde destek alması", correct: true }, { text: "Sınıftan alınıp yıl boyu kilitlenmesi", correct: false }, { text: "Sadece dış merkezde olması", correct: false }, { text: "Dersi müdürün anlatması", correct: false }, { text: "Ceza alanlara uygulanması", correct: false }], explanation: "Destek odası kaynaştırmayı destekleyen yasal birimdir." },
+            { id: 222, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Erişilebilirlik ilkesinin kapsamı nedir?", options: [{ text: "Binaların, sokakların, toplu taşımanın ve dijital içeriklerin bağımsız kullanılabilir olması", correct: true }, { text: "Lüks binalar için isteğe bağlı olması", correct: false }, { text: "Dijitalin erişilmez olması", correct: false }, { text: "Ulaşımın kapatılması", correct: false }, { text: "Kütüphaneyle sınırlı olması", correct: false }], explanation: "Erişilebilirlik tüm yaşam alanlarının kullanılabilirliğidir." },
+            { id: 223, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Standartları belirleyen resmi makam nedir?", options: [{ text: "MEB Özel Eğitim ve Rehberlik Hizmetleri Genel Müdürlüğü", correct: true }, { text: "Emniyet Genel Müdürlüğü", correct: false }, { text: "Sağlık Bakanlığı", correct: false }, { text: "Sanayi Bakanlığı", correct: false }, { text: "Ulaştırma Bakanlığı", correct: false }], explanation: "MEB Özel Eğitim ve Rehberlik Hizmetleri Genel Müdürlüğü yetkilidir." },
+            { id: 224, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "Multidisipliner iş birliği ilkesinin önemi nedir?", options: [{ text: "Tanı, tedavi, rehabilitasyon ve eğitimin tıp, psikoloji ve eğitim uzmanlarınca ortak yürütülmesi", correct: true }, { text: "Tek öğretmenin karar vermesi", correct: false }, { text: "İletişim yasağı", correct: false }, { text: "Eğitimin tıptan bağımsız olması", correct: false }, { text: "Ailenin dışlanması", correct: false }], explanation: "Uzmanların ortak çalışması bütünsel gelişimi sağlar." },
+            { id: 225, cat: "9", badge: "Mevzuat & Uluslararası Politikalar", text: "BM Sürdürülebilir Kalkınma Amaçları içinde özel eğitim hangi hedefledir?", options: [{ text: "Nitelikli Eğitim (Amaç 4)", correct: true }, { text: "Sanayi ve İnovasyon (Amaç 9)", correct: false }, { text: "Sudaki Yaşam (Amaç 14)", correct: false }, { text: "Temiz Enerji (Amaç 7)", correct: false }, { text: "İklim Eylemi (Amaç 13)", correct: false }], explanation: "Amaç 4 herkes için kapsayıcı ve nitelikli eğitimi hedefler." }
+        ];
+
+        let currentFilteredQuestions = [...questionDatabase];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let earnedXP = 0;
+        let incorrectQuestions = JSON.parse(localStorage.getItem('ozel_egitim_yanlislar') || '[]');
+        let favoriteQuestions = JSON.parse(localStorage.getItem('ozel_egitim_favoriler') || '[]');
+
+        const categorySelect = document.getElementById('categorySelect');
+        const questionBadge = document.getElementById('questionBadge');
+        const questionCounter = document.getElementById('questionCounter');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const explanationContainer = document.getElementById('explanationContainer');
+        const explanationText = document.getElementById('explanationText');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const quizContainer = document.getElementById('quizContainer');
+        const resultContainer = document.getElementById('resultContainer');
+        const statCorrect = document.getElementById('statCorrect');
+        const statWrong = document.getElementById('statWrong');
+        const favBtn = document.getElementById('favBtn');
+
+        categorySelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            currentIndex = 0;
+            if(val === 'all') {
+                currentFilteredQuestions = [...questionDatabase];
+            } else if(val === 'yanlislar') {
+                currentFilteredQuestions = questionDatabase.filter(q => incorrectQuestions.includes(q.id));
+            } else if(val === 'favoriler') {
+                currentFilteredQuestions = questionDatabase.filter(q => favoriteQuestions.includes(q.id));
+            } else {
+                currentFilteredQuestions = questionDatabase.filter(q => q.cat === val);
+            }
+
+            if(currentFilteredQuestions.length === 0) {
+                alert("Bu kategoride kayıtlı soru veya yanlış/favori bulunmuyor.");
+                currentFilteredQuestions = [...questionDatabase];
+                categorySelect.value = 'all';
+            }
+            loadQuestion();
+        });
+
+        function loadQuestion() {
+            quizContainer.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+
+            if(currentFilteredQuestions.length === 0) return;
+            const q = currentFilteredQuestions[currentIndex];
+
+            questionBadge.textContent = q.badge;
+            questionCounter.textContent = `Soru ${currentIndex + 1} / ${currentFilteredQuestions.length}`;
+            questionText.textContent = q.text;
+
+            if(favoriteQuestions.includes(q.id)) {
+                favBtn.innerHTML = '<i class="fa-solid fa-star text-amber-400"></i>';
+            } else {
+                favBtn.innerHTML = '<i class="fa-regular fa-star"></i>';
+            }
+
+            optionsContainer.innerHTML = '';
+            explanationContainer.classList.add('hidden');
+
+            const savedAnswer = userAnswers[q.id];
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-2xl border text-xs md:text-sm font-medium transition flex items-center justify-between ${
+                    savedAnswer !== undefined 
+                        ? (opt.correct ? 'bg-emerald-950/60 border-emerald-600 text-emerald-200' : (savedAnswer === idx ? 'bg-rose-950/60 border-rose-600 text-rose-200' : 'bg-slate-950/40 border-slate-800 text-slate-400 opacity-60'))
+                        : 'bg-slate-950/80 border-slate-800 hover:border-indigo-500 text-slate-200 hover:bg-slate-950'
+                }`;
+                
+                btn.innerHTML = `<span><strong class="mr-2 text-indigo-400 font-extrabold">${String.fromCharCode(65 + idx)}.</strong> ${opt.text}</span>`;
+                
+                if(savedAnswer === undefined) {
+                    btn.onclick = () => selectOption(idx);
+                } else {
+                    btn.disabled = true;
+                }
+                optionsContainer.appendChild(btn);
+            });
+
+            if(savedAnswer !== undefined) {
+                explanationText.textContent = q.explanation;
+                explanationContainer.classList.remove('hidden');
+            }
+
+            prevBtn.disabled = currentIndex === 0;
+            updateStats();
+        }
+
+        function selectOption(optIndex) {
+            const q = currentFilteredQuestions[currentIndex];
+            userAnswers[q.id] = optIndex;
+
+            const isCorrect = q.options[optIndex].correct;
+            if(isCorrect) {
+                earnedXP += 15;
+                if(typeof addXP === 'function') addXP(15);
+            } else {
+                if(!incorrectQuestions.includes(q.id)) {
+                    incorrectQuestions.push(q.id);
+                    localStorage.setItem('ozel_egitim_yanlislar', JSON.stringify(incorrectQuestions));
+                }
+            }
+
+            loadQuestion();
+        }
+
+        function toggleFavorite() {
+            const q = currentFilteredQuestions[currentIndex];
+            if(favoriteQuestions.includes(q.id)) {
+                favoriteQuestions = favoriteQuestions.filter(id => id !== q.id);
+            } else {
+                favoriteQuestions.push(q.id);
+            }
+            localStorage.setItem('ozel_egitim_favoriler', JSON.stringify(favoriteQuestions));
+            loadQuestion();
+        }
+
+        function nextQuestion() {
+            if(currentIndex < currentFilteredQuestions.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if(currentIndex > 0) {
+                currentIndex--;
+                loadQuestion();
+            }
+        }
+
+        function updateStats() {
+            let correct = 0;
+            let wrong = 0;
+            Object.keys(userAnswers).forEach(qId => {
+                const foundQ = questionDatabase.find(item => item.id == qId);
+                if(foundQ) {
+                    const ansIdx = userAnswers[qId];
+                    if(foundQ.options[ansIdx].correct) correct++;
+                    else wrong++;
+                }
+            });
+            statCorrect.textContent = correct;
+            statWrong.textContent = wrong;
+            document.getElementById('sessionXP').textContent = earnedXP;
+        }
+
+        function showResults() {
+            quizContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+
+            let correct = 0;
+            let wrong = 0;
+            Object.keys(userAnswers).forEach(qId => {
+                const foundQ = questionDatabase.find(item => item.id == qId);
+                if(foundQ) {
+                    const ansIdx = userAnswers[qId];
+                    if(foundQ.options[ansIdx].correct) correct++;
+                    else wrong++;
+                }
+            });
+
+            const totalAnswered = Object.keys(userAnswers).length;
+            const score = totalAnswered > 0 ? Math.round((correct / currentFilteredQuestions.length) * 100) : 0;
+
+            document.getElementById('resCorrect').textContent = correct;
+            document.getElementById('resWrong').textContent = wrong;
+            document.getElementById('resScore').textContent = `%${score}`;
+            document.getElementById('resEarnedXP').textContent = `+${earnedXP}`;
+        }
+
+        function restartTest() {
+            userAnswers = {};
+            earnedXP = 0;
+            currentIndex = 0;
+            loadQuestion();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Eğitim Akademi - Sınav Kazandıran Püf Noktaları & AGS Taktikleri</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Merkezi Yönetim Scripti -->
+    <script src="app-core.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+
+    <!-- Üst Menü -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Modern SVG Logo & Marka -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[2px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-sm tracking-tight text-white leading-none">ÖZEL EĞİTİM</span>
+                    <span class="font-bold text-[11px] tracking-widest text-indigo-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                        AKADEMİ <span class="bg-indigo-500/20 text-indigo-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-indigo-500/30">BETA</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigasyon Linkleri -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold">
+                <a href="index.html" class="text-slate-300 hover:text-indigo-400 transition">Ana Sayfa</a>
+                <a href="konu-anlatim.html" class="text-slate-300 hover:text-indigo-400 transition">Konu Anlatımları</a>
+                <a href="soru-bankasi.html" class="text-slate-300 hover:text-indigo-400 transition">Soru Bankası</a>
+                <a href="denemeler.html" class="text-slate-300 hover:text-indigo-400 transition">Deneme Sınavları</a>
+                <a href="analiz.html" class="text-slate-300 hover:text-indigo-400 transition">Performans Analizi</a>
+                <a href="ipuclari.html" class="text-indigo-400 font-bold">Püf Noktaları</a>
+            </nav>
+
+            <!-- Sağ Araçlar (XP, Streak ve Tema) -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="text-amber-400 font-bold flex items-center gap-1" title="Tecrübe Puanı">
+                        <i class="fa-solid fa-bolt text-xs"></i> <span id="headerXP">0 XP</span>
+                    </span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-orange-400 font-bold flex items-center gap-1" title="Çalışma Serisi">
+                        <i class="fa-solid fa-fire text-xs"></i> <span id="headerStreak">1 Gün</span>
+                    </span>
+                </div>
+
+                <button onclick="toggleTheme()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl transition border border-slate-700 text-xs" title="Temayı Değiştir">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobil Uyumlu Alt Navigasyon -->
+        <div class="lg:hidden flex items-center justify-around bg-slate-950 border-t border-slate-800 px-2 py-2 text-[11px] overflow-x-auto">
+            <a href="index.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Ana Sayfa</a>
+            <a href="konu-anlatim.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Konu Anlatımı</a>
+            <a href="soru-bankasi.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Soru Bankası</a>
+            <a href="denemeler.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Denemeler</a>
+            <a href="analiz.html" class="text-slate-300 whitespace-nowrap px-2 py-1">Analiz</a>
+            <a href="ipuclari.html" class="text-indigo-400 font-bold whitespace-nowrap px-2 py-1">Püf Noktaları</a>
+        </div>
+    </header>
+
+    <!-- Header Banner -->
+    <section class="bg-gradient-to-b from-indigo-950/50 via-slate-900/40 to-slate-950 py-10 border-b border-slate-800/80 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-300 border border-amber-500/30 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> Sınav Kazandıran Nokta Atışı Taktikler
+            </span>
+            <h1 class="text-2xl md:text-4xl font-black text-white mb-3 tracking-tight">
+                ÖABT & AGS Kilit İpuçları ve Özetler
+            </h1>
+            <p class="text-slate-400 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+                ÖSYM sorularında en çok karıştırılan kavramlar, altın değerindeki ayrım noktaları ve sınavda hız kazandıracak pratik bilgiler.
+            </p>
+
+            <!-- Kategori Filtreleme Butonları (Tabs) -->
+            <div class="mt-8 flex items-center justify-center gap-2 flex-wrap text-xs">
+                <button onclick="filterTips('all')" class="tip-tab active bg-indigo-600 text-white font-bold px-3.5 py-2 rounded-xl transition border border-indigo-500 cursor-pointer">
+                    Tümü
+                </button>
+                <button onclick="filterTips('ags')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    📘 AGS Taktikleri
+                </button>
+                <button onclick="filterTips('zihinsel')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    1. Zihinsel Yet.
+                </button>
+                <button onclick="filterTips('otizm')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    2. Otizm (OSB)
+                </button>
+                <button onclick="filterTips('ooo')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    3. ÖÖG
+                </button>
+                <button onclick="filterTips('ustun')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    4. Üstün Yet.
+                </button>
+                <button onclick="filterTips('duyusal')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    İşitme & Görme
+                </button>
+                <button onclick="filterTips('fiziksel')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    Fiziksel Yet.
+                </button>
+                <button onclick="filterTips('mevzuat')" class="tip-tab bg-slate-900/80 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl transition border border-slate-800 cursor-pointer">
+                    Mevzuat & Erken Çocukluk
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- İçerik Kartları Grid -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 md:p-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="tipsGrid">
+            
+            <!-- Kart 1: AAIDD Tanımı -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-amber-500/50 transition duration-300" data-cat="zihinsel">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/20 text-lg">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400">1. Zihinsel Yetersizlik</span>
+                        <h3 class="font-extrabold text-white text-base">AAIDD (2021) Tanım Şartı</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Zihinsel yetersizlik tanısında IQ 70 ve altı tek başına yetmez. Mutlaka gelişim döneminde (18 yaş altı) başlamış olmalı ve kavramsal, sosyal, pratik uyumsal alanlarda yetersizlik eşlik etmelidir.
+                </p>
+            </div>
+
+            <!-- Kart 2: AGS Sözel Mantık -->
+            <div class="tip-card bg-slate-900/70 border border-indigo-500/30 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-indigo-500/60 transition duration-300" data-cat="ags">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center border border-indigo-500/30 text-lg">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-400">AGS Sözel Akıl Yürütme</span>
+                        <h3 class="font-extrabold text-white text-base">Sözel Mantık Tablo Kurma Taktiği</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Sözel mantık sorularında sabit unsurları (günler, nöbet sıraları, katlar) tablonun başlığı yapın. Değişken kişileri tablonun içine yerleştirin ve "Kesin Bilgi"yi tabloya yazmadan ihtimallere geçmeyin!
+                </p>
+            </div>
+
+            <!-- Kart 3: Renzulli Üç Halka -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-amber-500/50 transition duration-300" data-cat="ustun">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/20 text-lg">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400">4. Üstün Yetenekliler</span>
+                        <h3 class="font-extrabold text-white text-base">Renzulli Üç Halka Modeli</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Üstün yeteneklilik; Ortalamanın üstü yetenek, Yaratıcılık ve Göreve adanmışlık (motivasyon) unsurlarının ortak kesişim kümesidir. Sadece yüksek IQ üstün yetenek tanımı için yeterli görülmez.
+                </p>
+            </div>
+
+            <!-- Kart 4: Orton-Gillingham -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-emerald-500/50 transition duration-300" data-cat="ooo">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/20 text-lg">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">3. Özel Öğrenme Güçlüğü</span>
+                        <h3 class="font-extrabold text-white text-base">Orton-Gillingham (Disleksi)</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Özel öğrenme güçlüğünde en etkili yaklaşım çoklu duyusal (görsel, işitsel, kinestetik, dokunsal) eşgüdümlü öğretim ilkesine dayanır. Tek kanallı öğretim yerine duyuları eşleme esastır.
+                </p>
+            </div>
+
+            <!-- Kart 5: En Az Kısıtlayıcı Ortam -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-blue-500/50 transition duration-300" data-cat="mevzuat">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center border border-blue-500/20 text-lg">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-400">9. Mevzuat & Politikalar</span>
+                        <h3 class="font-extrabold text-white text-base">En Az Kısıtlayıcı Ortam (LRE)</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Özel gereksinimli bireyin normal gelişim gösteren akranlarıyla en az düzeyde ayrıştırıldığı, toplumsal bütünleşmeyi en üst düzeye çıkaran tam zamanlı kaynaştırma eğitim ortamıdır.
+                </p>
+            </div>
+
+            <!-- Kart 6: Ling 6 Ses Testi -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-cyan-500/50 transition duration-300" data-cat="duyusal">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center border border-cyan-500/20 text-lg">
+                        <i class="fa-solid fa-ear-deaf"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-400">5. İşitme Yetersizliği</span>
+                        <h3 class="font-extrabold text-white text-base">Ling 6 Ses Testi</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    İşitme cihazı veya koklear implant kullanan bireylerde cihazın akustik performansını ve konuşma frekans algısını (/m/, /ah/, /ee/, /or/, /sh/, /s/) hızlıca kontrol etmek için uygulanan ses testidir.
+                </p>
+            </div>
+
+            <!-- Kart 7: Bağımsız Hareket ve Yönelim -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-rose-500/50 transition duration-300" data-cat="duyusal">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-rose-500/10 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/20 text-lg">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-400">6. Görme Yetersizliği</span>
+                        <h3 class="font-extrabold text-white text-base">Bağımsız Hareket ve Yönelim (O&M)</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Görme yetersizliği olan bireylerin çevrelerini güvenle algılaması (yönelim) ve uzun beyaz baston eşliğinde tek başına seyahat edebilmesini (bağımsız hareket) sağlayan temel eğitim alanıdır.
+                </p>
+            </div>
+
+            <!-- Kart 8: AGS Sayısal Akıl Yürütme -->
+            <div class="tip-card bg-slate-900/70 border border-emerald-500/30 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-emerald-500/60 transition duration-300" data-cat="ags">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30 text-lg">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">AGS Sayısal Akıl Yürütme</span>
+                        <h3 class="font-extrabold text-white text-base">Yüzde & Kalan Öğrenci Denklemi</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Sınıf mevcudu sorularında toplam mevcuda $100x$ deyin. Verilen yüzdeleri çıkardıktan sonra eldeki gerçek sayıyı kalan $x$ değerine eşitleyin. Bu yöntem denklem kurma sürenizi yarı yarıya kısaltır.
+                </p>
+            </div>
+
+            <!-- Kart 9: Epilepsi Nöbeti İlk Yardım -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-teal-500/50 transition duration-300" data-cat="fiziksel">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-teal-500/10 text-teal-400 rounded-2xl flex items-center justify-center border border-teal-500/20 text-lg">
+                        <i class="fa-solid fa-wheelchair"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-teal-400">7. Fiziksel Yetersizlik</span>
+                        <h3 class="font-extrabold text-white text-base">Epilepsi Nöbetinde Kritik Kural</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Nöbet geçiren öğrencinin kasılması durdurulmaya çalışılmaz, ağzına asla kaşık veya sert cisim sokulmaz! Güvenli yere yan yatırılır, başı korunur ve nöbet süresi takip edilir.
+                </p>
+            </div>
+
+            <!-- Kart 10: Denver II & Portage -->
+            <div class="tip-card bg-slate-900/70 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl space-y-3 hover:border-pink-500/50 transition duration-300" data-cat="mevzuat">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-pink-500/10 text-pink-400 rounded-2xl flex items-center justify-center border border-pink-500/20 text-lg">
+                        <i class="fa-solid fa-baby"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-pink-400">8. Erken Çocuklık</span>
+                        <h3 class="font-extrabold text-white text-base">Portage ve Denver II Ayırımı</h3>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Denver II ve AGTE geliştirme aşamasındaki gelişimsel gecikmeleri tespit eden <strong class="text-white">tarama testleridir</strong>. Portage ise ev merkezli uygulanan doğrudan bir <strong class="text-white">erken eğitim programıdır</strong>.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 mt-8">
+        Özel Eğitim Öğretmenliği ÖABT & AGS Hazırlık Platformu &copy; 2026
+    </footer>
+
+    <!-- Scriptler -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            if(body.classList.contains('bg-slate-950')) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
+
+        // İpucu Kartlarını Filtreleme Fonksiyonu
+        function filterTips(category) {
+            const cards = document.querySelectorAll('.tip-card');
+            const tabs = document.querySelectorAll('.tip-tab');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active', 'bg-indigo-600', 'text-white');
+                tab.classList.add('bg-slate-900/80', 'text-slate-300');
+            });
+
+            event.target.classList.add('active', 'bg-indigo-600', 'text-white');
+            event.target.classList.remove('bg-slate-900/80', 'text-slate-300');
+
+            cards.forEach(card => {
+                if(category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
